@@ -5,19 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Descarga Digital - Dashboard</title>
     
-    <!-- Carrega a fonte Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- Carrega a fonte Inter --><link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Carrega o Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carrega o Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Carrega o Chart.js para o gráfico (atualmente não utilizado, mas mantido) -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <!-- Configuração do Tailwind (Paleta ENAPOR e Fonte) -->
-    <script>
+    <!-- Configuração do Tailwind (Paleta ENAPOR e Fonte) --><script>
         tailwind.config = {
             theme: {
                 extend: {
@@ -26,8 +20,8 @@
                     },
                     colors: {
                         'enapor-blue': '#003A70',
-                        'enapor-orange': '#FF7A00',
-                        'enapor-green': '#00B294',
+                        'enapor-orange': '#BE1D2C',
+                        'enapor-green': '#BCBED0',
                         'enapor-gray': '#F8F9FA',
                         'enapor-red': '#D9534F' // Cor de erro
                     },
@@ -67,15 +61,15 @@
             background-color: #B4E9DC; /* Tom de verde um pouco mais escuro no hover */
         }
 
-        /* Classe para a linha pendente (NOVO) */
+        /* Classe para a linha pendente */
         .linha-pendente {
-            background-color: #FFF7ED; /* Tom de laranja/amarelo muito claro */
+            background-color: #FFF7ED; /* Tom de laranja/amelo muito claro */
         }
         .linha-pendente:hover {
-            background-color: #FEEDD6; /* Tom de laranja/amarelo um pouco mais escuro no hover */
+            background-color: #FEEDD6; /* Tom de laranja/amelo um pouco mais escuro no hover */
         }
 
-        /* NOVO: Estilos para o círculo de progresso */
+        /* Estilos para o círculo de progresso */
         #login-progress-circle {
             /* Perímetro (Raio 46): 2 * PI * 46 = ~289 */
             stroke-dasharray: 289;
@@ -86,38 +80,58 @@
         #login-circle-spinner.is-loading #login-progress-circle {
             stroke-dashoffset: 0;
         }
+        
+        /* Garante que a sidebar mobile cobre o conteúdo */
+        @media (max-width: 767px) {
+            #sidebar.hidden {
+                transform: translateX(-100%);
+            }
+            #sidebar {
+                transition: transform 0.3s ease-in-out;
+            }
+        }
+        
+        /* Estilos de Paginação */
+        .pagination-btn {
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        .pagination-btn.active {
+            background-color: #003A70; /* enapor-blue */
+            color: white;
+        }
+        .pagination-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .pagination-btn:not(.active):not(.disabled):hover {
+            background-color: #e5e7eb; /* gray-200 */
+        }
+
 
     </style>
 </head>
 
 <body class="bg-enapor-gray text-gray-800">
 
-    <!-- NOVO: Ecrã de Login Modernizado -->
-    <div id="login-screen" class="flex items-center justify-center min-h-screen bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1577561824128-53c3c78f1082?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzEyNjZ8MHwxfGFsbHx8fHx8fHx8fDE3Mjk5NzEwNjl8&ixlib=rb-4.0.3&q=80&w=1920');">
-        <!-- Overlay escuro -->
-        <div class="absolute inset-0 bg-enapor-blue/80 backdrop-blur-sm"></div>
+    <!-- Ecrã de Login Modernizado --><div id="login-screen" class="flex items-center justify-center min-h-screen bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1577561824128-53c3c78f1082?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzEyNjZ8MHwxfGFsbHx8fHx8fHx8fDE3Mjk5NzEwNjl8&ixlib=rb-4.0.3&q=80&w=1920');">
+        <!-- Overlay escuro --><div class="absolute inset-0 bg-enapor-blue/80 backdrop-blur-sm"></div>
         
         <div class="w-full max-w-sm p-8 bg-white rounded-2xl shadow-xl space-y-6 z-10">
             
-            <!-- Contenedor do Ícone e Spinner -->
-            <div class="relative w-24 h-24 mx-auto">
-                <!-- O Ícone (SVG) - Fica sempre visível -->
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <!-- Ícone para 'Descarga Digital': Um contentor com uma seta para baixo -->
-                    <svg class="w-12 h-12 text-enapor-blue" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Contenedor do Ícone e Spinner --><div class="relative w-24 h-24 mx-auto">
+                <!-- O Ícone (SVG) - Fica sempre visível --><div class="absolute inset-0 flex items-center justify-center">
+                    <!-- Ícone para 'Descarga Digital': Um contentor com uma seta para baixo --><svg class="w-12 h-12 text-enapor-blue" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                        <path d="M12 15v-6m-3 3 3 3 3-3"/> <!-- Seta para baixo -->
-                    </svg>
+                        <path d="M12 15v-6m-3 3 3 3 3-3"/> <!-- Seta para baixo --></svg>
                 </div>
                 
-                <!-- ALTERAÇÃO: Spinner antigo removido e substituído por este SVG -->
-                <!-- Círculo de Animação SVG -->
-                <svg id="login-circle-spinner" class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Círculo de fundo (o trilho) -->
-                    <circle class="text-enapor-blue/20" stroke-width="4" stroke="currentColor" fill="transparent" r="46" cx="50" cy="50"/>
+                <!-- Círculo de Animação SVG --><svg id="login-circle-spinner" class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Círculo de fundo (o trilho) --><circle class="text-enapor-blue/20" stroke-width="4" stroke="currentColor" fill="transparent" r="46" cx="50" cy="50"/>
                     
-                    <!-- Círculo de progresso (a linha que preenche) -->
-                    <circle id="login-progress-circle" 
+                    <!-- Círculo de progresso (a linha que preenche) --><circle id="login-progress-circle" 
                             class="text-enapor-blue" 
                             stroke-width="4" 
                             stroke-linecap="round" 
@@ -126,12 +140,10 @@
                             r="46" 
                             cx="50" 
                             cy="50"
-                            transform="rotate(-90 50 50)"/> <!-- Roda -90 graus para começar do topo -->
-                </svg>
+                            transform="rotate(-90 50 50)"/> <!-- Roda -90 graus para começar do topo --></svg>
             </div>
             
-            <!-- TÍTULO ADICIONADO -->
-            <div class="text-center">
+            <!-- TÍTULO --><div class="text-center">
                 <h1 class="text-3xl font-bold text-enapor-blue">Descarga Digital</h1>
             </div>
             
@@ -145,8 +157,7 @@
                     <input type="password" id="login-pass" name="pass" class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-enapor-blue" required>
                 </div>
                 
-                <!-- Mensagem de Erro de Login -->
-                <div id="login-error" class="text-enapor-red text-sm text-center hidden pt-2">
+                <!-- Mensagem de Erro de Login --><div id="login-error" class="text-enapor-red text-sm text-center hidden pt-2">
                     Utilizador ou palavra-passe incorretos.
                 </div>
                 
@@ -157,164 +168,116 @@
         </div>
     </div>
 
-    <!-- ALTERAÇÃO: Aplicação principal agora tem um ID e está oculta (hidden) -->
-    <div id="dashboard-app" class="flex h-screen hidden">
-        <!-- Barra Lateral (Sidebar) -->
-        <aside id="sidebar" class="w-64 bg-enapor-blue text-white p-6 shadow-lg hidden md:flex flex-col flex-shrink-0 absolute md:relative z-20 h-full">
-            <!-- Logo -->
-            <div class="mb-10">
-                <h1 class="text-2xl font-bold text-white">Descarga Digital</h1>
-            </div>
+    <!-- Aplicação principal agora tem um ID e está oculta (hidden) --><div id="dashboard-app" class="flex h-screen hidden">
+        <!-- Barra Lateral (Sidebar) --><aside id="sidebar" class="w-64 bg-enapor-blue text-white p-6 shadow-lg hidden md:flex flex-col flex-shrink-0 absolute md:relative z-20 h-full">
+            <!-- Logo --><div class="mb-10 text-center"> <!-- Adicionado text-center para centralizar o logo --><img src="https://www.enapor.cv/web/image/843" alt="Logo ENAPOR" class="h-21 mx-auto"> <!-- Ajustado h-16 para tamanho, e mx-auto para centralizar --></div>
             
-            <!-- Navegação Principal -->
-            <nav class="flex-1 space-y-2">
+            <!-- Navegação Principal --><nav class="flex-1 space-y-2">
                 <a href="#" id="nav-navios" class="flex items-center gap-3 px-4 py-3 bg-white/10 text-white font-semibold rounded-lg">
-                    <!-- Ícone 🚢 (Lucide: ShipWheel) -->
-                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4"/><path d="M2 12h4"/><path d="m19.07 4.93-.88.88"/><path d="m5.81 18.19.88-.88"/><path d="M12 2v4"/><path d="M12 22v-4"/><path d="m4.93 4.93.88.88"/><path d="m18.19 18.19-.88-.88"/><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/></svg>
+                    <!-- Ícone 🚢 (Lucide: ShipWheel) --><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4"/><path d="M2 12h4"/><path d="m19.07 4.93-.88.88"/><path d="m5.81 18.19.88-.88"/><path d="M12 2v4"/><path d="M12 22v-4"/><path d="m4.93 4.93.88.88"/><path d="m18.19 18.19-.88-.88"/><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/></svg>
                     <span>Navios</span>
                 </a>
                 <a href="#" id="nav-descarga" class="flex items-center gap-3 px-4 py-3 text-gray-200 hover:bg-white/10 hover:text-white font-medium rounded-lg">
-                    <!-- Ícone  (Lucide: Box) -->
-                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.29 7 12 12 20.71 7"></polyline><line x1="12" x2="12" y1="22" y2="12"></line></svg>
+                    <!-- Ícone  (Lucide: Box) --><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.29 7 12 12 20.71 7"></polyline><line x1="12" x2="12" y1="22" y2="12"></line></svg>
                     <span>Descarga</span>
                 </a>
             </nav>
             
-            <!-- Logout -->
-            <div class="mt-auto">
-                <!-- ALTERAÇÃO: Adicionado ID ao botão de logout -->
+            <!-- Logout --><div class="mt-auto">
                 <a href="#" id="logout-btn" class="flex items-center gap-3 px-4 py-3 text-gray-200 hover:bg-white/10 hover:text-white font-medium rounded-lg">
-                    <!-- Ícone 🔒 (Lucide: LogOut) -->
-                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg>
+                    <!-- Ícone 🔒 (Lucide: LogOut) --><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg>
                     <span>Terminar sessão</span>
                 </a>
             </div>
         </aside>
 
-        <!-- Conteúdo Principal -->
-        <div class="flex-1 flex flex-col overflow-hidden">
+        <!-- Conteúdo Principal --><div class="flex-1 flex flex-col overflow-hidden">
             
-            <!-- Header (Cabeçalho) -->
-            <header class="bg-white h-20 flex-shrink-0 shadow-sm flex items-center justify-between px-6 md:px-8">
-                <!-- Barra de Pesquisa -->
-                <div class="flex-1 max-w-xl relative">
-                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
-                        <!-- Ícone de Pesquisa (Lucide: Search) -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
-                    </span>
-                    <!-- Pesquisa de Navios -->
-                    <input type="text" id="ship-search-input" placeholder="Procurar por navio ou escala..." class="w-full pl-9 pr-4 py-2 bg-gray-100 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-enapor-blue">
-                    <!-- Pesquisa de Contentores (oculta por defeito) -->
-                    <input type="text" id="main-search-input" placeholder="Procurar por contentor..." class="w-full pl-9 pr-4 py-2 bg-gray-100 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-enapor-blue hidden">
+            <!-- Header (Cabeçalho) --><header class="bg-white h-20 flex-shrink-0 shadow-sm flex items-center justify-between px-4 md:px-8">
+                <!-- Lado Esquerdo: Botão Mobile e Título --><div class="flex items-center gap-3">
+                    <!-- Botão Menu Mobile --><button id="mobile-menu-btn" aria-label="Abrir menu" class="md:hidden text-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg>
+                    </button>
+                    
+                    <!-- Título (Azul) - Tamanho responsivo --><h1 class="text-2xl md:text-3xl font-bold text-enapor-blue">Descarga Digital</h1>
                 </div>
-                
-                <!-- Botão Menu Mobile -->
-                <button id="mobile-menu-btn" class="md:hidden ml-4 text-gray-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg>
-                </button>
 
-                <!-- Perfil do Utilizador -->
-                <div class="items-center gap-3 hidden md:flex ml-6">
-                    <img class="w-10 h-10 rounded-full object-cover" src="https://placehold.co/100x100/003A70/FFFFFF?text=JS" alt="Avatar João Silva">
-                    <div class="text-sm">
+                <!-- Lado Direito: Perfil do Utilizador (Avatar visível no mobile) --><div class="flex items-center gap-3">
+                    <img class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover" src="https://placehold.co/100x100/003A70/FFFFFF?text=JS" alt="Avatar João Silva">
+                    <div class="text-sm hidden md:block"> <!-- Texto escondido no mobile -->
                         <p class="font-semibold text-gray-900">João Silva</p>
                         <p class="text-gray-500">Operador</p>
                     </div>
                 </div>
             </header>
 
-            <!-- Área de Conteúdo (com scroll) -->
-            <main class="flex-1 overflow-y-auto p-6 md:p-8 space-y-6">
+            <!-- Área de Conteúdo (com scroll) --><main class="flex-1 overflow-y-auto p-6 md:p-8 space-y-6">
 
-                <!-- Tabela de Navios -->
-                <div id="navios-section" class="space-y-6">
-                    <!-- KPIs da secção de Navios -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Tabela de Navios --><div id="navios-section" class="space-y-6">
+                    <!-- NOVO: Título e Barra de Pesquisa --><div class="space-y-4">
+                        <!-- O Título h1 foi movido para o <header> global -->
+                        <div class="max-w-xl relative">
+                            <label for="ship-search-input" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+                                <!-- Ícone de Pesquisa (Lucide: Search) --><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
+                            </label>
+                            <!-- Pesquisa de Navios --><input type="text" id="ship-search-input" placeholder="Procurar por navio ou escala..." class="w-full pl-11 pr-4 py-2 bg-white border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-enapor-blue">
+                        </div>
+                    </div>
+                        
+                    <!-- KPIs da secção de Navios --><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <div class="bg-enapor-blue text-white p-6 rounded-2xl shadow-lg">
                             <p class="text-sm text-blue-100">Navios em Porto</p>
                             <p id="kpi-navios-porto" class="text-3xl font-bold text-white mt-1">0</p>
                         </div>
-                        <!-- ALTERAÇÃO: Nome e ID do KPI alterados -->
-                        <div class="bg-enapor-orange text-white p-6 rounded-2xl shadow-lg">
-                            <p class="text-sm text-orange-100">Navios Descarregados</p>
+                        <div class="bg-enapor-green text-white p-6 rounded-2xl shadow-lg">
+                            <p class="text-sm text-green-100">Navios Descarregados</p>
                             <p id="kpi-navios-descarregados" class="text-3xl font-bold text-white mt-1">0</p>
                         </div>
-                        <!-- ALTERAÇÃO: Nome e ID do KPI alterados -->
-                        <div class="bg-enapor-green text-white p-6 rounded-2xl shadow-lg">
-                            <p class="text-sm text-green-100">Navios em Descarga</p>
+                        <div class="bg-enapor-orange text-white p-6 rounded-2xl shadow-lg">
+                            <p class="text-sm text-orange-100">Navios em Descarga</p>
                             <p id="kpi-navios-descarga" class="text-3xl font-bold text-white mt-1">0</p>
                         </div>
                     </div>
 
-                    <!-- Tabela de Navios -->
-                    <div id="ship-table-container" class="bg-white rounded-2xl shadow-lg">
-                    <!-- Cabeçalho da Tabela -->
-                    <div class="px-6 py-5 border-b border-gray-200">
-                        <h2 class="text-xl font-semibold text-gray-900">Navios em Porto</h2>
-                    </div>
-                    
-                    <!-- Wrapper da Tabela (para scroll horizontal) -->
-                    <div class="overflow-x-auto">
-                        <table class="w-full min-w-[600px] text-sm">
-                            <thead>
-                                <!-- ALTERAÇÃO: Colunas removidas, reordenadas e renomeadas -->
-                                <tr class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                                    <th class="px-6 py-4">Navio</th>
-                                    <th class="px-6 py-4">Porto Anterior</th>
-                                    <th class="px-6 py-4">Nº da Escala</th>
-                                    <th class="px-6 py-4">Atracação</th>
-                                    <th class="px-6 py-4 text-right">Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody id="ship-table-body" class="">
-                                <!-- ALTERAÇÃO: Colunas removidas, reordenadas e data-attributes adicionados ao botão -->
-                                <tr class="border-b border-gray-100 hover:bg-gray-50 last:border-b-0" data-ata="2024-07-20T10:00:00">
-                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">MAR D´CANAL</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600 flex items-center gap-2">NLRTM, NL <img src="https://flagcdn.com/w20/nl.png" alt="Bandeira Países Baixos" class="h-3"></td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">GRA2025002630</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">20/07/2024 10:00</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right">
-                                        <button class="font-medium text-enapor-blue hover:underline" data-ship-name="MAR D´CANAL" data-escala="GRA2025002630" data-atracacao="20/07/2024 10:00">Ver Contentores</button>
-                                    </td>
-                                </tr>
-                                <tr class="border-b border-gray-100 hover:bg-gray-50 last:border-b-0" data-ata="2024-07-21T16:30:00">
-                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">B.LÉZA</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600 flex items-center gap-2">ESALG, ES <img src="https://flagcdn.com/w20/es.png" alt="Bandeira Espanha" class="h-3"></td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">GRA2025002633</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">21/07/2024 16:30</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right">
-                                        <button class="font-medium text-enapor-blue hover:underline" data-ship-name="B.LÉZA" data-escala="GRA2025002633" data-atracacao="21/07/2024 16:30">Ver Contentores</button>
-                                    </td>
-                                </tr>
-                                <tr class="border-b border-gray-100 hover:bg-gray-50 last:border-b-0" data-ata="2024-07-22T09:00:00">
-                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">CHIQUINHO BL</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600 flex items-center gap-2">DEHAM, DE <img src="https://flagcdn.com/w20/de.png" alt="Bandeira Alemanha" class="h-3"></td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">GRA2025002640</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">22/07/2024 09:00</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right">
-                                        <button class="font-medium text-enapor-blue hover:underline" data-ship-name="CHIQUINHO BL" data-escala="GRA2025002640" data-atracacao="22/07/2024 09:00">Ver Contentores</button>
-                                    </td>
-                                </tr>
-                                <tr class="border-b border-gray-100 hover:bg-gray-50 last:border-b-0" data-ata="2024-07-23T11:00:00">
-                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">DONA TUTUTA</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600 flex items-center gap-2">PTLXS, PT <img src="https://flagcdn.com/w20/pt.png" alt="Bandeira Portugal" class="h-3"></td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">GRA2025002642</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">23/07/2024 11:00</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right">
-                                        <button class="font-medium text-enapor-blue hover:underline" data-ship-name="DONA TUTUTA" data-escala="GRA2025002642" data-atracacao="23/07/2024 11:00">Ver Contentores</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <!-- Tabela de Navios --><div id="ship-table-container" class="bg-white rounded-2xl shadow-lg">
+                        <!-- Cabeçalho da Tabela --><div class="px-6 py-5 border-b border-gray-200">
+                            <h2 class="text-xl font-semibold text-gray-900">Navios em Porto</h2>
+                        </div>
+                        
+                        <!-- Wrapper da Tabela (para scroll horizontal) --><div class="overflow-x-auto">
+                            <table class="w-full min-w-[600px] text-sm">
+                                <thead>
+                                    <tr class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                        <th class="px-6 py-4">Navio</th>
+                                        <th class="px-6 py-4">Porto Anterior</th>
+                                        <th class="px-6 py-4">Nº da Escala</th>
+                                        <th class="px-6 py-4">Atracação</th>
+                                        <th class="px-6 py-4 text-right">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ship-table-body" class="">
+                                    <!-- Conteúdo gerado por JS --></tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Controlo de Paginação Navios --><div id="ship-pagination" class="px-6 py-4 border-t border-gray-200 flex justify-center items-center gap-2 text-sm">
+                            <!-- Gerado por JS -->
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Secção de Descarga -->
-                <div id="descarga-section" class="hidden space-y-6">
-                    
-                    <!-- ALTERAÇÃO: Cabeçalho de informações do navio adicionado -->
-                    <div id="descarga-header" class="hidden bg-white p-5 rounded-2xl shadow-lg">
+                <!-- Secção de Descarga --><div id="descarga-section" class="hidden space-y-6">
+                    <!-- NOVO: Título e Barra de Pesquisa --><div class="space-y-4">
+                        <!-- O Título h1 foi movido para o <header> global -->
+                        <div class="max-w-xl relative">
+                            <label for="main-search-input" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+                                <!-- Ícone de Pesquisa (Lucide: Search) --><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
+                            </label>
+                            <!-- Pesquisa de Contentores (oculta por defeito) --><input type="text" id="main-search-input" placeholder="Procurar por contentor..." class="w-full pl-11 pr-4 py-2 bg-white border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-enapor-blue">
+                        </div>
+                    </div>
+
+                    <!-- Cabeçalho de informações do navio adicionado --><div id="descarga-header" class="hidden bg-white p-5 rounded-2xl shadow-lg">
                         <h3 class="text-xl font-semibold text-gray-900 mb-2">
                             Navio: <span id="descarga-navio-nome" class="text-enapor-blue"></span>
                         </h3>
@@ -324,8 +287,7 @@
                         </div>
                     </div>
                     
-                    <!-- Cartões KPI (Key Performance Indicators) -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Cartões KPI (Key Performance Indicators) --><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <div class="bg-enapor-blue text-white p-6 rounded-2xl shadow-lg">
                             <p class="text-sm text-blue-100">Total Contentores</p>
                             <p id="kpi-contentores-total" class="text-3xl font-bold text-white mt-1">0</p>
@@ -334,156 +296,87 @@
                             <p class="text-sm text-green-100">Contentores Descarregados</p>
                             <p id="kpi-contentores-descarregados" class="text-3xl font-bold text-white mt-1">0</p>
                         </div>
-                        <!-- ALTERAÇÃO: Nome e ID do KPI alterados -->
                         <div class="bg-enapor-orange text-white p-6 rounded-2xl shadow-lg">
                             <p class="text-sm text-orange-100">Contentores por Descarregar</p>
                             <p id="kpi-contentores-pendentes" class="text-3xl font-bold text-white mt-1">0</p>
                         </div>
                     </div>
 
-                <!-- Tabela de Detalhes da Descarga -->
-                <div class="bg-white rounded-2xl shadow-lg">
-                    <!-- Cabeçalho da Tabela e Filtros -->
-                    <div class="px-6 py-5 border-b border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                        <h2 class="text-xl font-semibold text-gray-900">Descargas em curso</h2>
-                        <!-- Filtros e Botão de Registo Manual -->
-                        <div class="flex items-center gap-3">
-                            <div id="discharge-filters" class="flex items-center gap-2">
-                                <button data-filter="todos" class="px-4 py-1.5 text-sm rounded-lg font-semibold text-gray-900 bg-gray-200">Todos</button>
-                                <button data-filter="descarregado" class="px-4 py-1.5 text-sm rounded-lg font-medium text-gray-500 hover:bg-gray-100">Descarregados</button>
-                                <button data-filter="pendente" class="px-4 py-1.5 text-sm rounded-lg font-medium text-gray-500 hover:bg-gray-100">Pendentes</button>
+                    <!-- Tabela de Detalhes da Descarga --><div class="bg-white rounded-2xl shadow-lg">
+                        <!-- Cabeçalho da Tabela e Filtros --><div class="px-6 py-5 border-b border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <h2 class="text-xl font-semibold text-gray-900">Descargas em curso</h2>
+                            <!-- Filtros e Botão de Registo Manual --><div class="flex flex-wrap items-center justify-start md:justify-end gap-3">
+                                <div id="discharge-filters" class="flex items-center gap-2" role="group" aria-label="Filtros de descarga">
+                                    <button data-filter="todos" class="px-4 py-1.5 text-sm rounded-lg font-semibold text-gray-900 bg-gray-200" aria-pressed="true">Todos</button>
+                                    <button data-filter="descarregado" class="px-4 py-1.5 text-sm rounded-lg font-medium text-gray-500 hover:bg-gray-100" aria-pressed="false">Descarregados</button>
+                                    <button data-filter="pendente" class="px-4 py-1.5 text-sm rounded-lg font-medium text-gray-500 hover:bg-gray-100" aria-pressed="false">Pendentes</button>
+                                </div>
+                                <button id="open-manual-modal-btn" class="flex items-center gap-2 bg-enapor-orange text-white text-sm font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-orange-600 transition-all">
+                                    <!-- Ícone (Lucide: Plus) --><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
+                                    <span>Carga Mais</span>
+                                </button>
+                                <button id="finish-operation-btn" class="hidden flex items-center gap-2 bg-green-600 text-white text-sm font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-green-700 transition-all">
+                                    <!-- Ícone (Lucide: Check) --><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    <span>Finalizar Operação</span>
+                                </button>
                             </div>
-                            <!-- ALTERAÇÃO: Nome do botão alterado -->
-                            <button id="open-manual-modal-btn" class="flex items-center gap-2 bg-enapor-orange text-white text-sm font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-orange-600 transition-all">
-                                <!-- Ícone (Lucide: Plus) -->
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
-                                <span>Carga Mais</span>
-                            </button>
+                        </div>
+                        
+                        <!-- Wrapper da Tabela (para scroll horizontal) --><div class="overflow-x-auto">
+                            <table class="w-full min-w-[500px] text-sm">
+                                <thead>
+                                    <tr class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                        <th class="px-6 py-4">Navio</th>
+                                        <th class="px-6 py-4">Nº da Escala</th>
+                                        <th class="px-6 py-4">Contentor</th>
+                                        <th class="px-6 py-4">Tipo</th>
+                                        <th class="px-6 py-4">Data de descarga</th>
+                                        <th class="px-6 py-4 text-right">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="discharge-table-body" class="">
+                                    <!-- Conteúdo gerado por JS --></tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Controlo de Paginação Descarga --><div id="discharge-pagination" class="px-6 py-4 border-t border-gray-200 flex justify-center items-center gap-2 text-sm">
+                            <!-- Gerado por JS -->
                         </div>
                     </div>
-                    
-                    <!-- Wrapper da Tabela (para scroll horizontal) -->
-                    <div class="overflow-x-auto">
-                        <table class="w-full min-w-[500px] text-sm">
-                            <thead>
-                                <!-- ALTERAÇÃO: Colunas removidas e renomeadas -->
-                                <tr class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                                    <th class="px-6 py-4">Navio</th>
-                                    <th class="px-6 py-4">Nº da Escala</th>
-                                    <th class="px-6 py-4">Contentor</th>
-                                    <th class="px-6 py-4">Tipo</th>
-                                    <th class="px-6 py-4">Data de descarga</th>
-                                    <th class="px-6 py-4 text-right">Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody id="discharge-table-body" class="">
-                                <!-- ALTERAÇÃO: Colunas removidas, dados de 'Tipo' alterados, classe 'linha-descarregada' adicionada -->
-                                <tr class="border-b border-gray-100 hover:bg-gray-50 last:border-b-0 linha-descarregada" data-ship-name="MAR D´CANAL" data-escala="GRA2025002630" data-status="descarregado">
-                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">MAR D´CANAL</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">GRA2025002630</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">MSCU1234567</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">20P</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">17/07/2024 10:45:12</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right">
-                                        <button class="px-3 py-1 text-xs font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300">Desmarcar</button>
-                                    </td>
-                                </tr>
-                                <!-- ALTERAÇÃO: Colunas removidas, dados de 'Tipo' alterados -->
-                                <tr class="border-b border-gray-100 hover:bg-gray-50 last:border-b-0 linha-pendente" data-ship-name="B.LÉZA" data-escala="GRA2025002633" data-status="pendente">
-                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">B.LÉZA</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">GRA2025002633</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">CMAU7654321</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">40P</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">--:--:--</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right">
-                                        <button class="px-3 py-1 text-xs font-medium text-white bg-enapor-blue rounded-md hover:bg-opacity-90">Descarregar</button>
-                                    </td>
-                                </tr>
-                                <tr class="border-b border-gray-100 hover:bg-gray-50 last:border-b-0 linha-descarregada" data-ship-name="MAR D´CANAL" data-escala="GRA2025002630" data-status="descarregado">
-                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">MAR D´CANAL</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">GRA2025002630</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">MSCU1234568</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">20P</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">17/07/2024 10:50:02</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right">
-                                        <button class="px-3 py-1 text-xs font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300">Desmarcar</button>
-                                    </td>
-                                </tr>
-                                <tr class="border-b border-gray-100 hover:bg-gray-50 last:border-b-0 linha-pendente" data-ship-name="CHIQUINHO BL" data-escala="GRA2025002640" data-status="pendente">
-                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">CHIQUINHO BL</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">GRA2025002640</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">MRSU8765432</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">40P</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">--:--:--</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right">
-                                        <button class="px-3 py-1 text-xs font-medium text-white bg-enapor-blue rounded-md hover:bg-opacity-90">Descarregar</button>
-                                    </td>
-                                </tr>
-                                <tr class="border-b border-gray-100 hover:bg-gray-50 last:border-b-0 linha-descarregada" data-ship-name="CHIQUINHO BL" data-escala="GRA2025002640" data-status="descarregado">
-                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">CHIQUINHO BL</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">GRA2025002640</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">MAEU5432109</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">20P</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">17/07/2024 11:15:45</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right">
-                                        <button class="px-3 py-1 text-xs font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300">Desmarcar</button>
-                                    </td>
-                                </tr>
-                                <tr class="border-b border-gray-100 hover:bg-gray-50 last:border-b-0 linha-pendente" data-ship-name="DONA TUTUTA" data-escala="GRA2025002642" data-status="pendente">
-                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">DONA TUTUTA</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">GRA2025002642</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">EASU4567890</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">40P</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">--:--:--</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right">
-                                        <button class="px-3 py-1 text-xs font-medium text-white bg-enapor-blue rounded-md hover:bg-opacity-90">Descarregar</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
                 </div>
             </main>
         </div>
     </div>
 
-    <!-- Modal de Registo Manual -->
-    <div id="manual-register-modal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <!-- Modal de Registo Manual --><div id="manual-register-modal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md transform transition-all opacity-0 scale-95">
-            <!-- Cabeçalho do Modal -->
-            <div class="px-6 py-5 border-b border-gray-200">
-                <h3 class="text-lg font-semibold text-gray-900">Registar Carga Mais</h3>
+            <!-- Cabeçalho do Modal --><div class="px-6 py-5 border-b border-gray-200">
+                <h3 id="modal-title" class="text-lg font-semibold text-gray-900">Registar Carga Mais</h3>
             </div>
             
-            <!-- Corpo do Modal com Formulário -->
-            <form id="manual-register-form" class="p-6 space-y-4">
-                <!-- ALTERAÇÃO: Campo 'Porto' removido -->
+            <!-- Corpo do Modal com Formulário --><form id="manual-register-form" class="p-6 space-y-4">
                 <div>
                     <label for="manual-ship-select" class="block text-sm font-medium text-gray-700 mb-1">Navio</label>
                     <select id="manual-ship-select" name="ship" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-enapor-blue" required>
                         <option value="">Selecione um navio...</option>
-                        <!-- Opções preenchidas por JS -->
-                    </select>
+                        <!-- Opções preenchidas por JS --></select>
                 </div>
                 <div>
                     <label for="manual-container-input" class="block text-sm font-medium text-gray-700 mb-1">Número do Contentor</label>
                     <input type="text" id="manual-container-input" name="container" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-enapor-blue" placeholder="Ex: MSCU1234567" required>
                 </div>
                  <div>
-                    <label for="manual-container-type" class="block text-sm font-medium text-gray-700 mb-1">Tipo</label>
+                    <label for="manual-container-type" class="block text-sm font-medium text-gray-700 mb-1">Tipo</o>
                     <select id="manual-container-type" name="type" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-enapor-blue" required>
                         <option value="20P">20P</option>
                         <option value="40P">40P</option>
                         <option value="10P">10P</option>
                     </select>
                 </div>
-                <!-- Mensagem de erro (substitui o alert) -->
-                <div id="manual-register-error" class="text-enapor-red text-sm hidden"></div>
+                <!-- Mensagem de erro (substitui o alert) --><div id="manual-register-error" class="text-enapor-red text-sm hidden"></div>
             </form>
             
-            <!-- Rodapé do Modal com Ações -->
-            <div class="px-6 py-4 bg-gray-50 rounded-b-2xl flex justify-end gap-3">
+            <!-- Rodapé do Modal com Ações --><div class="px-6 py-4 bg-gray-50 rounded-b-2xl flex justify-end gap-3">
                 <button id="cancel-manual-modal-btn" type="button" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
                     Cancelar
                 </button>
@@ -494,99 +387,477 @@
         </div>
     </div>
 
+    <!-- Toast Notification --><div id="toast-notification" class="fixed top-5 right-5 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out z-50">
+        <p id="toast-message">Mensagem de sucesso!</p>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- NOVOS Seletores de Login ---
+
+            // --- Base de Dados (Simulada) ---
+            let db = {
+                ships: [
+                    {
+                        name: "MAR D´CANAL",
+                        port: "NLRTM, NL",
+                        flag: "nl",
+                        escala: "GRA2025002630",
+                        ata: "2025-11-01T10:00:00",
+                        status: "pending" // 'pending' ou 'finished'
+                    },
+                    {
+                        name: "B.LÉZA",
+                        port: "ESALG, ES",
+                        flag: "es",
+                        escala: "GRA2025002633",
+                        ata: "2025-11-01T16:30:00",
+                        status: "pending"
+                    },
+                    {
+                        name: "CHIQUINHO BL",
+                        port: "DEHAM, DE",
+                        flag: "de",
+                        escala: "GRA2025002640",
+                        ata: "2025-11-02T09:00:00",
+                        status: "pending"
+                    },
+                    {
+                        name: "DONA TUTUTA",
+                        port: "PTLXS, PT",
+                        flag: "pt",
+                        escala: "GRA2025002642",
+                        ata: "2025-11-02T11:00:00",
+                        status: "pending"
+                    },
+                    {
+                        name: "PONTA DO SOL",
+                        port: "FRMRS, FR",
+                        flag: "fr",
+                        escala: "GRA2025002650",
+                        ata: "2025-11-02T14:00:00",
+                        status: "pending"
+                    },
+                    {
+                        name: "PRAIA D´AGUADA",
+                        port: "USNYC, US",
+                        flag: "us",
+                        escala: "GRA2025002651",
+                        ata: "2025-11-02T18:00:00",
+                        status: "pending"
+                    },
+                    {
+                        name: "MONTE CARA",
+                        port: "ITGOA, IT",
+                        flag: "it",
+                        escala: "GRA2025002655",
+                        ata: "2025-11-03T08:00:00",
+                        status: "pending"
+                    },
+                    {
+                        name: "RIB. GRANDE",
+                        port: "ESSVN, ES",
+                        flag: "es",
+                        escala: "GRA2025002656",
+                        ata: "2025-11-03T10:30:00",
+                        status: "pending"
+                    },
+                    {
+                        name: "SANTO ANTAO",
+                        port: "NLRTM, NL",
+                        flag: "nl",
+                        escala: "GRA2025002660",
+                        ata: "2025-11-03T11:00:00",
+                        status: "pending"
+                    },
+                    {
+                        name: "MAR DE CANAL II",
+                        port: "DEHAM, DE",
+                        flag: "de",
+                        escala: "GRA2025002661",
+                        ata: "2025-11-03T12:45:00",
+                        status: "pending"
+                    }
+                ],
+                discharges: [
+                    // MAR D´CANAL
+                    { id: 1, shipName: "MAR D´CANAL", escala: "GRA2025002630", container: "MSCU1234567", type: "20P", status: "descarregado", dischargeTime: "2025-11-01T10:45:12" },
+                    { id: 3, shipName: "MAR D´CANAL", escala: "GRA2025002630", container: "MSCU1234568", type: "20P", status: "descarregado", dischargeTime: "2025-11-01T10:50:02" },
+                    { id: 7, shipName: "MAR D´CANAL", escala: "GRA2025002630", container: "TRLU6543210", type: "40P", status: "pendente", dischargeTime: null },
+                    
+                    // B.LÉZA
+                    { id: 2, shipName: "B.LÉZA", escala: "GRA2025002633", container: "CMAU7654321", type: "40P", status: "pendente", dischargeTime: null },
+                    { id: 8, shipName: "B.LÉZA", escala: "GRA2025002633", container: "CMAU7654322", type: "40P", status: "pendente", dischargeTime: null },
+                    { id: 9, shipName: "B.LÉZA", escala: "GRA2025002633", container: "HLCU1112223", type: "20P", status: "descarregado", dischargeTime: "2025-11-01T17:00:00" },
+                    
+                    // CHIQUINHO BL
+                    { id: 4, shipName: "CHIQUINHO BL", escala: "GRA2025002640", container: "MRSU8765432", type: "40P", status: "pendente", dischargeTime: null },
+                    { id: 5, shipName: "CHIQUINHO BL", escala: "GRA2025002640", container: "MAEU5432109", type: "20P", status: "descarregado", dischargeTime: "2025-11-02T09:15:45" },
+                    { id: 10, shipName: "CHIQUINHO BL", escala: "GRA2025002640", container: "MRSU8765433", type: "40P", status: "pendente", dischargeTime: null },
+                    { id: 11, shipName: "CHIQUINHO BL", escala: "GRA2025002640", container: "MRSU8765434", type: "40P", status: "pendente", dischargeTime: null },
+                    
+                    // DONA TUTUTA
+                    { id: 6, shipName: "DONA TUTUTA", escala: "GRA2025002642", container: "EASU4567890", type: "40P", status: "pendente", dischargeTime: null },
+                    { id: 12, shipName: "DONA TUTUTA", escala: "GRA2025002642", container: "EASU4567891", type: "20P", status: "descarregado", dischargeTime: "2025-11-02T11:30:00" },
+                    { id: 13, shipName: "DONA TUTUTA", escala: "GRA2025002642", container: "EASU4567892", type: "40P", status: "pendente", dischargeTime: null },
+                    
+                    // PONTA DO SOL
+                    { id: 14, shipName: "PONTA DO SOL", escala: "GRA2025002650", container: "FCIU9876543", type: "20P", status: "pendente", dischargeTime: null },
+                    
+                    // PRAIA D´AGUADA
+                    { id: 15, shipName: "PRAIA D´AGUADA", escala: "GRA2025002651", container: "OOLU1231234", type: "40P", status: "pendente", dischargeTime: null },
+                    { id: 16, shipName: "PRAIA D´AGUADA", escala: "GRA2025002651", container: "OOLU1231235", type: "20P", status: "pendente", dischargeTime: null },
+                    
+                    // MONTE CARA
+                    { id: 17, shipName: "MONTE CARA", escala: "GRA2025002655", container: "TCNU5554443", type: "20P", status: "descarregado", dischargeTime: "2025-11-03T08:30:10" },
+                    { id: 18, shipName: "MONTE CARA", escala: "GRA2025002655", container: "TCNU5554444", type: "40P", status: "pendente", dischargeTime: null },
+                    
+                    // RIB. GRANDE
+                    { id: 19, shipName: "RIB. GRANDE", escala: "GRA2025002656", container: "ZCSU7778889", type: "40P", status: "pendente", dischargeTime: null },
+                    { id: 20, shipName: "RIB. GRANDE", escala: "GRA2025002656", container: "ZCSU7778880", type: "40P", status: "pendente", dischargeTime: null },
+                    
+                    // SANTO ANTAO
+                    { id: 21, shipName: "SANTO ANTAO", escala: "GRA2025002660", container: "MSCU9998887", type: "20P", status: "pendente", dischargeTime: null },
+                    { id: 22, shipName: "SANTO ANTAO", escala: "GRA2025002660", container: "MSCU9998886", type: "20P", status: "pendente", dischargeTime: null },
+                    { id: 23, shipName: "SANTO ANTAO", escala: "GRA2025002660", container: "MSCU9998885", type: "40P", status: "pendente", dischargeTime: null },
+                    
+                    // MAR DE CANAL II
+                    { id: 24, shipName: "MAR DE CANAL II", escala: "GRA2025002661", container: "TRLU8887776", type: "40P", status: "pendente", dischargeTime: null }
+                ]
+            };
+            
+            // --- Estado da Aplicação ---
+            let state = {
+                currentView: 'login', // 'login', 'navios', 'descarga'
+                currentShipFilter: null, // null (todos) ou "Nome do Navio"
+                currentStatusFilter: 'todos', // 'todos', 'pendente', 'descarregado'
+                shipSearchTerm: '',
+                dischargeSearchTerm: '',
+                itemsPerPage: 7,
+                shipsCurrentPage: 1,
+                dischargeCurrentPage: 1
+            };
+
+            // --- Seletores de Elementos (DOM) ---
+            // Login
             const loginScreen = document.getElementById('login-screen');
             const loginForm = document.getElementById('login-form');
             const loginError = document.getElementById('login-error');
             const loginPassInput = document.getElementById('login-pass');
-            // --- ALTERAÇÃO: Seletor para o novo spinner de círculo ---
             const loginCircleSpinner = document.getElementById('login-circle-spinner');
-            const loginButton = document.querySelector('#login-form button[type="submit"]'); // Seleciona o botão
+            const loginButton = loginForm.querySelector('button[type="submit"]');
             
+            // App Principal
             const dashboardApp = document.getElementById('dashboard-app');
             const logoutBtn = document.getElementById('logout-btn');
+            const sidebar = document.getElementById('sidebar');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 
-            // --- Lógica de Login ---
-            if (loginForm) {
-                loginForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const user = e.target.elements.user.value;
-                    const pass = e.target.elements.pass.value;
-
-                    // 1. Mostrar spinner e desativar botão
-                    loginError.classList.add('hidden');
-                    // ALTERAÇÃO: Adiciona a classe 'is-loading' ao SVG
-                    loginCircleSpinner.classList.add('is-loading');
-                    loginButton.disabled = true;
-                    loginButton.classList.add('opacity-50');
-
-                    // 2. Simular chamada de API (1.5 segundos)
-                    setTimeout(() => {
-                        // 3. Esconder spinner e reativar botão
-                        // ALTERAÇÃO: Remove a classe 'is-loading'
-                        loginCircleSpinner.classList.remove('is-loading');
-                        loginButton.disabled = false;
-                        loginButton.classList.remove('opacity-50');
-
-                        // 4. Verificar credenciais (admin/admin)
-                        if (user === 'admin' && pass === 'admin') {
-                            loginScreen.classList.add('hidden');
-                            dashboardApp.classList.remove('hidden');
-                            loginPassInput.value = ''; // Limpa a passe
-                            showView('navios'); // NOVO: Mostrar a view 'navios' ao fazer login
-                        } else {
-                            loginError.textContent = 'Utilizador ou palavra-passe incorretos.';
-                            loginError.classList.remove('hidden');
-                        }
-                    }, 1500); // 1.5s de delay
-                });
-            }
-
-            // --- Lógica de Logout ---
-            if (logoutBtn) {
-                logoutBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    dashboardApp.classList.add('hidden');
-                    loginScreen.classList.remove('hidden');
-                    loginPassInput.value = ''; // Limpa a passe
-                });
-            }
-
-            // --- Seletores de Elementos (EXISTENTES) ---
+            // Navegação
             const navNavios = document.getElementById('nav-navios');
             const navDescarga = document.getElementById('nav-descarga');
             
+            // Secções
             const naviosSection = document.getElementById('navios-section');
             const descargaSection = document.getElementById('descarga-section');
-            
-            const mainSearchInput = document.getElementById('main-search-input'); // Para contentores
-            const shipSearchInput = document.getElementById('ship-search-input'); // Para navios
 
+            // Pesquisa
+            const mainSearchInput = document.getElementById('main-search-input'); // Contentores
+            const shipSearchInput = document.getElementById('ship-search-input'); // Navios
+
+            // Tabelas
             const shipTableBody = document.getElementById('ship-table-body');
             const dischargeTableBody = document.getElementById('discharge-table-body');
+            const shipPaginationContainer = document.getElementById('ship-pagination');
+            const dischargePaginationContainer = document.getElementById('discharge-pagination');
             
-            let shipTableRows = Array.from(shipTableBody.querySelectorAll('tr'));
-            let descargaTableRows = Array.from(dischargeTableBody.querySelectorAll('tr'));
-            
+            // Filtros Descarga
             const dischargeFilterButtons = document.querySelectorAll('#discharge-filters button');
             
-            // Elementos do Menu Mobile
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const sidebar = document.getElementById('sidebar');
-
-            // --- Seletores de Cabeçalho de Descarga ---
+            // Cabeçalho Descarga
             const descargaHeader = document.getElementById('descarga-header');
             const descargaNavioNome = document.getElementById('descarga-navio-nome');
             const descargaNavioEscala = document.getElementById('descarga-navio-escala');
             const descargaNavioAtracacao = document.getElementById('descarga-navio-atracacao');
 
-            // --- Variáveis de Estado ---
-            let currentStatusFilter = 'todos';
-            let currentShipFilter = null; // Armazena o filtro de navio ativo para a tabela de descargas
+            // Modal
+            const manualModal = document.getElementById('manual-register-modal');
+            const manualModalContent = manualModal.querySelector('.bg-white');
+            const openModalBtn = document.getElementById('open-manual-modal-btn');
+            const cancelModalBtn = document.getElementById('cancel-manual-modal-btn');
+            const manualForm = document.getElementById('manual-register-form');
+            const shipSelect = document.getElementById('manual-ship-select');
+            const containerInput = document.getElementById('manual-container-input');
+            const containerTypeSelect = document.getElementById('manual-container-type');
+            const manualErrorDiv = document.getElementById('manual-register-error');
+            const finishOperationBtn = document.getElementById('finish-operation-btn');
 
-            // --- Funções Principais ---
+            // Toast
+            const toastNotification = document.getElementById('toast-notification');
+            const toastMessage = document.getElementById('toast-message');
+            let toastTimer;
+
+            // --- Funções de Renderização ---
+
+            /**
+             * Mostra uma notificação toast.
+             * @param {string} message - A mensagem a exibir.
+             * @param {boolean} [isSuccess=true] - true para sucesso (verde), false para erro (vermelho).
+             */
+            function showToast(message, isSuccess = true) {
+                if (toastTimer) clearTimeout(toastTimer);
+
+                toastMessage.textContent = message;
+                toastNotification.classList.toggle('bg-green-600', isSuccess);
+                toastNotification.classList.toggle('bg-enapor-red', !isSuccess);
+                
+                toastNotification.classList.remove('translate-x-full');
+                toastNotification.classList.add('translate-x-0');
+
+                toastTimer = setTimeout(() => {
+                    toastNotification.classList.add('translate-x-full');
+                    toastNotification.classList.remove('translate-x-0');
+                }, 3000); // Esconde depois de 3 segundos
+            }
+
+
+            /**
+             * Formata data ISO (ex: 2024-07-20T10:00:00) para DD/MM/AAAA HH:MM
+             * @param {string | null} isoString
+             * @returns {string}
+             */
+            function formatDateTime(isoString) {
+                if (!isoString) return '--:--:--';
+                try {
+                    const date = new Date(isoString);
+                    // pt-PT usa DD/MM/AAAA
+                    const options = { 
+                        dateStyle: 'short', 
+                        timeStyle: 'medium', 
+                        hour12: false 
+                    };
+                    return date.toLocaleString('pt-PT', options).replace(',', ''); // Remove vírgula
+                } catch (e) {
+                    console.error('Data inválida:', isoString);
+                    return '--:--:--';
+                }
+            }
+            
+            /**
+             * Formata data ISO (ex: 2024-07-20T10:00:00) para DD/MM/AAAA HH:MM (sem segundos)
+             * @param {string} isoString
+             * @returns {string}
+             */
+            function formatAtaDateTime(isoString) {
+                 if (!isoString) return '--:--:--';
+                try {
+                    const date = new Date(isoString);
+                    const options = { 
+                        year: 'numeric', 
+                        month: '2-digit', 
+                        day: '2-digit', 
+                        hour: '2-digit', 
+                        minute: '2-digit',
+                        hour12: false 
+                    };
+                    return date.toLocaleString('pt-PT', options).replace(',', '');
+                } catch (e) {
+                    console.error('Data inválida:', isoString);
+                    return '--:--:--';
+                }
+            }
+            
+            /**
+             * Renderiza a paginação.
+             * @param {HTMLElement} container - O elemento que contém os botões.
+             * @param {number} totalItems - Total de itens (para calcular páginas).
+             * @param {number} currentPage - A página atual.
+             * @param {function(number):void} pageChangeCallback - Função chamada ao clicar num botão de página.
+             */
+            function renderPagination(container, totalItems, currentPage, pageChangeCallback) {
+                container.innerHTML = ''; // Limpar
+                const totalPages = Math.ceil(totalItems / state.itemsPerPage);
+
+                if (totalPages <= 1) {
+                    return; // Não mostrar paginação se houver 1 ou 0 páginas
+                }
+
+                // Botão "Anterior"
+                const prevBtn = document.createElement('button');
+                prevBtn.innerHTML = '&laquo; Anterior';
+                prevBtn.className = 'pagination-btn';
+                if (currentPage === 1) {
+                    prevBtn.classList.add('disabled');
+                } else {
+                    prevBtn.addEventListener('click', () => pageChangeCallback(currentPage - 1));
+                }
+                container.appendChild(prevBtn);
+
+                // Botões de Página (simplificado: mostra a página atual)
+                // Para uma lógica mais complexa (ex: 1 ... 4 5 6 ... 10) seria preciso mais código
+                const pageInfo = document.createElement('span');
+                pageInfo.className = "px-2 text-gray-700";
+                pageInfo.textContent = `Página ${currentPage} de ${totalPages}`;
+                container.appendChild(pageInfo);
+
+
+                // Botão "Seguinte"
+                const nextBtn = document.createElement('button');
+                nextBtn.innerHTML = 'Seguinte &raquo;';
+                nextBtn.className = 'pagination-btn';
+                if (currentPage === totalPages) {
+                    nextBtn.classList.add('disabled');
+                } else {
+                    nextBtn.addEventListener('click', () => pageChangeCallback(currentPage + 1));
+                }
+                container.appendChild(nextBtn);
+            }
+
+
+            /**
+             * Renderiza a tabela de navios com base nos dados e filtros.
+             */
+            function renderShipTable() {
+                // Ordenar navios por data de atracação (ata)
+                const sortedShips = [...db.ships].sort((a, b) => new Date(a.ata) - new Date(b.ata));
+                
+                // Filtrar por termo de pesquisa
+                const filteredShips = sortedShips.filter(ship => {
+                    const searchTerm = state.shipSearchTerm.toLowerCase();
+                    const nameMatch = ship.name.toLowerCase().includes(searchTerm);
+                    const escalaMatch = ship.escala.toLowerCase().includes(searchTerm);
+                    return nameMatch || escalaMatch;
+                });
+                
+                // Paginar
+                const startIndex = (state.shipsCurrentPage - 1) * state.itemsPerPage;
+                const endIndex = startIndex + state.itemsPerPage;
+                const paginatedShips = filteredShips.slice(startIndex, endIndex);
+
+                // Limpar tabela
+                shipTableBody.innerHTML = '';
+
+                if (filteredShips.length === 0) {
+                     shipTableBody.innerHTML = `<tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">Nenhum navio encontrado.</td></tr>`;
+                } else {
+                    // Criar e adicionar linhas
+                    paginatedShips.forEach(ship => {
+                        const row = document.createElement('tr');
+                        const isFinished = ship.status === 'finished';
+                        row.className = `border-b border-gray-100 last:border-b-0 ${isFinished ? 'linha-descarregada' : 'hover:bg-gray-50'}`;
+                        
+                        const ataFormatted = formatAtaDateTime(ship.ata);
+                        
+                        row.innerHTML = `
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">${ship.name}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-600 flex items-center gap-2">
+                                ${ship.port} 
+                                <img src="https://flagcdn.com/w20/${ship.flag}.png" alt="Bandeira ${ship.flag.toUpperCase()}" class="h-3">
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-600">${ship.escala}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-600">${ataFormatted}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right">
+                                <button class="font-medium text-enapor-blue hover:underline view-containers-btn" data-ship-name="${ship.name}">
+                                    Ver Contentores
+                                </button>
+                            </td>
+                        `;
+                        shipTableBody.appendChild(row);
+                    });
+                }
+                
+                // Renderizar Paginação
+                renderPagination(shipPaginationContainer, filteredShips.length, state.shipsCurrentPage, (newPage) => {
+                    state.shipsCurrentPage = newPage;
+                    renderShipTable(); // Re-renderizar tabela com a nova página
+                });
+            }
+
+            /**
+             * Renderiza a tabela de descargas com base nos dados e filtros.
+             */
+            function renderDischargeTable() {
+                // Filtrar descargas
+                const filteredDischarges = db.discharges.filter(item => {
+                    const shipMatch = !state.currentShipFilter || item.shipName === state.currentShipFilter;
+                    const statusMatch = state.currentStatusFilter === 'todos' || item.status === state.currentStatusFilter;
+                    const searchMatch = item.container.toLowerCase().includes(state.dischargeSearchTerm.toLowerCase());
+                    return shipMatch && statusMatch && searchMatch;
+                });
+                
+                // Paginar
+                const startIndex = (state.dischargeCurrentPage - 1) * state.itemsPerPage;
+                const endIndex = startIndex + state.itemsPerPage;
+                const paginatedDischarges = filteredDischarges.slice(startIndex, endIndex);
+
+                // Limpar tabela
+                dischargeTableBody.innerHTML = '';
+
+                if (filteredDischarges.length === 0) {
+                     dischargeTableBody.innerHTML = `<tr><td colspan="6" class="px-6 py-4 text-center text-gray-500">Nenhum contentor encontrado.</td></tr>`;
+                } else {
+                    // Criar e adicionar linhas
+                    paginatedDischarges.forEach(item => {
+                        const row = document.createElement('tr');
+                        const isPendente = item.status === 'pendente';
+                        row.className = `border-b border-gray-100 last:border-b-0 ${isPendente ? 'linha-pendente' : 'linha-descarregada'}`;
+                        
+                        const timeFormatted = formatDateTime(item.dischargeTime);
+                        
+                        const actionButtonHtml = isPendente
+                            ? `<button class="px-3 py-1 text-xs font-medium text-white bg-enapor-blue rounded-md hover:bg-opacity-90 action-btn" data-action="descarregar" data-id="${item.id}">Descarregar</button>`
+                            : `<button class="px-3 py-1 text-xs font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 action-btn" data-action="desmarcar" data-id="${item.id}">Desmarcar</button>`;
+                        
+                        row.innerHTML = `
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">${item.shipName}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-600">${item.escala}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-600">${item.container}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-600">${item.type}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-600">${timeFormatted}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right">
+                                ${actionButtonHtml}
+                            </td>
+                        `;
+                        dischargeTableBody.appendChild(row);
+                    });
+                }
+                
+                // Renderizar Paginação
+                renderPagination(dischargePaginationContainer, filteredDischarges.length, state.dischargeCurrentPage, (newPage) => {
+                    state.dischargeCurrentPage = newPage;
+                    renderDischargeTable(); // Re-renderizar tabela com a nova página
+                });
+            }
+
+            // --- Funções de Atualização de Estado e UI ---
+
+            /**
+             * Atualiza os KPIs da secção Navios.
+             */
+            function updateShipKPIs() {
+                const totalShips = db.ships.length;
+                const finishedShips = db.ships.filter(s => s.status === 'finished').length;
+                
+                document.getElementById('kpi-navios-porto').textContent = totalShips;
+                document.getElementById('kpi-navios-descarregados').textContent = finishedShips; // KPI agora reflete navios finalizados
+                document.getElementById('kpi-navios-descarga').textContent = totalShips; // "Navios em Descarga" = "Navios em Porto"
+            }
+
+            /**
+             * Atualiza os KPIs da secção Descarga.
+             */
+            function updateDischargeKPIs() {
+                // Filtra descargas com base APENAS no filtro de navio
+                const relevantDischarges = db.discharges.filter(item => 
+                    !state.currentShipFilter || item.shipName === state.currentShipFilter
+                );
+
+                const descarregadosCount = relevantDischarges.filter(item => item.status === 'descarregado').length;
+                const pendentesCount = relevantDischarges.filter(item => item.status === 'pendente').length;
+                
+                document.getElementById('kpi-contentores-total').textContent = descarregadosCount + pendentesCount;
+                document.getElementById('kpi-contentores-descarregados').textContent = descarregadosCount;
+                document.getElementById('kpi-contentores-pendentes').textContent = pendentesCount;
+            }
 
             /**
              * Mostra uma "view" (secção) principal e esconde as outras.
@@ -594,17 +865,16 @@
              * @param {object | null} [shipInfo=null] - (Opcional) Objeto com {name, escala, atracacao}.
              */
             function showView(viewName, shipInfo = null) {
-                // Atualiza o estado global do filtro de navio
-                currentShipFilter = shipInfo ? shipInfo.name : null;
+                state.currentView = viewName;
+                state.currentShipFilter = shipInfo ? shipInfo.name : null;
 
                 // Esconder todas as secções
                 naviosSection.classList.add('hidden');
                 descargaSection.classList.add('hidden');
-                descargaHeader.classList.add('hidden'); // Esconder cabeçalho de descarga por defeito
+                descargaHeader.classList.add('hidden');
+                finishOperationBtn.classList.add('hidden'); // Esconder botão 'Finalizar' por defeito
                 
-                // Controlar a visibilidade das barras de pesquisa
-                mainSearchInput.classList.add('hidden');
-                shipSearchInput.classList.add('hidden');
+                // REMOVIDO: Controlo de visibilidade das barras de pesquisa
 
                 // Resetar estado ativo da navegação
                 [navNavios, navDescarga].forEach(nav => {
@@ -614,17 +884,21 @@
 
                 if (viewName === 'navios') {
                     naviosSection.classList.remove('hidden');
-                    shipSearchInput.classList.remove('hidden'); 
+                    state.dischargeSearchTerm = ''; // Limpa pesquisa de contentores
                     mainSearchInput.value = ''; 
+                    state.shipsCurrentPage = 1; // Resetar página
                     
                     navNavios.classList.add('bg-white/10', 'text-white', 'font-semibold');
                     navNavios.classList.remove('text-gray-200', 'font-medium', 'hover:text-white');
-                    sortShipTable();
+                    
+                    renderShipTable();
+                    updateShipKPIs();
                 
                 } else if (viewName === 'descarga') {
                     descargaSection.classList.remove('hidden');
-                    mainSearchInput.classList.remove('hidden'); 
+                    state.shipSearchTerm = ''; // Limpa pesquisa de navios
                     shipSearchInput.value = ''; 
+                    state.dischargeCurrentPage = 1; // Resetar página
                     
                     navDescarga.classList.add('bg-white/10', 'text-white', 'font-semibold');
                     navDescarga.classList.remove('text-gray-200', 'font-medium', 'hover:text-white');
@@ -633,253 +907,68 @@
                     if (shipInfo) {
                         descargaNavioNome.textContent = shipInfo.name;
                         descargaNavioEscala.textContent = shipInfo.escala;
-                        descargaNavioAtracacao.textContent = shipInfo.atracacao;
+                        descargaNavioAtracacao.textContent = formatAtaDateTime(shipInfo.ata);
                         descargaHeader.classList.remove('hidden');
+                        
+                        // Mostrar botão 'Finalizar' apenas se o navio não estiver finalizado
+                        const ship = db.ships.find(s => s.name === shipInfo.name);
+                        if (ship && ship.status !== 'finished') {
+                            finishOperationBtn.classList.remove('hidden');
+                        }
+                        
+                        // Ao ver um navio específico, mostrar 'todos' por defeito
+                        state.currentStatusFilter = 'todos';
+                    } else {
+                        // Ao clicar em "Descarga", mostrar 'pendente' por defeito
+                        state.currentStatusFilter = 'pendente';
                     }
                     
-                    const statusToActivate = shipInfo ? 'todos' : 'pendente';
-                    currentStatusFilter = statusToActivate;
-
-                    // Atualizar visualmente os botões de filtro
-                    dischargeFilterButtons.forEach(btn => {
-                        btn.classList.remove('font-semibold', 'text-gray-900', 'bg-gray-200');
-                        btn.classList.add('font-medium', 'text-gray-500', 'hover:bg-gray-100');
-                        
-                        if (btn.dataset.filter === statusToActivate) {
-                            btn.classList.add('font-semibold', 'text-gray-900', 'bg-gray-200');
-                            btn.classList.remove('font-medium', 'text-gray-500', 'hover:bg-gray-100');
-                        }
-                    });
-
-                    // Aplicar o filtro e atualizar KPIs de descarga
-                    filterDischargeTable();
+                    updateDischargeFilterUI();
+                    renderDischargeTable();
                     updateDischargeKPIs();
                 }
-                updateShipKPIs();
-            }
-
-            /**
-             * Atualiza os KPIs da secção Navios.
-             */
-            function updateShipKPIs() {
-                shipTableRows = Array.from(shipTableBody.querySelectorAll('tr')); 
                 
-                const portoCount = shipTableRows.length; // Assumindo que todos na lista estão em porto
-                const descarregadosCount = 12; // Valor hardcoded conforme solicitado
-                
-                document.getElementById('kpi-navios-porto').textContent = portoCount;
-                document.getElementById('kpi-navios-descarregados').textContent = descarregadosCount;
-                document.getElementById('kpi-navios-descarga').textContent = portoCount; // "Navios em Descarga" = "Navios em Porto"
+                // Fecha a sidebar no mobile ao navegar
+                sidebar.classList.add('hidden');
+                sidebar.classList.remove('flex'); // Garante que no mobile 'hidden' tem precedência
             }
-
+            
             /**
-             * Atualiza os KPIs da secção Descarga.
+             * Atualiza o estado visual dos botões de filtro de descarga.
              */
-            function updateDischargeKPIs() {
-                // Atualiza a lista de linhas de descarga
-                descargaTableRows = Array.from(dischargeTableBody.querySelectorAll('tr'));
-
-                let pendentesCount = 0;
-                let descarregadosCount = 0;
-
-                descargaTableRows.forEach(row => {
-                    // Filtra apenas as linhas que pertencem ao navio atualmente selecionado (se houver)
-                    if (!currentShipFilter || row.dataset.shipName === currentShipFilter) {
-                        if (row.dataset.status === 'pendente') {
-                            pendentesCount++;
-                        } else if (row.dataset.status === 'descarregado') {
-                            descarregadosCount++;
-                        }
-                    }
-                });
-
-                document.getElementById('kpi-contentores-total').textContent = pendentesCount + descarregadosCount;
-                document.getElementById('kpi-contentores-descarregados').textContent = descarregadosCount;
-                document.getElementById('kpi-contentores-pendentes').textContent = pendentesCount;
-            }
-
-
-            /**
-             * Ordena a tabela de navios por data ATA (data-ata attribute).
-             */
-            function sortShipTable() {
-                const rows = Array.from(shipTableBody.querySelectorAll('tr'));
-
-                rows.sort((a, b) => {
-                    const dateA = new Date(a.dataset.ata);
-                    const dateB = new Date(b.dataset.ata);
-                    return dateA - dateB; 
-                });
-
-                rows.forEach(row => shipTableBody.appendChild(row));
-            }
-
-            /**
-             * Filtra a tabela de descargas com base nos estados globais.
-             */
-            function filterDischargeTable() {
-                const searchTerm = mainSearchInput.value.toLowerCase();
-
-                descargaTableRows.forEach(row => {
-                    const shipMatch = !currentShipFilter || row.dataset.shipName === currentShipFilter;
-                    const statusMatch = currentStatusFilter === 'todos' || row.dataset.status === currentStatusFilter;
+            function updateDischargeFilterUI() {
+                dischargeFilterButtons.forEach(btn => {
+                    const isPressed = btn.dataset.filter === state.currentStatusFilter;
+                    btn.classList.toggle('font-semibold', isPressed);
+                    btn.classList.toggle('text-gray-900', isPressed);
+                    btn.classList.toggle('bg-gray-200', isPressed);
                     
-                    // ALTERAÇÃO: Índice da célula mudou para 2 (Contentor)
-                    const containerCell = row.cells[2] ? row.cells[2].textContent.toLowerCase() : '';
-                    const searchMatch = containerCell.includes(searchTerm);
-
-                    if (shipMatch && statusMatch && searchMatch) {
-                        row.style.display = ''; // Mostra a linha
-                    } else {
-                        row.style.display = 'none'; // Esconde a linha
-                    }
-                });
-            }
-
-            /**
-             * Filtra a tabela de navios com base na pesquisa.
-             */
-            function filterShipTable() {
-                const searchTerm = shipSearchInput.value.toLowerCase();
-                shipTableRows.forEach(row => {
-                    // ALTERAÇÃO: Índices de célula mudados para 0 (Navio) e 2 (Escala)
-                    const shipName = row.cells[0] ? row.cells[0].textContent.toLowerCase() : '';
-                    const shipEscala = row.cells[2] ? row.cells[2].textContent.toLowerCase() : '';
+                    btn.classList.toggle('font-medium', !isPressed);
+                    btn.classList.toggle('text-gray-500', !isPressed);
+                    btn.classList.toggle('hover:bg-gray-100', !isPressed);
                     
-                    if (shipName.includes(searchTerm) || shipEscala.includes(searchTerm)) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
+                    btn.setAttribute('aria-pressed', isPressed);
                 });
             }
 
-            // --- Event Listeners ---
-
-            if (mainSearchInput) {
-                mainSearchInput.addEventListener('keyup', filterDischargeTable);
-            }
-
-            if (shipSearchInput) {
-                shipSearchInput.addEventListener('keyup', filterShipTable);
-            }
-
-            if (dischargeFilterButtons) {
-                dischargeFilterButtons.forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        currentStatusFilter = e.target.dataset.filter;
-                        dischargeFilterButtons.forEach(btn => {
-                            btn.classList.remove('font-semibold', 'text-gray-900', 'bg-gray-200');
-                            btn.classList.add('font-medium', 'text-gray-500', 'hover:bg-gray-100');
-                        });
-                        e.target.classList.add('font-semibold', 'text-gray-900', 'bg-gray-200');
-                        e.target.classList.remove('font-medium', 'text-gray-500', 'hover:bg-gray-100');
-                        
-                        filterDischargeTable();
-                    });
-                });
-            }
-
-            navNavios.addEventListener('click', (e) => {
-                e.preventDefault();
-                showView('navios');
-            });
-
-            navDescarga.addEventListener('click', (e) => {
-                e.preventDefault();
-                showView('descarga'); // Mostra todos os contentores, filtrados por 'pendente'
-            });
-
-            // Botões "Ver Contentores" (usando Event Delegation na tabela de navios)
-            shipTableBody.addEventListener('click', (e) => {
-                const button = e.target.closest('button[data-ship-name]');
-                if (button) {
-                    e.preventDefault();
-                    const shipInfo = {
-                        name: button.dataset.shipName,
-                        escala: button.dataset.escala,
-                        atracacao: button.dataset.atracacao
-                    };
-                    showView('descarga', shipInfo); // Mostra a descarga, filtrada por este navio
-                }
-            });
-
-
-            // Ações na Tabela de Descarga (Descarregar/Desmarcar) - Event Delegation
-            dischargeTableBody.addEventListener('click', (e) => {
-                const button = e.target.closest('button');
-                if (!button) return; 
-
-                const row = button.closest('tr');
-                if (!row) return; 
-
-                if (button.textContent === 'Descarregar') {
-                    // --- Ação Descarregar ---
-                    // ALTERAÇÃO: Índice da célula de tempo mudou para 4
-                    const timeCell = row.cells[4];
-                    const now = new Date();
-                    timeCell.textContent = now.toLocaleString('pt-PT', { dateStyle: 'short', timeStyle: 'medium' });
-
-                    // ALTERAÇÃO: Adiciona classe de cor e muda estado
-                    row.classList.remove('linha-pendente'); // NOVO: Remove amarelo
-                    row.classList.add('linha-descarregada');
-                    row.dataset.status = 'descarregado';
-
-                    button.parentElement.innerHTML = `<button class="px-3 py-1 text-xs font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300">Desmarcar</button>`;
-                
-                } else if (button.textContent === 'Desmarcar') {
-                    // --- Ação Desmarcar ---
-                    // ALTERAÇÃO: Índice da célula de tempo mudou para 4
-                    row.cells[4].textContent = '--:--:--'; // Limpar data
-                    
-                    // ALTERAÇÃO: Remove classe de cor e muda estado
-                    row.classList.remove('linha-descarregada');
-                    row.classList.add('linha-pendente'); // NOVO: Adiciona amarelo
-                    row.dataset.status = 'pendente';
-                    
-                    button.parentElement.innerHTML = `<button class="px-3 py-1 text-xs font-medium text-white bg-enapor-blue rounded-md hover:bg-opacity-90">Descarregar</button>`;
-                }
-
-                // Esconde a linha se já não corresponder ao filtro de estado atual
-                filterDischargeTable();
-                // Atualiza os KPIs de descarga após a ação
-                updateDischargeKPIs();
-            });
-
-            // Menu Mobile
-            if (mobileMenuBtn && sidebar) {
-                mobileMenuBtn.addEventListener('click', () => {
-                    sidebar.classList.toggle('hidden');
-                });
-            }
-
-            // --- Lógica do Modal de Registo Manual ---
-            const manualModal = document.getElementById('manual-register-modal');
-            const manualModalContent = manualModal.querySelector('.bg-white');
-            const openModalBtn = document.getElementById('open-manual-modal-btn');
-            const cancelModalBtn = document.getElementById('cancel-manual-modal-btn');
-            const manualForm = document.getElementById('manual-register-form');
-            const shipSelect = document.getElementById('manual-ship-select');
-            const containerTypeSelect = document.getElementById('manual-container-type');
-            const errorDiv = document.getElementById('manual-register-error');
+            // --- Lógica do Modal ---
 
             function openManualModal() {
-                // ALTERAÇÃO: Simplificado para preencher apenas navios, assume que todos estão em porto
+                // Preencher select com navios da DB
                 shipSelect.innerHTML = '<option value="">Selecione um navio...</option>';
                 
-                shipTableRows.forEach(row => {
-                    // ALTERAÇÃO: Índice 0 é 'Navio', 2 é 'Escala'
-                    const shipName = row.cells[0].textContent.trim();
-                    const escala = row.cells[2].textContent.trim(); // Obter escala
+                // Mostrar apenas navios pendentes no modal
+                db.ships.filter(s => s.status === 'pending').forEach(ship => {
                     const option = document.createElement('option');
-                    option.value = shipName;
-                    option.textContent = shipName;
-                    option.dataset.escala = escala; // Guardar a escala no data-attribute
+                    option.value = ship.name;
+                    option.textContent = ship.name;
+                    // Guardar dados extra no option para fácil acesso
+                    option.dataset.escala = ship.escala;
                     shipSelect.appendChild(option);
                 });
                 
-                shipSelect.disabled = false;
-                errorDiv.classList.add('hidden'); // Limpar erros
+                manualErrorDiv.classList.add('hidden'); // Limpar erros
+                manualErrorDiv.textContent = '';
                 manualForm.reset();
 
                 // Mostrar modal com animação
@@ -898,6 +987,205 @@
                 }, 300); // Duração da animação
             }
 
+            function handleManualFormSubmit(e) {
+                e.preventDefault();
+                manualErrorDiv.classList.add('hidden');
+                
+                const selectedShipName = shipSelect.value;
+                const container = containerInput.value.toUpperCase();
+                const type = containerTypeSelect.value;
+
+                // Validação
+                if (!selectedShipName) {
+                    manualErrorDiv.textContent = 'Por favor, selecione um navio.';
+                    manualErrorDiv.classList.remove('hidden');
+                    return;
+                }
+                
+                if (!container) { // Alterado: Apenas verifica se está vazio
+                     manualErrorDiv.textContent = 'Por favor, insira um número de contentor.';
+                    manualErrorDiv.classList.remove('hidden');
+                    return;
+                }
+
+                // Obter a escala do navio selecionado
+                const selectedOption = shipSelect.querySelector(`option[value="${selectedShipName}"]`);
+                const escala = selectedOption.dataset.escala;
+
+                // Criar novo registo de descarga
+                const newDischarge = {
+                    id: Date.now(), // ID único
+                    shipName: selectedShipName,
+                    escala: escala,
+                    container: container,
+                    type: type,
+                    status: "pendente", // "Carga Mais" entra como pendente
+                    dischargeTime: null
+                };
+
+                // Adicionar à base de dados simulada
+                db.discharges.push(newDischarge);
+
+                // Re-renderizar UI
+                renderDischargeTable();
+                updateDischargeKPIs();
+
+                closeManualModal();
+            }
+
+            // --- Lógica de Ações da Tabela ---
+
+            function handleDischargeAction(e) {
+                const button = e.target.closest('.action-btn');
+                if (!button) return;
+
+                const action = button.dataset.action;
+                const id = parseInt(button.dataset.id, 10);
+
+                // Encontrar o item na "base de dados"
+                const item = db.discharges.find(d => d.id === id);
+                if (!item) return;
+
+                if (action === 'descarregar') {
+                    item.status = 'descarregado';
+                    item.dischargeTime = new Date().toISOString();
+                    // Mostrar Toast de sucesso
+                    showToast(`Contentor ${item.container} descarregado com sucesso`);
+                } else if (action === 'desmarcar') {
+                    item.status = 'pendente';
+                    item.dischargeTime = null;
+                }
+
+                // Re-renderizar a tabela e KPIs
+                renderDischargeTable();
+                updateDischargeKPIs();
+            }
+            
+            function handleViewContainers(e) {
+                 const button = e.target.closest('.view-containers-btn');
+                 if (!button) return;
+                 
+                 e.preventDefault();
+                 const shipName = button.dataset.shipName;
+                 const ship = db.ships.find(s => s.name === shipName);
+                 
+                 if (ship) {
+                    const shipInfo = {
+                        name: ship.name,
+                        escala: ship.escala,
+                        ata: ship.ata // Passa a data ISO
+                    };
+                    showView('descarga', shipInfo);
+                 }
+            }
+
+            /**
+             * Finaliza a operação para o navio atual.
+             */
+            function handleFinishOperation() {
+                if (!state.currentShipFilter) return; 
+
+                const shipName = state.currentShipFilter;
+                const ship = db.ships.find(s => s.name === shipName);
+                
+                if (ship) {
+                    ship.status = 'finished'; // Marcar como finalizado
+                    
+                    // 1. Mostrar toast
+                    showToast('Operação Finalizada com sucesso');
+                    
+                    // 2. Voltar para a secção de navios (que agora mostrará a linha a verde)
+                    showView('navios');
+                    
+                    // 3. Atualizar KPIs dos Navios
+                    updateShipKPIs();
+                }
+            }
+
+
+            // --- Event Listeners ---
+
+            // Login / Logout
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const user = e.target.elements.user.value;
+                const pass = e.target.elements.pass.value;
+
+                loginError.classList.add('hidden');
+                loginCircleSpinner.classList.add('is-loading');
+                loginButton.disabled = true;
+                loginButton.classList.add('opacity-50');
+
+                setTimeout(() => {
+                    loginCircleSpinner.classList.remove('is-loading');
+                    loginButton.disabled = false;
+                    loginButton.classList.remove('opacity-50');
+
+                    if (user === 'admin' && pass === 'admin') {
+                        loginScreen.classList.add('hidden');
+                        dashboardApp.classList.remove('hidden');
+                        loginPassInput.value = '';
+                        showView('navios'); // Mostrar 'navios' ao fazer login
+                    } else {
+                        loginError.textContent = 'Utilizador ou palavra-passe incorretos.';
+                        loginError.classList.remove('hidden');
+                    }
+                }, 1500);
+            });
+
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                dashboardApp.classList.add('hidden');
+                loginScreen.classList.remove('hidden');
+                loginPassInput.value = '';
+                state.currentView = 'login';
+            });
+            
+            // Menu Mobile
+            mobileMenuBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('hidden'); // Alterna entre hidden e a classe de display (flex)
+            });
+
+            // Navegação Principal
+            navNavios.addEventListener('click', (e) => {
+                e.preventDefault();
+                showView('navios');
+            });
+
+            navDescarga.addEventListener('click', (e) => {
+                e.preventDefault();
+                showView('descarga'); // Mostra todos os contentores, filtrados por 'pendente'
+            });
+
+            // Pesquisa
+            shipSearchInput.addEventListener('input', (e) => {
+                state.shipSearchTerm = e.target.value;
+                state.shipsCurrentPage = 1; // Resetar página ao pesquisar
+                renderShipTable();
+            });
+            
+            mainSearchInput.addEventListener('input', (e) => {
+                state.dischargeSearchTerm = e.target.value;
+                state.dischargeCurrentPage = 1; // Resetar página ao pesquisar
+                renderDischargeTable();
+            });
+            
+            // Filtros de Descarga
+            document.getElementById('discharge-filters').addEventListener('click', (e) => {
+                const button = e.target.closest('button[data-filter]');
+                if (!button) return;
+                
+                state.currentStatusFilter = button.dataset.filter;
+                state.dischargeCurrentPage = 1; // Resetar página ao filtrar
+                updateDischargeFilterUI();
+                renderDischargeTable();
+            });
+
+            // Ações nas Tabelas (Event Delegation)
+            shipTableBody.addEventListener('click', handleViewContainers);
+            dischargeTableBody.addEventListener('click', handleDischargeAction);
+
+            // Modal
             openModalBtn.addEventListener('click', openManualModal);
             cancelModalBtn.addEventListener('click', closeManualModal);
             manualModal.addEventListener('click', (e) => {
@@ -905,14 +1193,15 @@
                     closeManualModal();
                 }
             });
+            manualForm.addEventListener('submit', handleManualFormSubmit);
+
+            // Botão Finalizar Operação
+            finishOperationBtn.addEventListener('click', handleFinishOperation);
 
             // --- Estado Inicial ---
-            // ALTERAÇÃO: A app não mostra 'navios' por defeito, espera pelo login.
-            // showView('navios');
+            // A app agora espera pelo login para mostrar a primeira view.
         });
     </script>
 </body>
 </html>
-
-
 
