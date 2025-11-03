@@ -169,8 +169,8 @@
     </div>
 
     <!-- Aplicação principal agora tem um ID e está oculta (hidden) --><div id="dashboard-app" class="flex h-screen hidden">
-        <!-- Barra Lateral (Sidebar) --><aside id="sidebar" class="w-64 bg-enapor-blue text-white p-6 shadow-lg hidden md:flex flex-col flex-shrink-0 absolute md:relative z-20 h-full">
-            <!-- Logo --><div class="mb-10 text-center"> <!-- Adicionado text-center para centralizar o logo --><img src="https://www.enapor.cv/web/image/843" alt="Logo ENAPOR" class="h-21 mx-auto"> <!-- Ajustado h-16 para tamanho, e mx-auto para centralizar --></div>
+        <!-- Barra Lateral (Sidebar) - REDUZIDA --><aside id="sidebar" class="w-56 bg-enapor-blue text-white p-4 shadow-lg hidden md:flex flex-col flex-shrink-0 absolute md:relative z-20 h-full">
+            <!-- Logo --><div class="mb-8 text-center"> <!-- Reduzido mb-10 para mb-8 --><img src="https://www.enapor.cv/web/image/843" alt="Logo ENAPOR" class="h-21 mx-auto"> </div>
             
             <!-- Navegação Principal --><nav class="flex-1 space-y-2">
                 <a href="#" id="nav-navios" class="flex items-center gap-3 px-4 py-3 bg-white/10 text-white font-semibold rounded-lg">
@@ -193,17 +193,17 @@
 
         <!-- Conteúdo Principal --><div class="flex-1 flex flex-col overflow-hidden">
             
-            <!-- Header (Cabeçalho) --><header class="bg-white h-20 flex-shrink-0 shadow-sm flex items-center justify-between px-4 md:px-8">
+            <!-- Header (Cabeçalho) - REDUZIDO --><header class="bg-white h-16 flex-shrink-0 shadow-sm flex items-center justify-between px-4 md:px-6">
                 <!-- Lado Esquerdo: Botão Mobile e Título --><div class="flex items-center gap-3">
                     <!-- Botão Menu Mobile --><button id="mobile-menu-btn" aria-label="Abrir menu" class="md:hidden text-gray-600">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg>
                     </button>
                     
-                    <!-- Título (Azul) - Tamanho responsivo --><h1 class="text-2xl md:text-3xl font-bold text-enapor-blue">Descarga Digital</h1>
+                    <!-- Título (Azul) - Tamanho responsivo REDUZIDO --><h1 class="text-xl md:text-2xl font-bold text-enapor-blue">Descarga Digital</h1>
                 </div>
 
-                <!-- Lado Direito: Perfil do Utilizador (Avatar visível no mobile) --><div class="flex items-center gap-3">
-                    <img class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover" src="https://placehold.co/100x100/003A70/FFFFFF?text=JS" alt="Avatar João Silva">
+                <!-- Lado Direito: Perfil do Utilizador (Avatar visível no mobile) - REDUZIDO --><div class="flex items-center gap-3">
+                    <img class="w-8 h-8 md:w-9 md:h-9 rounded-full object-cover" src="https://placehold.co/100x100/003A70/FFFFFF?text=JS" alt="Avatar João Silva">
                     <div class="text-sm hidden md:block"> <!-- Texto escondido no mobile -->
                         <p class="font-semibold text-gray-900">João Silva</p>
                         <p class="text-gray-500">Operador</p>
@@ -211,48 +211,61 @@
                 </div>
             </header>
 
-            <!-- Área de Conteúdo (com scroll) --><main class="flex-1 overflow-y-auto p-6 md:p-8 space-y-6">
+            <!-- 
+                OTIMIZAÇÃO: 
+                - Padding REDUZIDO de 'p-6 md:p-8' para 'p-4 md:p-6'
+            --><main class="flex-1 flex flex-col p-4 md:p-6 overflow-hidden">
 
-                <!-- Tabela de Navios --><div id="navios-section" class="space-y-6">
+                <!-- 
+                    OTIMIZAÇÃO: 
+                    - 'space-y-6' REDUZIDO para 'space-y-4'
+                --><div id="navios-section" class="flex-1 flex flex-col space-y-4 overflow-hidden">
                     <!-- NOVO: Título e Barra de Pesquisa --><div class="space-y-4">
                         <!-- O Título h1 foi movido para o <header> global -->
                         <div class="max-w-xl relative">
-                            <label for="ship-search-input" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+                            <label for="ship-search-input" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
                                 <!-- Ícone de Pesquisa (Lucide: Search) --><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
                             </label>
-                            <!-- Pesquisa de Navios --><input type="text" id="ship-search-input" placeholder="Procurar por navio ou escala..." class="w-full pl-11 pr-4 py-2 bg-white border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-enapor-blue">
+                            <!-- Pesquisa de Navios - REDUZIDA --><input type="text" id="ship-search-input" placeholder="Procurar por navio ou escala..." class="w-full pl-10 pr-4 py-1.5 bg-white border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-enapor-blue">
                         </div>
                     </div>
                         
-                    <!-- KPIs da secção de Navios --><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div class="bg-enapor-blue text-white p-6 rounded-2xl shadow-lg">
+                    <!-- KPIs da secção de Navios - REDUZIDOS --><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="bg-enapor-blue text-white p-4 rounded-2xl shadow-lg">
                             <p class="text-sm text-blue-100">Navios em Porto</p>
-                            <p id="kpi-navios-porto" class="text-3xl font-bold text-white mt-1">0</p>
+                            <p id="kpi-navios-porto" class="text-2xl font-bold text-white mt-1">0</p>
                         </div>
-                        <div class="bg-enapor-green text-white p-6 rounded-2xl shadow-lg">
+                        <div class="bg-enapor-green text-white p-4 rounded-2xl shadow-lg">
                             <p class="text-sm text-green-100">Navios Descarregados</p>
-                            <p id="kpi-navios-descarregados" class="text-3xl font-bold text-white mt-1">0</p>
+                            <p id="kpi-navios-descarregados" class="text-2xl font-bold text-white mt-1">0</p>
                         </div>
-                        <div class="bg-enapor-orange text-white p-6 rounded-2xl shadow-lg">
+                        <div class="bg-enapor-orange text-white p-4 rounded-2xl shadow-lg">
                             <p class="text-sm text-orange-100">Navios em Descarga</p>
-                            <p id="kpi-navios-descarga" class="text-3xl font-bold text-white mt-1">0</p>
+                            <p id="kpi-navios-descarga" class="text-2xl font-bold text-white mt-1">0</p>
                         </div>
                     </div>
 
-                    <!-- Tabela de Navios --><div id="ship-table-container" class="bg-white rounded-2xl shadow-lg">
-                        <!-- Cabeçalho da Tabela --><div class="px-6 py-5 border-b border-gray-200">
-                            <h2 class="text-xl font-semibold text-gray-900">Navios em Porto</h2>
+                    <!-- 
+                        OTIMIZAÇÃO: 
+                        - Container da tabela
+                    --><div id="ship-table-container" class="bg-white rounded-2xl shadow-lg flex-1 flex flex-col overflow-hidden">
+                        <!-- Cabeçalho da Tabela - REDUZIDO --><div class="px-5 py-4 border-b border-gray-200">
+                            <h2 class="text-lg font-semibold text-gray-900">Navios em Porto</h2>
                         </div>
                         
-                        <!-- Wrapper da Tabela (para scroll horizontal) --><div class="overflow-x-auto">
+                        <!-- 
+                            OTIMIZAÇÃO: 
+                            - Wrapper de scroll
+                        --><div class="overflow-x-auto overflow-y-auto flex-1">
                             <table class="w-full min-w-[600px] text-sm">
                                 <thead>
                                     <tr class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                                        <th class="px-6 py-4">Navio</th>
-                                        <th class="px-6 py-4">Porto Anterior</th>
-                                        <th class="px-6 py-4">Nº da Escala</th>
-                                        <th class="px-6 py-4">Atracação</th>
-                                        <th class="px-6 py-4 text-right">Ações</th>
+                                        <!-- Padding da Tabela REDUZIDO -->
+                                        <th class="px-5 py-3">Navio</th>
+                                        <th class="px-5 py-3">Porto Anterior</th>
+                                        <th class="px-5 py-3">Nº da Escala</th>
+                                        <th class="px-5 py-3">Atracação</th>
+                                        <th class="px-5 py-3 text-right">Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody id="ship-table-body" class="">
@@ -260,25 +273,28 @@
                             </table>
                         </div>
                         
-                        <!-- Controlo de Paginação Navios --><div id="ship-pagination" class="px-6 py-4 border-t border-gray-200 flex justify-center items-center gap-2 text-sm">
+                        <!-- Controlo de Paginação Navios - REDUZIDO --><div id="ship-pagination" class="px-5 py-3 border-t border-gray-200 flex justify-center items-center gap-2 text-sm">
                             <!-- Gerado por JS -->
                         </div>
                     </div>
                 </div>
                 
-                <!-- Secção de Descarga --><div id="descarga-section" class="hidden space-y-6">
+                <!-- 
+                    OTIMIZAÇÃO: 
+                    - 'space-y-6' REDUZIDO para 'space-y-4'
+                --><div id="descarga-section" class="hidden flex-1 flex flex-col space-y-4 overflow-hidden">
                     <!-- NOVO: Título e Barra de Pesquisa --><div class="space-y-4">
                         <!-- O Título h1 foi movido para o <header> global -->
                         <div class="max-w-xl relative">
-                            <label for="main-search-input" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+                            <label for="main-search-input" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
                                 <!-- Ícone de Pesquisa (Lucide: Search) --><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
                             </label>
-                            <!-- Pesquisa de Contentores (oculta por defeito) --><input type="text" id="main-search-input" placeholder="Procurar por contentor..." class="w-full pl-11 pr-4 py-2 bg-white border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-enapor-blue">
+                            <!-- Pesquisa de Contentores - REDUZIDA --><input type="text" id="main-search-input" placeholder="Procurar por contentor..." class="w-full pl-10 pr-4 py-1.5 bg-white border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-enapor-blue">
                         </div>
                     </div>
 
-                    <!-- Cabeçalho de informações do navio adicionado --><div id="descarga-header" class="hidden bg-white p-5 rounded-2xl shadow-lg">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                    <!-- Cabeçalho de informações do navio - REDUZIDO --><div id="descarga-header" class="hidden bg-white p-4 rounded-2xl shadow-lg">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-1">
                             Navio: <span id="descarga-navio-nome" class="text-enapor-blue"></span>
                         </h3>
                         <div class="flex flex-col md:flex-row md:gap-6 text-sm">
@@ -287,51 +303,58 @@
                         </div>
                     </div>
                     
-                    <!-- Cartões KPI (Key Performance Indicators) --><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div class="bg-enapor-blue text-white p-6 rounded-2xl shadow-lg">
+                    <!-- Cartões KPI (Key Performance Indicators) - REDUZIDOS --><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="bg-enapor-blue text-white p-4 rounded-2xl shadow-lg">
                             <p class="text-sm text-blue-100">Total Contentores</p>
-                            <p id="kpi-contentores-total" class="text-3xl font-bold text-white mt-1">0</p>
+                            <p id="kpi-contentores-total" class="text-2xl font-bold text-white mt-1">0</p>
                         </div>
-                        <div class="bg-enapor-green text-white p-6 rounded-2xl shadow-lg">
+                        <div class="bg-enapor-green text-white p-4 rounded-2xl shadow-lg">
                             <p class="text-sm text-green-100">Contentores Descarregados</p>
-                            <p id="kpi-contentores-descarregados" class="text-3xl font-bold text-white mt-1">0</p>
+                            <p id="kpi-contentores-descarregados" class="text-2xl font-bold text-white mt-1">0</p>
                         </div>
-                        <div class="bg-enapor-orange text-white p-6 rounded-2xl shadow-lg">
+                        <div class="bg-enapor-orange text-white p-4 rounded-2xl shadow-lg">
                             <p class="text-sm text-orange-100">Contentores por Descarregar</p>
-                            <p id="kpi-contentores-pendentes" class="text-3xl font-bold text-white mt-1">0</p>
+                            <p id="kpi-contentores-pendentes" class="text-2xl font-bold text-white mt-1">0</p>
                         </div>
                     </div>
 
-                    <!-- Tabela de Detalhes da Descarga --><div class="bg-white rounded-2xl shadow-lg">
-                        <!-- Cabeçalho da Tabela e Filtros --><div class="px-6 py-5 border-b border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                            <h2 class="text-xl font-semibold text-gray-900">Descargas em curso</h2>
-                            <!-- Filtros e Botão de Registo Manual --><div class="flex flex-wrap items-center justify-start md:justify-end gap-3">
+                    <!-- 
+                        OTIMIZAÇÃO: 
+                        - Container da tabela
+                    --><div class="bg-white rounded-2xl shadow-lg flex-1 flex flex-col overflow-hidden">
+                        <!-- Cabeçalho da Tabela e Filtros - REDUZIDO --><div class="px-5 py-4 border-b border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+                            <h2 class="text-lg font-semibold text-gray-900">Descargas em curso</h2>
+                            <!-- Filtros e Botão de Registo Manual --><div class="flex flex-wrap items-center justify-start md:justify-end gap-2">
                                 <div id="discharge-filters" class="flex items-center gap-2" role="group" aria-label="Filtros de descarga">
-                                    <button data-filter="todos" class="px-4 py-1.5 text-sm rounded-lg font-semibold text-gray-900 bg-gray-200" aria-pressed="true">Todos</button>
-                                    <button data-filter="descarregado" class="px-4 py-1.5 text-sm rounded-lg font-medium text-gray-500 hover:bg-gray-100" aria-pressed="false">Descarregados</button>
-                                    <button data-filter="pendente" class="px-4 py-1.5 text-sm rounded-lg font-medium text-gray-500 hover:bg-gray-100" aria-pressed="false">Pendentes</button>
+                                    <button data-filter="todos" class="px-3 py-1 text-sm rounded-lg font-semibold text-gray-900 bg-gray-200" aria-pressed="true">Todos</button>
+                                    <button data-filter="descarregado" class="px-3 py-1 text-sm rounded-lg font-medium text-gray-500 hover:bg-gray-100" aria-pressed="false">Descarregados</button>
+                                    <button data-filter="pendente" class="px-3 py-1 text-sm rounded-lg font-medium text-gray-500 hover:bg-gray-100" aria-pressed="false">Pendentes</button>
                                 </div>
-                                <button id="open-manual-modal-btn" class="flex items-center gap-2 bg-enapor-orange text-white text-sm font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-orange-600 transition-all">
+                                <button id="open-manual-modal-btn" class="flex items-center gap-2 bg-enapor-orange text-white text-sm font-semibold px-3 py-1.5 rounded-lg shadow-md hover:bg-orange-600 transition-all">
                                     <!-- Ícone (Lucide: Plus) --><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
                                     <span>Carga Mais</span>
                                 </button>
-                                <button id="finish-operation-btn" class="hidden flex items-center gap-2 bg-green-600 text-white text-sm font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-green-700 transition-all">
+                                <button id="finish-operation-btn" class="hidden flex items-center gap-2 bg-green-600 text-white text-sm font-semibold px-3 py-1.5 rounded-lg shadow-md hover:bg-green-700 transition-all">
                                     <!-- Ícone (Lucide: Check) --><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="20 6 9 17 4 12"></polyline></svg>
                                     <span>Finalizar Operação</span>
                                 </button>
                             </div>
                         </div>
                         
-                        <!-- Wrapper da Tabela (para scroll horizontal) --><div class="overflow-x-auto">
+                        <!-- 
+                            OTIMIZAÇÃO: 
+                            - Wrapper de scroll
+                        --><div class="overflow-x-auto overflow-y-auto flex-1">
                             <table class="w-full min-w-[500px] text-sm">
                                 <thead>
                                     <tr class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                                        <th class="px-6 py-4">Navio</th>
-                                        <th class="px-6 py-4">Nº da Escala</th>
-                                        <th class="px-6 py-4">Contentor</th>
-                                        <th class="px-6 py-4">Tipo</th>
-                                        <th class="px-6 py-4">Data de descarga</th>
-                                        <th class="px-6 py-4 text-right">Ações</th>
+                                        <!-- Padding da Tabela REDUZIDO -->
+                                        <th class="px-5 py-3">Navio</th>
+                                        <th class="px-5 py-3">Nº da Escala</th>
+                                        <th class="px-5 py-3">Contentor</th>
+                                        <th class="px-5 py-3">Tipo</th>
+                                        <th class="px-5 py-3">Data de descarga</th>
+                                        <th class="px-5 py-3 text-right">Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody id="discharge-table-body" class="">
@@ -339,7 +362,7 @@
                             </table>
                         </div>
                         
-                        <!-- Controlo de Paginação Descarga --><div id="discharge-pagination" class="px-6 py-4 border-t border-gray-200 flex justify-center items-center gap-2 text-sm">
+                        <!-- Controlo de Paginação Descarga - REDUZIDO --><div id="discharge-pagination" class="px-5 py-3 border-t border-gray-200 flex justify-center items-center gap-2 text-sm">
                             <!-- Gerado por JS -->
                         </div>
                     </div>
@@ -348,26 +371,26 @@
         </div>
     </div>
 
-    <!-- Modal de Registo Manual --><div id="manual-register-modal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <!-- Modal de Registo Manual - REDUZIDO --><div id="manual-register-modal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md transform transition-all opacity-0 scale-95">
-            <!-- Cabeçalho do Modal --><div class="px-6 py-5 border-b border-gray-200">
+            <!-- Cabeçalho do Modal --><div class="px-6 py-4 border-b border-gray-200">
                 <h3 id="modal-title" class="text-lg font-semibold text-gray-900">Registar Carga Mais</h3>
             </div>
             
-            <!-- Corpo do Modal com Formulário --><form id="manual-register-form" class="p-6 space-y-4">
+            <!-- Corpo do Modal com Formulário --><form id="manual-register-form" class="p-6 space-y-3">
                 <div>
                     <label for="manual-ship-select" class="block text-sm font-medium text-gray-700 mb-1">Navio</label>
-                    <select id="manual-ship-select" name="ship" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-enapor-blue" required>
+                    <select id="manual-ship-select" name="ship" class="w-full px-3 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-enapor-blue" required>
                         <option value="">Selecione um navio...</option>
                         <!-- Opções preenchidas por JS --></select>
                 </div>
                 <div>
                     <label for="manual-container-input" class="block text-sm font-medium text-gray-700 mb-1">Número do Contentor</label>
-                    <input type="text" id="manual-container-input" name="container" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-enapor-blue" placeholder="Ex: MSCU1234567" required>
+                    <input type="text" id="manual-container-input" name="container" class="w-full px-3 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-enapor-blue" placeholder="Ex: MSCU1234567" required>
                 </div>
                  <div>
                     <label for="manual-container-type" class="block text-sm font-medium text-gray-700 mb-1">Tipo</o>
-                    <select id="manual-container-type" name="type" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-enapor-blue" required>
+                    <select id="manual-container-type" name="type" class="w-full px-3 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-enapor-blue" required>
                         <option value="20P">20P</option>
                         <option value="40P">40P</option>
                         <option value="10P">10P</option>
@@ -376,18 +399,18 @@
                 <!-- Mensagem de erro (substitui o alert) --><div id="manual-register-error" class="text-enapor-red text-sm hidden"></div>
             </form>
             
-            <!-- Rodapé do Modal com Ações --><div class="px-6 py-4 bg-gray-50 rounded-b-2xl flex justify-end gap-3">
-                <button id="cancel-manual-modal-btn" type="button" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
+            <!-- Rodapé do Modal com Ações --><div class="px-6 py-3 bg-gray-50 rounded-b-2xl flex justify-end gap-2">
+                <button id="cancel-manual-modal-btn" type="button" class="px-4 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
                     Cancelar
                 </button>
-                <button id="save-manual-modal-btn" type="submit" form="manual-register-form" class="px-4 py-2 text-sm font-medium text-white bg-enapor-blue rounded-lg hover:bg-opacity-90">
+                <button id="save-manual-modal-btn" type="submit" form="manual-register-form" class="px-4 py-1.5 text-sm font-medium text-white bg-enapor-blue rounded-lg hover:bg-opacity-90">
                     Guardar
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Toast Notification --><div id="toast-notification" class="fixed top-5 right-5 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out z-50">
+    <!-- Toast Notification - REDUZIDO --><div id="toast-notification" class="fixed top-5 right-5 bg-green-600 text-white px-5 py-2 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out z-50">
         <p id="toast-message">Mensagem de sucesso!</p>
     </div>
 
@@ -532,7 +555,7 @@
                 currentStatusFilter: 'todos', // 'todos', 'pendente', 'descarregado'
                 shipSearchTerm: '',
                 dischargeSearchTerm: '',
-                itemsPerPage: 7,
+                itemsPerPage: 10, // AUMENTADO de 7 para 10
                 shipsCurrentPage: 1,
                 dischargeCurrentPage: 1
             };
@@ -737,7 +760,7 @@
                 shipTableBody.innerHTML = '';
 
                 if (filteredShips.length === 0) {
-                     shipTableBody.innerHTML = `<tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">Nenhum navio encontrado.</td></tr>`;
+                     shipTableBody.innerHTML = `<tr><td colspan="5" class="px-5 py-3 text-center text-gray-500">Nenhum navio encontrado.</td></tr>`;
                 } else {
                     // Criar e adicionar linhas
                     paginatedShips.forEach(ship => {
@@ -747,15 +770,16 @@
                         
                         const ataFormatted = formatAtaDateTime(ship.ata);
                         
+                        // Padding da Tabela REDUZIDO de 'px-6 py-4' para 'px-5 py-3'
                         row.innerHTML = `
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">${ship.name}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-gray-600 flex items-center gap-2">
+                            <td class="px-5 py-3 whitespace-nowrap font-medium text-gray-900">${ship.name}</td>
+                            <td class="px-5 py-3 whitespace-nowrap text-gray-600 flex items-center gap-2">
                                 ${ship.port} 
                                 <img src="https://flagcdn.com/w20/${ship.flag}.png" alt="Bandeira ${ship.flag.toUpperCase()}" class="h-3">
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-gray-600">${ship.escala}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-gray-600">${ataFormatted}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-right">
+                            <td class="px-5 py-3 whitespace-nowrap text-gray-600">${ship.escala}</td>
+                            <td class="px-5 py-3 whitespace-nowrap text-gray-600">${ataFormatted}</td>
+                            <td class="px-5 py-3 whitespace-nowrap text-right">
                                 <button class="font-medium text-enapor-blue hover:underline view-containers-btn" data-ship-name="${ship.name}">
                                     Ver Contentores
                                 </button>
@@ -793,7 +817,7 @@
                 dischargeTableBody.innerHTML = '';
 
                 if (filteredDischarges.length === 0) {
-                     dischargeTableBody.innerHTML = `<tr><td colspan="6" class="px-6 py-4 text-center text-gray-500">Nenhum contentor encontrado.</td></tr>`;
+                     dischargeTableBody.innerHTML = `<tr><td colspan="6" class="px-5 py-3 text-center text-gray-500">Nenhum contentor encontrado.</td></tr>`;
                 } else {
                     // Criar e adicionar linhas
                     paginatedDischarges.forEach(item => {
@@ -807,13 +831,14 @@
                             ? `<button class="px-3 py-1 text-xs font-medium text-white bg-enapor-blue rounded-md hover:bg-opacity-90 action-btn" data-action="descarregar" data-id="${item.id}">Descarregar</button>`
                             : `<button class="px-3 py-1 text-xs font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 action-btn" data-action="desmarcar" data-id="${item.id}">Desmarcar</button>`;
                         
+                        // Padding da Tabela REDUZIDO de 'px-6 py-4' para 'px-5 py-3'
                         row.innerHTML = `
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">${item.shipName}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-gray-600">${item.escala}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-gray-600">${item.container}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-gray-600">${item.type}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-gray-600">${timeFormatted}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-right">
+                            <td class="px-5 py-3 whitespace-nowrap font-medium text-gray-900">${item.shipName}</td>
+                            <td class="px-5 py-3 whitespace-nowrap text-gray-600">${item.escala}</td>
+                            <td class="px-5 py-3 whitespace-nowrap text-gray-600">${item.container}</td>
+                            <td class="px-5 py-3 whitespace-nowrap text-gray-600">${item.type}</td>
+                            <td class="px-5 py-3 whitespace-nowrap text-gray-600">${timeFormatted}</td>
+                            <td class="px-5 py-3 whitespace-nowrap text-right">
                                 ${actionButtonHtml}
                             </td>
                         `;
