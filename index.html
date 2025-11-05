@@ -146,7 +146,11 @@
                             r="46" 
                             cx="50" 
                             cy="50"
-                            transform="rotate(-90 50 50)"/> <!-- Roda -90 graus para começar do topo --></svg>
+                            transform="rotate(-90 50 50)"/> <!-- Roda -90 graus para começar do topo -->
+                </svg>
+                
+                <!-- ERRO CORRIGIDO: O Bloco de indicadores estava aqui dentro. Foi removido. -->
+            
             </div>
             
             <!-- TÍTULO --><div class="text-center">
@@ -176,46 +180,46 @@
 
     <!-- Aplicação principal agora tem um ID e está oculta (hidden) --><div id="dashboard-app" class="flex h-screen hidden">
         <!-- Barra Lateral (Sidebar) - REDUZIDA --><aside id="sidebar" class="w-56 bg-enapor-blue text-white p-4 shadow-lg hidden md:flex flex-col flex-shrink-0 absolute md:relative z-20 h-full">
-            <!-- Logo --><div class="mb-8 text-center"> <!-- Reduzido mb-10 para mb-8 --><img src="https://www.enapor.cv/web/image/843" alt="Logo ENAPOR" class="h-21 mx-auto"> </div>
+            <!-- Logo --><div class="mb-8 text-center"> <!-- Adicionado text-center para centralizar o logo --><img src="https://www.enapor.cv/web/image/843" alt="Logo ENAPOR" class="h-21 mx-auto"> <!-- Ajustado h-16 para tamanho, e mx-auto para centralizar --></div>
             
-            <!-- Navegação Principal -->
-            <!-- ATUALIZAÇÃO: Adicionadas classes border-l-4 para o apontamento de cor -->
-            <nav class="flex-1 space-y-2">
-                <a href="#" id="nav-navios" class="flex items-center gap-3 px-4 py-3 bg-white/10 text-white font-semibold rounded-lg border-l-4 border-enapor-orange">
+            <!-- Navegação Principal --><nav class="flex-1 space-y-2">
+                <!-- CORREÇÃO: Borda de 'hover' e 'ativo' (vermelha) -->
+                <a href="#" id="nav-navios" class="flex items-center gap-3 px-4 py-3 bg-white/10 text-white font-semibold rounded-lg border-l-4 border-enapor-orange transition-all">
                     <!-- Ícone 🚢 (Lucide: ShipWheel) --><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4"/><path d="M2 12h4"/><path d="m19.07 4.93-.88.88"/><path d="m5.81 18.19.88-.88"/><path d="M12 2v4"/><path d="M12 22v-4"/><path d="m4.93 4.93.88.88"/><path d="m18.19 18.19-.88-.88"/><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/></svg>
                     <span>Navios</span>
                 </a>
-                <a href="#" id="nav-descarga" class="flex items-center gap-3 px-4 py-3 text-gray-200 hover:bg-white/10 hover:text-white font-medium rounded-lg border-l-4 border-transparent hover:border-enapor-orange/50">
+                <a href="#" id="nav-descarga" class="flex items-center gap-3 px-4 py-3 text-gray-200 hover:bg-white/10 hover:text-white font-medium rounded-lg border-l-4 border-transparent hover:border-enapor-orange transition-all">
                     <!-- Ícone  (Lucide: Box) --><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.29 7 12 12 20.71 7"></polyline><line x1="12" x2="12" y1="22" y2="12"></line></svg>
                     <span>Descarga</span>
                 </a>
-                <!-- NOVO: Link Indicadores --><a href="#" id="nav-indicadores" class="flex items-center gap-3 px-4 py-3 text-gray-200 hover:bg-white/10 hover:text-white font-medium rounded-lg border-l-4 border-transparent hover:border-enapor-orange/50">
-                    <!-- Ícone (Lucide: BarChart3) --><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M7 12v5"></path><path d="M12 8v9"></path><path d="M17 14v3"></path></svg>
+                <!-- NOVO MENU: Indicadores -->
+                <a href="#" id="nav-indicadores" class="flex items-center gap-3 px-4 py-3 text-gray-200 hover:bg-white/10 hover:text-white font-medium rounded-lg border-l-4 border-transparent hover:border-enapor-orange transition-all">
+                    <!-- Ícone (Lucide: PieChart) --><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
                     <span>Indicadores</span>
                 </a>
             </nav>
             
             <!-- Logout --><div class="mt-auto">
-                <a href="#" id="logout-btn" class="flex items-center gap-3 px-4 py-3 text-gray-200 hover:bg-white/10 hover:text-white font-medium rounded-lg border-l-4 border-transparent hover:border-enapor-orange">
+                <a href="#" id="logout-btn" class="flex items-center gap-3 px-4 py-3 text-gray-200 hover:bg-white/10 hover:text-white font-medium rounded-lg border-l-4 border-transparent hover:border-enapor-orange transition-all">
                     <!-- Ícone 🔒 (Lucide: LogOut) --><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg>
                     <span>Terminar sessão</span>
                 </a>
             </div>
         </aside>
 
-        <!-- Conteúdo Principal --><div class="flex-1 flex flex-col overflow-hidden">
+        <!-- Conteúdo Principal - REDUZIDO --><div class="flex-1 flex flex-col overflow-hidden">
             
-            <!-- Header (Cabeçalho) - REDUZIDO --><header class="bg-white h-16 flex-shrink-0 shadow-sm flex items-center justify-between px-4 md:px-6">
+            <!-- Header (Cabeçalho) - REDUZIDO --><header class="bg-white h-16 flex-shrink-0 shadow-sm flex items-center justify-between px-4 md:px-8">
                 <!-- Lado Esquerdo: Botão Mobile e Título --><div class="flex items-center gap-3">
                     <!-- Botão Menu Mobile --><button id="mobile-menu-btn" aria-label="Abrir menu" class="md:hidden text-gray-600">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg>
                     </button>
                     
-                    <!-- Título (Azul) - Tamanho responsivo REDUZIDO --><h1 class="text-xl md:text-2xl font-bold text-enapor-blue">Descarga Digital</h1>
+                    <!-- Título (Azul) - Tamanho responsivo --><h1 class="text-xl md:text-2xl font-bold text-enapor-blue">Descarga Digital</h1>
                 </div>
 
-                <!-- Lado Direito: Perfil do Utilizador (Avatar visível no mobile) - REDUZIDO --><div class="flex items-center gap-3">
-                    <img class="w-8 h-8 md:w-9 md:h-9 rounded-full object-cover" src="https://placehold.co/100x100/003A70/FFFFFF?text=JS" alt="Avatar João Silva">
+                <!-- Lado Direito: Perfil do Utilizador (Avatar visível no mobile) --><div class="flex items-center gap-3">
+                    <img class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover" src="https://placehold.co/100x100/003A70/FFFFFF?text=JS" alt="Avatar João Silva">
                     <div class="text-sm hidden md:block"> <!-- Texto escondido no mobile -->
                         <p class="font-semibold text-gray-900">João Silva</p>
                         <p class="text-gray-500">Operador</p>
@@ -223,61 +227,49 @@
                 </div>
             </header>
 
-            <!-- 
-                OTIMIZAÇÃO: 
-                - Padding REDUZIDO de 'p-6 md:p-8' para 'p-4 md:p-6'
-            --><main class="flex-1 flex flex-col p-4 md:p-6 overflow-hidden">
+            <!-- Área de Conteúdo (com scroll) - REDUZIDO --><main class="flex-1 overflow-y-auto p-4 md:p-6 space-y-4">
 
-                <!-- 
-                    OTIMIZAÇÃO: 
-                    - 'space-y-6' REDUZIDO para 'space-y-4'
-                --><div id="navios-section" class="flex-1 flex flex-col space-y-4 overflow-hidden">
+                <!-- Tabela de Navios --><div id="navios-section" class="space-y-4">
                     <!-- NOVO: Título e Barra de Pesquisa --><div class="space-y-4">
                         <!-- O Título h1 foi movido para o <header> global -->
                         <div class="max-w-xl relative">
-                            <label for="ship-search-input" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                            <label for="ship-search-input" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
                                 <!-- Ícone de Pesquisa (Lucide: Search) --><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
                             </label>
-                            <!-- Pesquisa de Navios - REDUZIDA --><input type="text" id="ship-search-input" placeholder="Procurar por navio ou escala..." class="w-full pl-10 pr-4 py-1.5 bg-white border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-enapor-blue">
+                            <!-- Pesquisa de Navios --><input type="text" id="ship-search-input" placeholder="Procurar por navio ou escala..." class="w-full pl-11 pr-4 py-2 bg-white border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-enapor-blue">
                         </div>
                     </div>
                         
-                    <!-- KPIs da secção de Navios - REDUZIDOS --><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- KPIs da secção de Navios - REDUZIDO --><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         <div class="bg-enapor-blue text-white p-4 rounded-2xl shadow-lg">
-                            <p class="text-sm text-white font-semibold">Navios em Porto</p>
+                            <p class="text-sm font-semibold text-white">Navios em Porto</p>
                             <p id="kpi-navios-porto" class="text-2xl font-bold text-white mt-1">0</p>
                         </div>
                         <div class="bg-enapor-green text-white p-4 rounded-2xl shadow-lg">
-                            <p class="text-sm text-white font-semibold">Navios Descarregados</p>
+                            <p class="text-sm font-semibold text-white">Navios Descarregados</p>
                             <p id="kpi-navios-descarregados" class="text-2xl font-bold text-white mt-1">0</p>
                         </div>
                         <div class="bg-enapor-orange text-white p-4 rounded-2xl shadow-lg">
-                            <p class="text-sm text-white font-semibold">Navios em Descarga</p>
+                            <p class="text-sm font-semibold text-white">Navios em Descarga</p>
                             <p id="kpi-navios-descarga" class="text-2xl font-bold text-white mt-1">0</p>
                         </div>
                     </div>
 
-                    <!-- 
-                        OTIMIZAÇÃO: 
-                        - Container da tabela
-                    --><div id="ship-table-container" class="bg-white rounded-2xl shadow-lg flex-1 flex flex-col overflow-hidden">
-                        <!-- Cabeçalho da Tabela - REDUZIDO --><div class="px-5 py-4 border-b border-gray-200">
+                    <!-- Tabela de Navios - REDUZIDO --><div id="ship-table-container" class="bg-white rounded-2xl shadow-lg">
+                        <!-- Cabeçalho da Tabela --><div class="px-5 py-4 border-b border-gray-200">
                             <h2 class="text-lg font-semibold text-gray-900">Navios em Porto</h2>
                         </div>
                         
-                        <!-- 
-                            OTIMIZAÇÃO: 
-                            - Wrapper de scroll
-                        --><div class="overflow-x-auto overflow-y-auto flex-1">
+                        <!-- Wrapper da Tabela (para scroll horizontal) --><div class="overflow-x-auto">
                             <table class="w-full min-w-[600px] text-sm">
                                 <thead>
                                     <tr class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                                        <!-- Padding da Tabela REDUZIDO -->
+                                        <!-- Padding REDUZIDO de px-6 py-4 para px-5 py-3 -->
                                         <th class="px-5 py-3">Navio</th>
                                         <th class="px-5 py-3">Porto Anterior</th>
                                         <th class="px-5 py-3">Nº da Escala</th>
                                         <th class="px-5 py-3">Atracação</th>
-                                        <th class="px-5 py-3">Nº Contentores</th>
+                                        <th class="px-5 py-3">Nº Contentores</th> <!-- NOVA COLUNA -->
                                         <th class="px-5 py-3 text-right">Ações</th>
                                     </tr>
                                 </thead>
@@ -292,51 +284,45 @@
                     </div>
                 </div>
                 
-                <!-- 
-                    OTIMIZAÇÃO: 
-                    - 'space-y-6' REDUZIDO para 'space-y-4'
-                --><div id="descarga-section" class="hidden flex-1 flex flex-col space-y-4 overflow-hidden">
+                <!-- Secção de Descarga - REDUZIDO --><div id="descarga-section" class="hidden space-y-4">
                     <!-- NOVO: Título e Barra de Pesquisa --><div class="space-y-4">
                         <!-- O Título h1 foi movido para o <header> global -->
                         <div class="max-w-xl relative">
-                            <label for="main-search-input" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                            <label for="main-search-input" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
                                 <!-- Ícone de Pesquisa (Lucide: Search) --><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
                             </label>
-                            <!-- Pesquisa de Contentores - REDUZIDA --><input type="text" id="main-search-input" placeholder="Procurar por contentor..." class="w-full pl-10 pr-4 py-1.5 bg-white border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-enapor-blue">
+                            <!-- Pesquisa de Contentores (oculta por defeito) --><input type="text" id="main-search-input" placeholder="Procurar por contentor..." class="w-full pl-11 pr-4 py-2 bg-white border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-enapor-blue">
                         </div>
                     </div>
 
-                    <!-- Cabeçalho de informações do navio - REDUZIDO --><div id="descarga-header" class="hidden bg-white p-4 rounded-2xl shadow-lg">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-1">
+                    <!-- Cabeçalho de informações do navio adicionado --><div id="descarga-header" class="hidden bg-white p-4 rounded-2xl shadow-lg">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">
                             Navio: <span id="descarga-navio-nome" class="text-enapor-blue"></span>
                         </h3>
                         <div class="flex flex-col md:flex-row md:gap-6 text-sm">
                             <p><strong>Escala:</strong> <span id="descarga-navio-escala" class="text-gray-700"></span></p>
                             <p><strong>Atracação:</strong> <span id="descarga-navio-atracacao" class="text-gray-700"></span></p>
-                            <p><strong>Total Contentores:</strong> <span id="descarga-navio-total-contentores" class="text-gray-700"></span></p>
+                            <p><strong>Total Contentores:</strong> <span id="descarga-navio-total-contentores" class="text-gray-700"></span></p> <!-- NOVA INFORMAÇÃO -->
                         </div>
                     </div>
                     
-                    <!-- Cartões KPI (Key Performance Indicators) - REDUZIDOS --><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Cartões KPI (Key Performance Indicators) - REDUZIDO --><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         <div class="bg-enapor-blue text-white p-4 rounded-2xl shadow-lg">
-                            <p class="text-sm text-white font-semibold">Total Contentores</p>
+                            <p class="text-sm font-semibold text-white">Total Contentores</p>
                             <p id="kpi-contentores-total" class="text-2xl font-bold text-white mt-1">0</p>
                         </div>
                         <div class="bg-enapor-green text-white p-4 rounded-2xl shadow-lg">
-                            <p class="text-sm text-white font-semibold">Contentores Descarregados</p>
+                            <p class="text-sm font-semibold text-white">Contentores Descarregados</p>
                             <p id="kpi-contentores-descarregados" class="text-2xl font-bold text-white mt-1">0</p>
                         </div>
                         <div class="bg-enapor-orange text-white p-4 rounded-2xl shadow-lg">
-                            <p class="text-sm text-white font-semibold">Contentores por Descarregar</p>
+                            <p class="text-sm font-semibold text-white">Contentores por Descarregar</p>
                             <p id="kpi-contentores-pendentes" class="text-2xl font-bold text-white mt-1">0</p>
                         </div>
                     </div>
 
-                    <!-- 
-                        OTIMIZAÇÃO: 
-                        - Container da tabela
-                    --><div class="bg-white rounded-2xl shadow-lg flex-1 flex flex-col overflow-hidden">
-                        <!-- Cabeçalho da Tabela e Filtros - REDUZIDO --><div class="px-5 py-4 border-b border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+                    <!-- Tabela de Detalhes da Descarga - REDUZIDO --><div class="bg-white rounded-2xl shadow-lg">
+                        <!-- Cabeçalho da Tabela e Filtros --><div class="px-5 py-4 border-b border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
                             <h2 class="text-lg font-semibold text-gray-900">Descargas em curso</h2>
                             <!-- Filtros e Botão de Registo Manual --><div class="flex flex-wrap items-center justify-start md:justify-end gap-2">
                                 <div id="discharge-filters" class="flex items-center gap-2" role="group" aria-label="Filtros de descarga">
@@ -355,14 +341,11 @@
                             </div>
                         </div>
                         
-                        <!-- 
-                            OTIMIZAÇÃO: 
-                            - Wrapper de scroll
-                        --><div class="overflow-x-auto overflow-y-auto flex-1">
+                        <!-- Wrapper da Tabela (para scroll horizontal) --><div class="overflow-x-auto">
                             <table class="w-full min-w-[500px] text-sm">
                                 <thead>
                                     <tr class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                                        <!-- Padding da Tabela REDUZIDO -->
+                                        <!-- Padding REDUZIDO de px-6 py-4 para px-5 py-3 -->
                                         <th class="px-5 py-3">Navio</th>
                                         <th class="px-5 py-3">Nº da Escala</th>
                                         <th class="px-5 py-3">Contentor</th>
@@ -382,43 +365,65 @@
                     </div>
                 </div>
 
-                <!-- NOVO: Secção de Indicadores com Gráficos --><div id="indicadores-section" class="hidden flex-1 flex flex-col space-y-4 overflow-auto">
-                    <h2 class="text-lg font-semibold text-gray-900">Indicadores de Performance</h2>
+                <!-- ERRO CORRIGIDO: Secção de Indicadores movida para aqui (o seu local correto) -->
+                <!-- SECÇÃO DE INDICADORES REVERTIDA E REORGANIZADA --><div id="indicadores-section" class="hidden flex-1 flex flex-col space-y-4 overflow-y-auto p-4 md:p-6">
                     
-                    <!-- KPIs numéricos (3 cartões) --><div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="bg-white p-4 rounded-2xl shadow-lg">
-                            <p class="text-sm font-medium text-gray-600">Contentores Registados (Carga Mais)</p>
-                            <p id="indicador-contentores-a-mais" class="text-2xl font-bold text-enapor-blue mt-1">0</p>
+                    <!-- Título da Página --><h2 class="text-2xl font-bold text-gray-900">Indicadores de Performance</h2>
+                    
+                    <!-- [ LINHA DE KPIs NUMÉRICOS ] (Compactos) --><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        
+                        <!-- KPI: Contentores (Ano) --><div class="bg-enapor-blue text-white p-4 rounded-2xl shadow-lg flex justify-between items-center transition-all duration-200 hover:shadow-xl hover:-translate-y-1 border-l-4 border-enapor-orange">
+                            <div>
+                                <p class="text-sm font-medium text-blue-100">Contentores (Ano)</p>
+                                <p id="indicador-contentores-mes" class="text-3xl font-bold text-white mt-1">0</p>
+                            </div>
+                            <!-- Ícone (Lucide: CalendarDays) --><svg class="w-8 h-8 text-white/30" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg>
                         </div>
-                        <div class="bg-white p-4 rounded-2xl shadow-lg">
-                            <p class="text-sm font-medium text-gray-600">Tempo Médio de Operação por Navio</p>
-                            <p id="indicador-tempo-medio-navio" class="text-2xl font-bold text-enapor-blue mt-1">0h 00m</p>
+
+                        <!-- KPI: Carga Mais --><div class="bg-enapor-blue text-white p-4 rounded-2xl shadow-lg flex justify-between items-center transition-all duration-200 hover:shadow-xl hover:-translate-y-1 border-l-4 border-enapor-orange">
+                            <div>
+                                <p class="text-sm font-medium text-blue-100">Contentores (Carga Mais)</p>
+                                <p id="indicador-contentores-a-mais" class="text-3xl font-bold text-white mt-1">0</p>
+                            </div>
+                            <!-- Ícone (Lucide: PackagePlus) --><svg class="w-8 h-8 text-white/30" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 16h6M19 13v6"></path><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14"></path><path d="m7.5 4.6-1-1.16"></path><polyline points="3.29 7 12 12 20.71 7"></polyline><line x1="12" x2="12" y1="22" y2="12"></line></svg>
                         </div>
-                        <div class="bg-white p-4 rounded-2xl shadow-lg">
-                            <p class="text-sm font-medium text-gray-600">Percentagem de Descarga Concluída (Global)</p>
-                            <p id="indicador-percentagem-concluida" class="text-2xl font-bold text-enapor-blue mt-1">0%</p>
+
+                        <!-- KPI: Tempo Médio --><div class="bg-enapor-blue text-white p-4 rounded-2xl shadow-lg flex justify-between items-center transition-all duration-200 hover:shadow-xl hover:-translate-y-1 border-l-4 border-enapor-orange">
+                            <div>
+                                <p class="text-sm font-medium text-blue-100">Tempo Médio Operação</p>
+                                <p id="indicador-tempo-medio-navio" class="text-3xl font-bold text-white mt-1">0h 00m</p>
+                            </div>
+                             <!-- Ícone (Lucide: Timer) --><svg class="w-8 h-8 text-white/30" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="10" x2="14" y1="2" y2="2"></line><line x1="12" x2="12" y1="6" y2="18"></line><path d="M16 18a4 4 0 0 1-8 0"></path><circle cx="12" cy="12" r="10"></circle></svg>
+                        </div>
+
+                        <!-- KPI: % Concluída --><div class="bg-enapor-blue text-white p-4 rounded-2xl shadow-lg flex justify-between items-center transition-all duration-200 hover:shadow-xl hover:-translate-y-1 border-l-4 border-enapor-orange">
+                            <div>
+                                <p class="text-sm font-medium text-blue-100">% Descarga Concluída</p>
+                                <p id="indicador-percentagem-concluida" class="text-3xl font-bold text-white mt-1">0%</p>
+                            </div>
+                            <!-- Ícone (Lucide: CheckCircle) --><svg class="w-8 h-8 text-white/30" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                         </div>
                     </div>
 
-                    <!-- Gráficos (Linha e Donut) --><div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                        <div class="bg-white p-4 rounded-2xl shadow-lg flex flex-col">
-                            <h3 class="text-md font-semibold text-gray-900 mb-2">Descargas por Mês (Últimos 6 Meses)</h3>
-                            <div class="relative flex-1 h-64">
+                    <!-- [ GRELHA DOS GRÁFICOS ] --><div class="grid grid-cols-1 lg:grid-cols-3 gap-4 flex-1">
+                        
+                        <!-- [ GRÁFICO DE LINHAS ] (Destaque total) --><div class="lg:col-span-3 bg-white p-5 rounded-2xl shadow-lg transition-all duration-200 hover:shadow-xl">
+                            <h3 class="text-md font-semibold text-gray-700 border-b pb-3 mb-3">Descargas por Mês (Últimos 6 Meses)</h3>
+                            <div class="relative h-64">
                                 <canvas id="chart-descargas-mes"></canvas>
                             </div>
                         </div>
-                        <div class="bg-white p-4 rounded-2xl shadow-lg flex flex-col">
-                            <h3 class="text-md font-semibold text-gray-900 mb-2">Estado da Descarga (Global)</h3>
-                            <div class="relative flex-1 h-64">
+
+                        <!-- [ GRÁFICO DONUT ] (Destaque 1/3) --><div class="lg:col-span-1 bg-white p-5 rounded-2xl shadow-lg transition-all duration-200 hover:shadow-xl">
+                            <h3 class="text-md font-semibold text-gray-700 border-b pb-3 mb-3">Estado da Descarga (Global)</h3>
+                            <div class="relative h-64"> <!-- Altura aumentada para h-64 -->
                                 <canvas id="chart-percentagem-concluida"></canvas>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Gráfico (Barras) --><div class="grid grid-cols-1 gap-4 flex-1">
-                        <div class="bg-white p-4 rounded-2xl shadow-lg flex flex-col">
-                            <h3 class="text-md font-semibold text-gray-900 mb-2">Tempo de Operação por Navio Finalizado (minutos)</h3>
-                            <div class="relative flex-1 h-64">
+                        <!-- [ GRÁFICO DE BARRAS ] (Destaque 2/3) --><div class="lg:col-span-2 bg-white p-5 rounded-2xl shadow-lg transition-all duration-200 hover:shadow-xl">
+                            <h3 class="text-md font-semibold text-gray-700 border-b pb-3 mb-3">Tempo de Operação por Navio Finalizado (minutos)</h3>
+                            <div class="relative h-64"> <!-- Altura aumentada para h-64 -->
                                 <canvas id="chart-tempos-navio"></canvas>
                             </div>
                         </div>
@@ -1050,6 +1055,10 @@
                 // 3. Tempo médio por Navio
                 const { average } = getShipOperationTimes();
                 document.getElementById('indicador-tempo-medio-navio').textContent = formatDuration(average);
+
+                // 4. ALTERADO: Contentores (Ano) - Mostrar o total de contentores na DB (que são todos de 2025)
+                const contentoresAnoTotal = db.discharges.length;
+                document.getElementById('indicador-contentores-mes').textContent = contentoresAnoTotal;
             }
 
              /**
@@ -1222,7 +1231,7 @@
                             // --- NOVO: Configuração Datalabels para Gráfico Donut ---
                             datalabels: {
                                 display: true,
-                                color: 'white',
+                                color: '#003A70', // ALTERADO DE 'white' para azul-enapor
                                 font: {
                                     weight: 'bold',
                                     size: 14
