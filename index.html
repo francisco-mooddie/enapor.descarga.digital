@@ -325,10 +325,12 @@
                         <!-- Cabeçalho da Tabela e Filtros --><div class="px-5 py-4 border-b border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
                             <h2 class="text-lg font-semibold text-gray-900">Descargas em curso</h2>
                             <!-- Filtros e Botão de Registo Manual --><div class="flex flex-wrap items-center justify-start md:justify-end gap-2">
-                                <div id="discharge-filters" class="flex items-center gap-2" role="group" aria-label="Filtros de descarga">
-                                    <button data-filter="todos" class="px-3 py-1 text-sm rounded-lg font-semibold text-gray-900 bg-gray-200" aria-pressed="true">Todos</button>
-                                    <button data-filter="descarregado" class="px-3 py-1 text-sm rounded-lg font-medium text-gray-500 hover:bg-gray-100" aria-pressed="false">Descarregados</button>
-                                    <button data-filter="pendente" class="px-3 py-1 text-sm rounded-lg font-medium text-gray-500 hover:bg-gray-100" aria-pressed="false">Pendentes</button>
+                                
+                                <!-- ALTERADO: Estilo dos botões de filtro para maior destaque -->
+                                <div id="discharge-filters" class="flex items-center rounded-lg overflow-hidden ring-1 ring-gray-300" role="group" aria-label="Filtros de descarga">
+                                    <button data-filter="todos" class="px-3 py-1 text-sm rounded-none font-semibold text-white bg-enapor-blue" aria-pressed="true">Todos</button>
+                                    <button data-filter="descarregado" class="px-3 py-1 text-sm rounded-none font-medium text-gray-700 bg-white hover:bg-gray-50 border-l border-gray-300" aria-pressed="false">Descarregados</button>
+                                    <button data-filter="pendente" class="px-3 py-1 text-sm rounded-none font-medium text-gray-700 bg-white hover:bg-gray-50 border-l border-gray-300" aria-pressed="false">Pendentes</button>
                                 </div>
                                 <button id="open-manual-modal-btn" class="flex items-center gap-2 bg-enapor-orange text-white text-sm font-semibold px-3 py-1.5 rounded-lg shadow-md hover:bg-orange-600 transition-all">
                                     <!-- Ícone (Lucide: Plus) --><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
@@ -1440,13 +1442,17 @@
             function updateDischargeFilterUI() {
                 dischargeFilterButtons.forEach(btn => {
                     const isPressed = btn.dataset.filter === state.currentStatusFilter;
-                    btn.classList.toggle('font-semibold', isPressed);
-                    btn.classList.toggle('text-gray-900', isPressed);
-                    btn.classList.toggle('bg-gray-200', isPressed);
                     
+                    // Classes para botão ATIVO
+                    btn.classList.toggle('font-semibold', isPressed);
+                    btn.classList.toggle('text-white', isPressed);
+                    btn.classList.toggle('bg-enapor-blue', isPressed);
+                    
+                    // Classes para botão INATIVO
                     btn.classList.toggle('font-medium', !isPressed);
-                    btn.classList.toggle('text-gray-500', !isPressed);
-                    btn.classList.toggle('hover:bg-gray-100', !isPressed);
+                    btn.classList.toggle('text-gray-700', !isPressed);
+                    btn.classList.toggle('bg-white', !isPressed);
+                    btn.classList.toggle('hover:bg-gray-50', !isPressed);
                     
                     btn.setAttribute('aria-pressed', isPressed);
                 });
