@@ -11,6 +11,10 @@
     
     <!-- Carrega o Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Carrega a Chart.js para gráficos --><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- NOVO: Carrega o plugin de datalabels para a Chart.js --><script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    
     <!-- Configuração do Tailwind (Paleta ENAPOR e Fonte) --><script>
         tailwind.config = {
             theme: {
@@ -23,7 +27,9 @@
                         'enapor-orange': '#BE1D2C',
                         'enapor-green': '#BCBED0',
                         'enapor-gray': '#F8F9FA',
-                        'enapor-red': '#D9534F' // Cor de erro
+                        'enapor-red': '#D9534F', // Cor de erro
+                        'chart-green': '#22C55E', // Verde para gráficos (Descarregado)
+                        'chart-orange': '#F97316' // Laranja para gráficos (Pendente)
                     },
                     borderRadius: {
                         '2xl': '1rem', // 16px
@@ -172,19 +178,25 @@
         <!-- Barra Lateral (Sidebar) - REDUZIDA --><aside id="sidebar" class="w-56 bg-enapor-blue text-white p-4 shadow-lg hidden md:flex flex-col flex-shrink-0 absolute md:relative z-20 h-full">
             <!-- Logo --><div class="mb-8 text-center"> <!-- Reduzido mb-10 para mb-8 --><img src="https://www.enapor.cv/web/image/843" alt="Logo ENAPOR" class="h-21 mx-auto"> </div>
             
-            <!-- Navegação Principal --><nav class="flex-1 space-y-2">
-                <a href="#" id="nav-navios" class="flex items-center gap-3 px-4 py-3 bg-white/10 text-white font-semibold rounded-lg">
+            <!-- Navegação Principal -->
+            <!-- ATUALIZAÇÃO: Adicionadas classes border-l-4 para o apontamento de cor -->
+            <nav class="flex-1 space-y-2">
+                <a href="#" id="nav-navios" class="flex items-center gap-3 px-4 py-3 bg-white/10 text-white font-semibold rounded-lg border-l-4 border-enapor-orange">
                     <!-- Ícone 🚢 (Lucide: ShipWheel) --><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4"/><path d="M2 12h4"/><path d="m19.07 4.93-.88.88"/><path d="m5.81 18.19.88-.88"/><path d="M12 2v4"/><path d="M12 22v-4"/><path d="m4.93 4.93.88.88"/><path d="m18.19 18.19-.88-.88"/><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/></svg>
                     <span>Navios</span>
                 </a>
-                <a href="#" id="nav-descarga" class="flex items-center gap-3 px-4 py-3 text-gray-200 hover:bg-white/10 hover:text-white font-medium rounded-lg">
+                <a href="#" id="nav-descarga" class="flex items-center gap-3 px-4 py-3 text-gray-200 hover:bg-white/10 hover:text-white font-medium rounded-lg border-l-4 border-transparent hover:border-enapor-orange/50">
                     <!-- Ícone  (Lucide: Box) --><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.29 7 12 12 20.71 7"></polyline><line x1="12" x2="12" y1="22" y2="12"></line></svg>
                     <span>Descarga</span>
+                </a>
+                <!-- NOVO: Link Indicadores --><a href="#" id="nav-indicadores" class="flex items-center gap-3 px-4 py-3 text-gray-200 hover:bg-white/10 hover:text-white font-medium rounded-lg border-l-4 border-transparent hover:border-enapor-orange/50">
+                    <!-- Ícone (Lucide: BarChart3) --><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M7 12v5"></path><path d="M12 8v9"></path><path d="M17 14v3"></path></svg>
+                    <span>Indicadores</span>
                 </a>
             </nav>
             
             <!-- Logout --><div class="mt-auto">
-                <a href="#" id="logout-btn" class="flex items-center gap-3 px-4 py-3 text-gray-200 hover:bg-white/10 hover:text-white font-medium rounded-lg">
+                <a href="#" id="logout-btn" class="flex items-center gap-3 px-4 py-3 text-gray-200 hover:bg-white/10 hover:text-white font-medium rounded-lg border-l-4 border-transparent hover:border-enapor-orange">
                     <!-- Ícone 🔒 (Lucide: LogOut) --><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg>
                     <span>Terminar sessão</span>
                 </a>
@@ -232,15 +244,15 @@
                         
                     <!-- KPIs da secção de Navios - REDUZIDOS --><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         <div class="bg-enapor-blue text-white p-4 rounded-2xl shadow-lg">
-                            <p class="text-sm text-blue-100">Navios em Porto</p>
+                            <p class="text-sm text-white font-semibold">Navios em Porto</p>
                             <p id="kpi-navios-porto" class="text-2xl font-bold text-white mt-1">0</p>
                         </div>
                         <div class="bg-enapor-green text-white p-4 rounded-2xl shadow-lg">
-                            <p class="text-sm text-green-100">Navios Descarregados</p>
+                            <p class="text-sm text-white font-semibold">Navios Descarregados</p>
                             <p id="kpi-navios-descarregados" class="text-2xl font-bold text-white mt-1">0</p>
                         </div>
                         <div class="bg-enapor-orange text-white p-4 rounded-2xl shadow-lg">
-                            <p class="text-sm text-orange-100">Navios em Descarga</p>
+                            <p class="text-sm text-white font-semibold">Navios em Descarga</p>
                             <p id="kpi-navios-descarga" class="text-2xl font-bold text-white mt-1">0</p>
                         </div>
                     </div>
@@ -265,6 +277,7 @@
                                         <th class="px-5 py-3">Porto Anterior</th>
                                         <th class="px-5 py-3">Nº da Escala</th>
                                         <th class="px-5 py-3">Atracação</th>
+                                        <th class="px-5 py-3">Nº Contentores</th>
                                         <th class="px-5 py-3 text-right">Ações</th>
                                     </tr>
                                 </thead>
@@ -300,20 +313,21 @@
                         <div class="flex flex-col md:flex-row md:gap-6 text-sm">
                             <p><strong>Escala:</strong> <span id="descarga-navio-escala" class="text-gray-700"></span></p>
                             <p><strong>Atracação:</strong> <span id="descarga-navio-atracacao" class="text-gray-700"></span></p>
+                            <p><strong>Total Contentores:</strong> <span id="descarga-navio-total-contentores" class="text-gray-700"></span></p>
                         </div>
                     </div>
                     
                     <!-- Cartões KPI (Key Performance Indicators) - REDUZIDOS --><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         <div class="bg-enapor-blue text-white p-4 rounded-2xl shadow-lg">
-                            <p class="text-sm text-blue-100">Total Contentores</p>
+                            <p class="text-sm text-white font-semibold">Total Contentores</p>
                             <p id="kpi-contentores-total" class="text-2xl font-bold text-white mt-1">0</p>
                         </div>
                         <div class="bg-enapor-green text-white p-4 rounded-2xl shadow-lg">
-                            <p class="text-sm text-green-100">Contentores Descarregados</p>
+                            <p class="text-sm text-white font-semibold">Contentores Descarregados</p>
                             <p id="kpi-contentores-descarregados" class="text-2xl font-bold text-white mt-1">0</p>
                         </div>
                         <div class="bg-enapor-orange text-white p-4 rounded-2xl shadow-lg">
-                            <p class="text-sm text-orange-100">Contentores por Descarregar</p>
+                            <p class="text-sm text-white font-semibold">Contentores por Descarregar</p>
                             <p id="kpi-contentores-pendentes" class="text-2xl font-bold text-white mt-1">0</p>
                         </div>
                     </div>
@@ -364,6 +378,49 @@
                         
                         <!-- Controlo de Paginação Descarga - REDUZIDO --><div id="discharge-pagination" class="px-5 py-3 border-t border-gray-200 flex justify-center items-center gap-2 text-sm">
                             <!-- Gerado por JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NOVO: Secção de Indicadores com Gráficos --><div id="indicadores-section" class="hidden flex-1 flex flex-col space-y-4 overflow-auto">
+                    <h2 class="text-lg font-semibold text-gray-900">Indicadores de Performance</h2>
+                    
+                    <!-- KPIs numéricos (3 cartões) --><div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white p-4 rounded-2xl shadow-lg">
+                            <p class="text-sm font-medium text-gray-600">Contentores Registados (Carga Mais)</p>
+                            <p id="indicador-contentores-a-mais" class="text-2xl font-bold text-enapor-blue mt-1">0</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-2xl shadow-lg">
+                            <p class="text-sm font-medium text-gray-600">Tempo Médio de Operação por Navio</p>
+                            <p id="indicador-tempo-medio-navio" class="text-2xl font-bold text-enapor-blue mt-1">0h 00m</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-2xl shadow-lg">
+                            <p class="text-sm font-medium text-gray-600">Percentagem de Descarga Concluída (Global)</p>
+                            <p id="indicador-percentagem-concluida" class="text-2xl font-bold text-enapor-blue mt-1">0%</p>
+                        </div>
+                    </div>
+
+                    <!-- Gráficos (Linha e Donut) --><div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div class="bg-white p-4 rounded-2xl shadow-lg flex flex-col">
+                            <h3 class="text-md font-semibold text-gray-900 mb-2">Descargas por Mês (Últimos 6 Meses)</h3>
+                            <div class="relative flex-1 h-64">
+                                <canvas id="chart-descargas-mes"></canvas>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-2xl shadow-lg flex flex-col">
+                            <h3 class="text-md font-semibold text-gray-900 mb-2">Estado da Descarga (Global)</h3>
+                            <div class="relative flex-1 h-64">
+                                <canvas id="chart-percentagem-concluida"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gráfico (Barras) --><div class="grid grid-cols-1 gap-4 flex-1">
+                        <div class="bg-white p-4 rounded-2xl shadow-lg flex flex-col">
+                            <h3 class="text-md font-semibold text-gray-900 mb-2">Tempo de Operação por Navio Finalizado (minutos)</h3>
+                            <div class="relative flex-1 h-64">
+                                <canvas id="chart-tempos-navio"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -426,7 +483,7 @@
                         flag: "nl",
                         escala: "GRA2025002630",
                         ata: "2025-11-01T10:00:00",
-                        status: "pending" // 'pending' ou 'finished'
+                        status: "finished" // MUDADO PARA FINISHED
                     },
                     {
                         name: "B.LÉZA",
@@ -434,7 +491,7 @@
                         flag: "es",
                         escala: "GRA2025002633",
                         ata: "2025-11-01T16:30:00",
-                        status: "pending"
+                        status: "finished" // MUDADO PARA FINISHED
                     },
                     {
                         name: "CHIQUINHO BL",
@@ -442,7 +499,7 @@
                         flag: "de",
                         escala: "GRA2025002640",
                         ata: "2025-11-02T09:00:00",
-                        status: "pending"
+                        status: "finished" // MUDADO PARA FINISHED
                     },
                     {
                         name: "DONA TUTUTA",
@@ -527,55 +584,84 @@
                     }
                 ],
                 discharges: [
-                    // MAR D´CANAL
-                    { id: 1, shipName: "MAR D´CANAL", escala: "GRA2025002630", container: "MSCU1234567", type: "20P", status: "descarregado", dischargeTime: "2025-11-01T10:45:12" },
-                    { id: 3, shipName: "MAR D´CANAL", escala: "GRA2025002630", container: "MSCU1234568", type: "20P", status: "descarregado", dischargeTime: "2025-11-01T10:50:02" },
-                    { id: 7, shipName: "MAR D´CANAL", escala: "GRA2025002630", container: "TRLU6543210", type: "40P", status: "pendente", dischargeTime: null },
+                    // --- DADOS NOVEMBRO (MÊS ATUAL) ---
+                    // MAR D´CANAL (Finalizado)
+                    { id: 1, shipName: "MAR D´CANAL", escala: "GRA2025002630", container: "MSCU1234567", type: "20P", status: "descarregado", dischargeTime: "2025-11-01T10:45:12", cargaMais: false },
+                    { id: 3, shipName: "MAR D´CANAL", escala: "GRA2025002630", container: "MSCU1234568", type: "20P", status: "descarregado", dischargeTime: "2025-11-01T10:50:02", cargaMais: false },
+                    { id: 7, shipName: "MAR D´CANAL", escala: "GRA2025002630", container: "TRLU6543210", type: "40P", status: "descarregado", dischargeTime: "2025-11-01T11:05:00", cargaMais: false },
                     
-                    // B.LÉZA
-                    { id: 2, shipName: "B.LÉZA", escala: "GRA2025002633", container: "CMAU7654321", type: "40P", status: "pendente", dischargeTime: null },
-                    { id: 8, shipName: "B.LÉZA", escala: "GRA2025002633", container: "CMAU7654322", type: "40P", status: "pendente", dischargeTime: null },
-                    { id: 9, shipName: "B.LÉZA", escala: "GRA2025002633", container: "HLCU1112223", type: "20P", status: "descarregado", dischargeTime: "2025-11-01T17:00:00" },
+                    // B.LÉZA (Finalizado)
+                    { id: 2, shipName: "B.LÉZA", escala: "GRA2025002633", container: "CMAU7654321", type: "40P", status: "descarregado", dischargeTime: "2025-11-01T16:45:00", cargaMais: false },
+                    { id: 8, shipName: "B.LÉZA", escala: "GRA2025002633", container: "CMAU7654322", type: "40P", status: "descarregado", dischargeTime: "2025-11-01T16:50:00", cargaMais: false },
+                    { id: 9, shipName: "B.LÉZA", escala: "GRA2025002633", container: "HLCU1112223", type: "20P", status: "descarregado", dischargeTime: "2025-11-01T17:00:00", cargaMais: false },
+                    { id: 25, shipName: "B.LÉZA", escala: "GRA2025002633", container: "HLCU1112224", type: "20P", status: "descarregado", dischargeTime: "2025-11-01T17:05:15", cargaMais: true }, // Carga Mais
                     
-                    // CHIQUINHO BL
-                    { id: 4, shipName: "CHIQUINHO BL", escala: "GRA2025002640", container: "MRSU8765432", type: "40P", status: "pendente", dischargeTime: null },
-                    { id: 5, shipName: "CHIQUINHO BL", escala: "GRA2025002640", container: "MAEU5432109", type: "20P", status: "descarregado", dischargeTime: "2025-11-02T09:15:45" },
-                    { id: 10, shipName: "CHIQUINHO BL", escala: "GRA2025002640", container: "MRSU8765433", type: "40P", status: "pendente", dischargeTime: null },
-                    { id: 11, shipName: "CHIQUINHO BL", escala: "GRA2025002640", container: "MRSU8765434", type: "40P", status: "pendente", dischargeTime: null },
+                    // CHIQUINHO BL (Finalizado)
+                    { id: 4, shipName: "CHIQUINHO BL", escala: "GRA2025002640", container: "MRSU8765432", type: "40P", status: "descarregado", dischargeTime: "2025-11-02T09:10:00", cargaMais: false },
+                    { id: 5, shipName: "CHIQUINHO BL", escala: "GRA2025002640", container: "MAEU5432109", type: "20P", status: "descarregado", dischargeTime: "2025-11-02T09:15:45", cargaMais: false },
+                    { id: 10, shipName: "CHIQUINHO BL", escala: "GRA2025002640", container: "MRSU8765433", type: "40P", status: "descarregado", dischargeTime: "2025-11-02T09:20:00", cargaMais: false },
+                    { id: 11, shipName: "CHIQUINHO BL", escala: "GRA2025002640", container: "MRSU8765434", type: "40P", status: "descarregado", dischargeTime: "2025-11-02T09:25:00", cargaMais: false },
                     
-                    // DONA TUTUTA
-                    { id: 6, shipName: "DONA TUTUTA", escala: "GRA2025002642", container: "EASU4567890", type: "40P", status: "pendente", dischargeTime: null },
-                    { id: 12, shipName: "DONA TUTUTA", escala: "GRA2025002642", container: "EASU4567891", type: "20P", status: "descarregado", dischargeTime: "2025-11-02T11:30:00" },
-                    { id: 13, shipName: "DONA TUTUTA", escala: "GRA2025002642", container: "EASU4567892", type: "40P", status: "pendente", dischargeTime: null },
+                    // DONA TUTUTA (Pendente)
+                    { id: 6, shipName: "DONA TUTUTA", escala: "GRA2025002642", container: "EASU4567890", type: "40P", status: "pendente", dischargeTime: null, cargaMais: false },
+                    { id: 12, shipName: "DONA TUTUTA", escala: "GRA2025002642", container: "EASU4567891", type: "20P", status: "descarregado", dischargeTime: "2025-11-02T11:30:00", cargaMais: false },
+                    { id: 13, shipName: "DONA TUTUTA", escala: "GRA2025002642", container: "EASU4567892", type: "40P", status: "pendente", dischargeTime: null, cargaMais: false },
                     
-                    // PONTA DO SOL
-                    { id: 14, shipName: "PONTA DO SOL", escala: "GRA2025002650", container: "FCIU9876543", type: "20P", status: "pendente", dischargeTime: null },
+                    // PONTA DO SOL (Pendente)
+                    { id: 14, shipName: "PONTA DO SOL", escala: "GRA2025002650", container: "FCIU9876543", type: "20P", status: "pendente", dischargeTime: null, cargaMais: false },
                     
-                    // PRAIA D´AGUADA
-                    { id: 15, shipName: "PRAIA D´AGUADA", escala: "GRA2025002651", container: "OOLU1231234", type: "40P", status: "pendente", dischargeTime: null },
-                    { id: 16, shipName: "PRAIA D´AGUADA", escala: "GRA2025002651", container: "OOLU1231235", type: "20P", status: "pendente", dischargeTime: null },
+                    // PRAIA D´AGUADA (Pendente)
+                    { id: 15, shipName: "PRAIA D´AGUADA", escala: "GRA2025002651", container: "OOLU1231234", type: "40P", status: "pendente", dischargeTime: null, cargaMais: false },
+                    { id: 16, shipName: "PRAIA D´AGUADA", escala: "GRA2025002651", container: "OOLU1231235", type: "20P", status: "pendente", dischargeTime: null, cargaMais: false },
                     
-                    // MONTE CARA
-                    { id: 17, shipName: "MONTE CARA", escala: "GRA2025002655", container: "TCNU5554443", type: "20P", status: "descarregado", dischargeTime: "2025-11-03T08:30:10" },
-                    { id: 18, shipName: "MONTE CARA", escala: "GRA2025002655", container: "TCNU5554444", type: "40P", status: "pendente", dischargeTime: null },
+                    // MONTE CARA (Pendente)
+                    { id: 17, shipName: "MONTE CARA", escala: "GRA2025002655", container: "TCNU5554443", type: "20P", status: "descarregado", dischargeTime: "2025-11-03T08:30:10", cargaMais: false },
+                    { id: 18, shipName: "MONTE CARA", escala: "GRA2025002655", container: "TCNU5554444", type: "40P", status: "pendente", dischargeTime: null, cargaMais: false },
                     
-                    // RIB. GRANDE
-                    { id: 19, shipName: "RIB. GRANDE", escala: "GRA2025002656", container: "ZCSU7778889", type: "40P", status: "pendente", dischargeTime: null },
-                    { id: 20, shipName: "RIB. GRANDE", escala: "GRA2025002656", container: "ZCSU7778880", type: "40P", status: "pendente", dischargeTime: null },
+                    // RIB. GRANDE (Pendente)
+                    { id: 19, shipName: "RIB. GRANDE", escala: "GRA2025002656", container: "ZCSU7778889", type: "40P", status: "pendente", dischargeTime: null, cargaMais: false },
+                    { id: 20, shipName: "RIB. GRANDE", escala: "GRA2025002656", container: "ZCSU7778880", type: "40P", status: "pendente", dischargeTime: null, cargaMais: false },
                     
-                    // SANTO ANTAO
-                    { id: 21, shipName: "SANTO ANTAO", escala: "GRA2025002660", container: "MSCU9998887", type: "20P", status: "pendente", dischargeTime: null },
-                    { id: 22, shipName: "SANTO ANTAO", escala: "GRA2025002660", container: "MSCU9998886", type: "20P", status: "pendente", dischargeTime: null },
-                    { id: 23, shipName: "SANTO ANTAO", escala: "GRA2025002660", container: "MSCU9998885", type: "40P", status: "pendente", dischargeTime: null },
+                    // SANTO ANTAO (Pendente)
+                    { id: 21, shipName: "SANTO ANTAO", escala: "GRA2025002660", container: "MSCU9998887", type: "20P", status: "pendente", dischargeTime: null, cargaMais: false },
+                    { id: 22, shipName: "SANTO ANTAO", escala: "GRA2025002660", container: "MSCU9998886", type: "20P", status: "pendente", dischargeTime: null, cargaMais: false },
+                    { id: 23, shipName: "SANTO ANTAO", escala: "GRA2025002660", container: "MSCU9998885", type: "40P", status: "pendente", dischargeTime: null, cargaMais: false },
                     
-                    // MAR DE CANAL II
-                    { id: 24, shipName: "MAR DE CANAL II", escala: "GRA2025002661", container: "TRLU8887776", type: "40P", status: "pendente", dischargeTime: null }
+                    // MAR DE CANAL II (Pendente)
+                    { id: 24, shipName: "MAR DE CANAL II", escala: "GRA2025002661", container: "TRLU8887776", type: "40P", status: "pendente", dischargeTime: null, cargaMais: false },
+
+                    // --- DADOS FICTÍCIOS (MESES ANTERIORES) ---
+                    // Outubro
+                    { id: 101, shipName: "NAVIO OUTUBRO A", escala: "GRA2025002500", container: "TEST1", type: "20P", status: "descarregado", dischargeTime: "2025-10-05T10:00:00", cargaMais: false },
+                    { id: 102, shipName: "NAVIO OUTUBRO A", escala: "GRA2025002500", container: "TEST2", type: "40P", status: "descarregado", dischargeTime: "2025-10-05T10:15:00", cargaMais: false },
+                    { id: 103, shipName: "NAVIO OUTUBRO B", escala: "GRA2025002510", container: "TEST3", type: "20P", status: "descarregado", dischargeTime: "2025-10-15T14:30:00", cargaMais: false },
+                    { id: 104, shipName: "NAVIO OUTUBRO B", escala: "GRA2025002510", container: "TEST4", type: "20P", status: "descarregado", dischargeTime: "2025-10-15T14:45:00", cargaMais: false },
+                    { id: 105, shipName: "NAVIO OUTUBRO B", escala: "GRA2025002510", container: "TEST5", type: "40P", status: "descarregado", dischargeTime: "2025-10-15T15:00:00", cargaMais: true }, // Carga Mais
+                    { id: 106, shipName: "NAVIO OUTUBRO C", escala: "GRA2025002520", container: "TEST6", type: "20P", status: "descarregado", dischargeTime: "2025-10-28T09:00:00", cargaMais: false },
+                    
+                    // Setembro
+                    { id: 201, shipName: "NAVIO SETEMBRO A", escala: "GRA2025002400", container: "TEST10", type: "40P", status: "descarregado", dischargeTime: "2025-09-10T08:00:00", cargaMais: false },
+                    { id: 202, shipName: "NAVIO SETEMBRO A", escala: "GRA2025002400", container: "TEST11", type: "40P", status: "descarregado", dischargeTime: "2025-09-10T08:30:00", cargaMais: false },
+                    { id: 203, shipName: "NAVIO SETEMBRO B", escala: "GRA2025002410", container: "TEST12", type: "20P", status: "descarregado", dischargeTime: "2025-09-22T11:00:00", cargaMais: false },
+                    
+                    // Agosto
+                    { id: 301, shipName: "NAVIO AGOSTO A", escala: "GRA2025002300", container: "TEST20", type: "20P", status: "descarregado", dischargeTime: "2025-08-01T10:00:00", cargaMais: false },
+                    { id: 302, shipName: "NAVIO AGOSTO A", escala: "GRA2025002300", container: "TEST21", type: "40P", status: "descarregado", dischargeTime: "2025-08-01T10:20:00", cargaMais: false },
+                    { id: 303, shipName: "NAVIO AGOSTO A", escala: "GRA2025002300", container: "TEST22", type: "20P", status: "descarregado", dischargeTime: "2025-08-01T10:40:00", cargaMais: false },
+                    { id: 304, shipName: "NAVIO AGOSTO B", escala: "GRA2025002310", container: "TEST23", type: "40P", status: "descarregado", dischargeTime: "2025-08-19T16:00:00", cargaMais: false },
+
+                    // Julho
+                    { id: 401, shipName: "NAVIO JULHO A", escala: "GRA2025002200", container: "TEST30", type: "20P", status: "descarregado", dischargeTime: "2025-07-10T09:00:00", cargaMais: false },
+                    { id: 402, shipName: "NAVIO JULHO A", escala: "GRA2025002200", container: "TEST31", type: "20P", status: "descarregado", dischargeTime: "2025-07-10T09:15:00", cargaMais: true }, // Carga Mais
+                    
+                    // Junho
+                    { id: 501, shipName: "NAVIO JUNHO A", escala: "GRA2025002100", container: "TEST40", type: "40P", status: "descarregado", dischargeTime: "2025-06-20T14:00:00", cargaMais: false }
                 ]
             };
             
             // --- Estado da Aplicação ---
             let state = {
-                currentView: 'login', // 'login', 'navios', 'descarga'
+                currentView: 'login', // 'login', 'navios', 'descarga', 'indicadores'
                 currentShipFilter: null, // null (todos) ou "Nome do Navio"
                 currentStatusFilter: 'todos', // 'todos', 'pendente', 'descarregado'
                 shipSearchTerm: '',
@@ -584,6 +670,11 @@
                 shipsCurrentPage: 1,
                 dischargeCurrentPage: 1
             };
+
+            // --- Instâncias dos Gráficos ---
+            let chartPercentagem = null;
+            let chartTemposNavio = null;
+            let chartDescargasMes = null; // NOVO: Gráfico de Linhas
 
             // --- Seletores de Elementos (DOM) ---
             // Login
@@ -603,10 +694,12 @@
             // Navegação
             const navNavios = document.getElementById('nav-navios');
             const navDescarga = document.getElementById('nav-descarga');
+            const navIndicadores = document.getElementById('nav-indicadores');
             
             // Secções
             const naviosSection = document.getElementById('navios-section');
             const descargaSection = document.getElementById('descarga-section');
+            const indicadoresSection = document.getElementById('indicadores-section');
 
             // Pesquisa
             const mainSearchInput = document.getElementById('main-search-input'); // Contentores
@@ -626,6 +719,7 @@
             const descargaNavioNome = document.getElementById('descarga-navio-nome');
             const descargaNavioEscala = document.getElementById('descarga-navio-escala');
             const descargaNavioAtracacao = document.getElementById('descarga-navio-atracacao');
+            const descargaNavioTotalContentores = document.getElementById('descarga-navio-total-contentores');
 
             // Modal
             const manualModal = document.getElementById('manual-register-modal');
@@ -643,6 +737,45 @@
             const toastNotification = document.getElementById('toast-notification');
             const toastMessage = document.getElementById('toast-message');
             let toastTimer;
+
+            // --- NOVO: Plugin Chart.js para Texto Central do Donut ---
+            const donutCenterTextPlugin = {
+                id: 'donutCenterText',
+                beforeDraw: (chart) => {
+                    // Verificar se é um donut e se a opção está ativa
+                    if (chart.config.type !== 'doughnut' || !chart.config.options.plugins.donutCenterText) {
+                        return;
+                    }
+
+                    const { ctx, data } = chart;
+                    const total = data.datasets[0].data.reduce((a, b) => a + b, 0);
+                    const text = total.toString();
+                    const subText = 'Total';
+
+                    ctx.save();
+                    const x = chart.getDatasetMeta(0).data[0].x;
+                    const y = chart.getDatasetMeta(0).data[0].y;
+
+                    // Texto "Total" (mais pequeno, cinzento)
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.font = 'bold 16px Inter';
+                    ctx.fillStyle = '#6b7280'; // gray-500
+                    ctx.fillText(subText, x, y - 12);
+
+                    // Número Total (maior, azul)
+                    ctx.font = 'bold 24px Inter';
+                    ctx.fillStyle = '#003A70'; // enapor-blue
+                    ctx.fillText(text, x, y + 14);
+
+                    ctx.restore();
+                }
+            };
+
+            // --- Registar Plugins Globalmente ---
+            // Registar o plugin de datalabels e o plugin de texto central
+            Chart.register(ChartDataLabels, donutCenterTextPlugin);
+
 
             // --- Funções de Renderização ---
 
@@ -715,6 +848,21 @@
                     return '--:--:--';
                 }
             }
+
+            /**
+             * Formata milissegundos num formato legível (ex: 2h 15m)
+             * @param {number} ms - Duração em milissegundos
+             * @returns {string}
+             */
+            function formatDuration(ms) {
+                if (isNaN(ms) || ms === 0) return '0h 00m';
+                
+                const totalMinutes = Math.floor(ms / (1000 * 60));
+                const hours = Math.floor(totalMinutes / 60);
+                const minutes = totalMinutes % 60;
+                
+                return `${hours}h ${minutes.toString().padStart(2, '0')}m`;
+            }
             
             /**
              * Renderiza a paginação.
@@ -743,7 +891,6 @@
                 container.appendChild(prevBtn);
 
                 // Botões de Página (simplificado: mostra a página atual)
-                // Para uma lógica mais complexa (ex: 1 ... 4 5 6 ... 10) seria preciso mais código
                 const pageInfo = document.createElement('span');
                 pageInfo.className = "px-2 text-gray-700";
                 pageInfo.textContent = `Página ${currentPage} de ${totalPages}`;
@@ -787,7 +934,7 @@
                 shipTableBody.innerHTML = '';
 
                 if (filteredShips.length === 0) {
-                     shipTableBody.innerHTML = `<tr><td colspan="5" class="px-5 py-3 text-center text-gray-500">Nenhum navio encontrado.</td></tr>`;
+                     shipTableBody.innerHTML = `<tr><td colspan="6" class="px-5 py-3 text-center text-gray-500">Nenhum navio encontrado.</td></tr>`;
                 } else {
                     // Criar e adicionar linhas
                     paginatedShips.forEach(ship => {
@@ -797,6 +944,9 @@
                         
                         const ataFormatted = formatAtaDateTime(ship.ata);
                         
+                        // Calcular total de contentores para este navio
+                        const totalContentores = db.discharges.filter(d => d.shipName === ship.name).length;
+
                         // Padding da Tabela REDUZIDO de 'px-6 py-4' para 'px-5 py-3'
                         row.innerHTML = `
                             <td class="px-5 py-3 whitespace-nowrap font-medium text-gray-900">${ship.name}</td>
@@ -806,6 +956,7 @@
                             </td>
                             <td class="px-5 py-3 whitespace-nowrap text-gray-600">${ship.escala}</td>
                             <td class="px-5 py-3 whitespace-nowrap text-gray-600">${ataFormatted}</td>
+                            <td class="px-5 py-3 whitespace-nowrap text-gray-600">${totalContentores}</td>
                             <td class="px-5 py-3 whitespace-nowrap text-right">
                                 <button class="font-medium text-enapor-blue hover:underline view-containers-btn" data-ship-name="${ship.name}">
                                     Ver Contentores
@@ -880,6 +1031,272 @@
                 });
             }
 
+            /**
+             * Calcula e renderiza os KPIs numéricos dos indicadores.
+             */
+            function renderIndicadoresKPIs() {
+                // 1. Contentores registados a mais
+                const contentoresAMais = db.discharges.filter(d => d.cargaMais === true).length;
+                document.getElementById('indicador-contentores-a-mais').textContent = contentoresAMais;
+
+                // 2. Percentagem de descarga concluída (Global)
+                const totalContentoresGlobal = db.discharges.length;
+                const totalDescarregadosGlobal = db.discharges.filter(d => d.status === 'descarregado').length;
+                const percentagemConcluida = (totalContentoresGlobal > 0) 
+                    ? (totalDescarregadosGlobal / totalContentoresGlobal * 100) 
+                    : 0;
+                document.getElementById('indicador-percentagem-concluida').textContent = `${percentagemConcluida.toFixed(1)}%`;
+
+                // 3. Tempo médio por Navio
+                const { average } = getShipOperationTimes();
+                document.getElementById('indicador-tempo-medio-navio').textContent = formatDuration(average);
+            }
+
+             /**
+             * Calcula os tempos de operação para navios finalizados.
+             * @returns {{labels: string[], data: number[], average: number}}
+             */
+            function getShipOperationTimes() {
+                let totalDuration = 0;
+                let finishedShipsCount = 0;
+                const labels = [];
+                const data = []; // Duração em minutos
+
+                const finishedShips = db.ships.filter(s => s.status === 'finished');
+
+                finishedShips.forEach(ship => {
+                    const shipDischarges = db.discharges
+                        .filter(d => d.shipName === ship.name && d.status === 'descarregado' && d.dischargeTime)
+                        .map(d => new Date(d.dischargeTime).getTime()); // Obter timestamps
+                    
+                    if (shipDischarges.length > 0) {
+                        const firstDischarge = Math.min(...shipDischarges);
+                        const lastDischarge = Math.max(...shipDischarges);
+                        let durationMs = lastDischarge - firstDischarge;
+
+                        // Se houver apenas 1 contentor, consideramos uma duração mínima (ex: 5 min)
+                        if (durationMs === 0 && shipDischarges.length > 0) {
+                            durationMs = 300000; // 5 minutos em ms
+                        }
+                        
+                        totalDuration += durationMs;
+                        finishedShipsCount++;
+                        labels.push(ship.name);
+                        data.push(Math.floor(durationMs / 60000)); // Converter para minutos
+                    }
+                });
+
+                const average = (finishedShipsCount === 0) ? 0 : (totalDuration / finishedShipsCount);
+                return { labels, data, average };
+            }
+
+            /**
+             * Destrói gráficos existentes (para evitar sobreposição).
+             */
+            function destroyGraficos() {
+                if (chartPercentagem) {
+                    chartPercentagem.destroy();
+                    chartPercentagem = null;
+                }
+                if (chartTemposNavio) {
+                    chartTemposNavio.destroy();
+                    chartTemposNavio = null;
+                }
+                if (chartDescargasMes) {
+                    chartDescargasMes.destroy();
+                    chartDescargasMes = null;
+                }
+            }
+
+            /**
+             * Renderiza TODOS os gráficos na secção de Indicadores.
+             */
+            function renderGraficos() {
+                destroyGraficos(); // Limpar gráficos anteriores
+                
+                renderGraficoLinhasMes();
+                renderGraficoDonut();
+                renderGraficoBarras();
+            }
+
+            /**
+             * Renderiza o gráfico de Linhas (Descargas por Mês).
+             */
+            function renderGraficoLinhasMes() {
+                const meses = ['Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov']; // Últimos 6 meses
+                const data = [0, 0, 0, 0, 0, 0];
+                const hoje = new Date(2025, 10, 5); // Simular data atual (Novembro 2025)
+                const anoAtual = hoje.getFullYear();
+
+                db.discharges.forEach(d => {
+                    if (d.status === 'descarregado' && d.dischargeTime) {
+                        const dataDescarga = new Date(d.dischargeTime);
+                        if (dataDescarga.getFullYear() === anoAtual) {
+                            const mes = dataDescarga.getMonth(); // 0 = Jan, 10 = Nov
+                            
+                            // Mapear mês para o índice do array 'meses' (0-5)
+                            // 5 = Junho (índice 0)
+                            // 10 = Novembro (índice 5)
+                            const index = mes - 5; 
+                            if (index >= 0 && index < data.length) {
+                                data[index]++;
+                            }
+                        }
+                    }
+                });
+
+                const ctx = document.getElementById('chart-descargas-mes').getContext('2d');
+                chartDescargasMes = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: meses,
+                        datasets: [{
+                            label: 'Contentores Descarregados',
+                            data: data,
+                            borderColor: tailwind.config.theme.extend.colors['enapor-blue'],
+                            backgroundColor: 'rgba(0, 58, 112, 0.1)',
+                            fill: true,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { 
+                            legend: { display: false },
+                            // --- NOVO: Configuração Datalabels para Gráfico de Linha ---
+                            datalabels: {
+                                display: true,
+                                align: 'top',
+                                anchor: 'end',
+                                backgroundColor: 'rgba(0, 58, 112, 0.8)', // enapor-blue
+                                borderColor: 'white',
+                                borderWidth: 2,
+                                borderRadius: 4,
+                                color: 'white',
+                                font: {
+                                    weight: 'bold'
+                                },
+                                padding: 4
+                            }
+                        },
+                        scales: {
+                            y: { beginAtZero: true, title: { display: true, text: 'Nº Contentores' } }
+                        }
+                    }
+                });
+            }
+
+            /**
+             * Renderiza o gráfico Donut (Percentagem Concluída).
+             */
+            function renderGraficoDonut() {
+                const totalContentoresGlobal = db.discharges.length;
+                const totalDescarregadosGlobal = db.discharges.filter(d => d.status === 'descarregado').length;
+                const totalPendentesGlobal = totalContentoresGlobal - totalDescarregadosGlobal;
+
+                const ctx = document.getElementById('chart-percentagem-concluida').getContext('2d');
+                chartPercentagem = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Descarregados', 'Pendentes'],
+                        datasets: [{
+                            data: [totalDescarregadosGlobal, totalPendentesGlobal],
+                            backgroundColor: [
+                                tailwind.config.theme.extend.colors['chart-green'], // Verde
+                                tailwind.config.theme.extend.colors['chart-orange']  // Laranja
+                            ],
+                            borderColor: '#ffffff',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                            },
+                            // --- NOVO: Ativar plugin de texto central ---
+                            donutCenterText: true,
+                            // --- NOVO: Configuração Datalabels para Gráfico Donut ---
+                            datalabels: {
+                                display: true,
+                                color: 'white',
+                                font: {
+                                    weight: 'bold',
+                                    size: 14
+                                },
+                                // Formatar para mostrar "Valor (Percentagem%)"
+                                formatter: (value, ctx) => {
+                                    const dataPoints = ctx.chart.data.datasets[0].data;
+                                    const total = dataPoints.reduce((a, b) => a + b, 0);
+                                    const percentage = (value / total) * 100;
+                                    
+                                    if (percentage < 5) return null; // Esconder se for muito pequeno
+
+                                    return `${value} (${percentage.toFixed(1)}%)`;
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            /**
+             * Renderiza o gráfico de Barras (Tempos por Navio).
+             */
+            function renderGraficoBarras() {
+                const { labels, data } = getShipOperationTimes();
+                
+                const ctx = document.getElementById('chart-tempos-navio').getContext('2d');
+                chartTemposNavio = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels.length > 0 ? labels : ['Nenhum navio finalizado'],
+                        datasets: [{
+                            label: 'Tempo de Operação (minutos)',
+                            data: data.length > 0 ? data : [0],
+                            backgroundColor: tailwind.config.theme.extend.colors['enapor-blue'],
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false // Esconder legenda para um gráfico de barras simples
+                            },
+                            // --- NOVO: Configuração Datalabels para Gráfico de Barras ---
+                            datalabels: {
+                                display: true,
+                                anchor: 'end',
+                                align: 'top',
+                                color: '#333',
+                                font: {
+                                    weight: 'bold'
+                                },
+                                // Adicionar " min" ao valor
+                                formatter: (value) => value > 0 ? `${value} min` : null
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Minutos'
+                                },
+                                // --- CORREÇÃO: Adicionada vírgula e 'max: 50' ---
+                                max: 50
+                            }
+                        }
+                    }
+                });
+            }
+
+
             // --- Funções de Atualização de Estado e UI ---
 
             /**
@@ -913,25 +1330,29 @@
 
             /**
              * Mostra uma "view" (secção) principal e esconde as outras.
-             * @param {string} viewName - O nome da view ('navios' ou 'descarga').
+             * @param {string} viewName - O nome da view ('navios', 'descarga', 'indicadores').
              * @param {object | null} [shipInfo=null] - (Opcional) Objeto com {name, escala, atracacao}.
              */
             function showView(viewName, shipInfo = null) {
                 state.currentView = viewName;
                 state.currentShipFilter = shipInfo ? shipInfo.name : null;
 
+                // Destruir gráficos se sairmos da secção de indicadores
+                if (viewName !== 'indicadores') {
+                    destroyGraficos();
+                }
+
                 // Esconder todas as secções
                 naviosSection.classList.add('hidden');
                 descargaSection.classList.add('hidden');
+                indicadoresSection.classList.add('hidden');
                 descargaHeader.classList.add('hidden');
                 finishOperationBtn.classList.add('hidden'); // Esconder botão 'Finalizar' por defeito
                 
-                // REMOVIDO: Controlo de visibilidade das barras de pesquisa
-
                 // Resetar estado ativo da navegação
-                [navNavios, navDescarga].forEach(nav => {
-                    nav.classList.remove('bg-white/10', 'text-white', 'font-semibold');
-                    nav.classList.add('text-gray-200', 'font-medium', 'hover:text-white');
+                [navNavios, navDescarga, navIndicadores].forEach(nav => {
+                    nav.classList.remove('bg-white/10', 'text-white', 'font-semibold', 'border-enapor-orange');
+                    nav.classList.add('text-gray-200', 'font-medium', 'hover:text-white', 'border-transparent');
                 });
 
                 if (viewName === 'navios') {
@@ -940,8 +1361,8 @@
                     mainSearchInput.value = ''; 
                     state.shipsCurrentPage = 1; // Resetar página
                     
-                    navNavios.classList.add('bg-white/10', 'text-white', 'font-semibold');
-                    navNavios.classList.remove('text-gray-200', 'font-medium', 'hover:text-white');
+                    navNavios.classList.add('bg-white/10', 'text-white', 'font-semibold', 'border-enapor-orange');
+                    navNavios.classList.remove('text-gray-200', 'font-medium', 'hover:text-white', 'border-transparent');
                     
                     renderShipTable();
                     updateShipKPIs();
@@ -952,14 +1373,19 @@
                     shipSearchInput.value = ''; 
                     state.dischargeCurrentPage = 1; // Resetar página
                     
-                    navDescarga.classList.add('bg-white/10', 'text-white', 'font-semibold');
-                    navDescarga.classList.remove('text-gray-200', 'font-medium', 'hover:text-white');
+                    navDescarga.classList.add('bg-white/10', 'text-white', 'font-semibold', 'border-enapor-orange');
+                    navDescarga.classList.remove('text-gray-200', 'font-medium', 'hover:text-white', 'border-transparent');
                     
                     // Se viemos de "Ver Contentores", preencher o cabeçalho
                     if (shipInfo) {
                         descargaNavioNome.textContent = shipInfo.name;
                         descargaNavioEscala.textContent = shipInfo.escala;
                         descargaNavioAtracacao.textContent = formatAtaDateTime(shipInfo.ata);
+                        
+                        // Calcular e preencher total de contentores
+                        const totalContentores = db.discharges.filter(d => d.shipName === shipInfo.name).length;
+                        descargaNavioTotalContentores.textContent = totalContentores;
+
                         descargaHeader.classList.remove('hidden');
                         
                         // Mostrar botão 'Finalizar' apenas se o navio não estiver finalizado
@@ -978,6 +1404,20 @@
                     updateDischargeFilterUI();
                     renderDischargeTable();
                     updateDischargeKPIs();
+                
+                } else if (viewName === 'indicadores') {
+                    indicadoresSection.classList.remove('hidden');
+                    
+                    navIndicadores.classList.add('bg-white/10', 'text-white', 'font-semibold', 'border-enapor-orange');
+                    navIndicadores.classList.remove('text-gray-200', 'font-medium', 'hover:text-white', 'border-transparent');
+
+                    renderIndicadoresKPIs(); // Calcular e mostrar os KPIs
+                    
+                    // A Chart.js precisa de um pequeno delay para renderizar corretamente
+                    // quando o contentor estava 'hidden'
+                    setTimeout(() => {
+                        renderGraficos(); // Calcular e mostrar os Gráficos
+                    }, 50); 
                 }
                 
                 // Fecha a sidebar no mobile ao navegar
@@ -1054,7 +1494,7 @@
                     return;
                 }
                 
-                if (!container) { // Alterado: Apenas verifica se está vazio
+                if (!container) { 
                      manualErrorDiv.textContent = 'Por favor, insira um número de contentor.';
                     manualErrorDiv.classList.remove('hidden');
                     return;
@@ -1072,7 +1512,8 @@
                     container: container,
                     type: type,
                     status: "pendente", // "Carga Mais" entra como pendente
-                    dischargeTime: null
+                    dischargeTime: null,
+                    cargaMais: true // Marcar como "Carga Mais"
                 };
 
                 // Adicionar à base de dados simulada
@@ -1209,6 +1650,11 @@
                 showView('descarga'); // Mostra todos os contentores, filtrados por 'pendente'
             });
 
+            navIndicadores.addEventListener('click', (e) => {
+                e.preventDefault();
+                showView('indicadores');
+            });
+
             // Pesquisa
             shipSearchInput.addEventListener('input', (e) => {
                 state.shipSearchTerm = e.target.value;
@@ -1256,4 +1702,3 @@
     </script>
 </body>
 </html>
-
