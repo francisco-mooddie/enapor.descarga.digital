@@ -303,6 +303,7 @@
                             <p><strong>Escala:</strong> <span id="descarga-navio-escala" class="text-gray-700"></span></p>
                             <p><strong>Atracação:</strong> <span id="descarga-navio-atracacao" class="text-gray-700"></span></p>
                             <p><strong>Total Contentores:</strong> <span id="descarga-navio-total-contentores" class="text-gray-700"></span></p> <!-- NOVA INFORMAÇÃO -->
+                            <p><strong>Local:</strong> <span id="descarga-navio-local" class="text-gray-700"></span></p> <!-- NOVO CAMPO -->
                         </div>
                     </div>
                     
@@ -490,6 +491,8 @@
                         flag: "nl",
                         escala: "GRA2025002630",
                         ata: "2025-11-01T10:00:00",
+                        terminal: "Terminal de Contentores", // NOVO
+                        cais: "Cais 1", // NOVO
                         status: "finished" // MUDADO PARA FINISHED
                     },
                     {
@@ -498,6 +501,8 @@
                         flag: "es",
                         escala: "GRA2025002633",
                         ata: "2025-11-01T16:30:00",
+                        terminal: "Terminal de Contentores", // NOVO
+                        cais: "Cais 1", // NOVO
                         status: "finished" // MUDADO PARA FINISHED
                     },
                     {
@@ -506,6 +511,8 @@
                         flag: "de",
                         escala: "GRA2025002640",
                         ata: "2025-11-02T09:00:00",
+                        terminal: "Terminal de Contentores", // NOVO
+                        cais: "Cais 1", // NOVO
                         status: "finished" // MUDADO PARA FINISHED
                     },
                     {
@@ -514,6 +521,8 @@
                         flag: "pt",
                         escala: "GRA2025002642",
                         ata: "2025-11-02T11:00:00",
+                        terminal: "Terminal de Contentores", // NOVO
+                        cais: "Cais 1", // NOVO
                         status: "pending"
                     },
                     {
@@ -522,6 +531,8 @@
                         flag: "fr",
                         escala: "GRA2025002650",
                         ata: "2025-11-02T14:00:00",
+                        terminal: "Terminal de Contentores", // NOVO
+                        cais: "Cais 1", // NOVO
                         status: "pending"
                     },
                     {
@@ -530,6 +541,8 @@
                         flag: "us",
                         escala: "GRA2025002651",
                         ata: "2025-11-02T18:00:00",
+                        terminal: "Terminal de Contentores", // NOVO
+                        cais: "Cais 1", // NOVO
                         status: "pending"
                     },
                     {
@@ -538,6 +551,8 @@
                         flag: "it",
                         escala: "GRA2025002655",
                         ata: "2025-11-03T08:00:00",
+                        terminal: "Terminal de Contentores", // NOVO
+                        cais: "Cais 1", // NOVO
                         status: "pending"
                     },
                     {
@@ -546,6 +561,8 @@
                         flag: "es",
                         escala: "GRA2025002656",
                         ata: "2025-11-03T10:30:00",
+                        terminal: "Terminal de Contentores", // NOVO
+                        cais: "Cais 1", // NOVO
                         status: "pending"
                     },
                     {
@@ -554,6 +571,8 @@
                         flag: "nl",
                         escala: "GRA2025002660",
                         ata: "2025-11-03T11:00:00",
+                        terminal: "Terminal de Contentores", // NOVO
+                        cais: "Cais 1", // NOVO
                         status: "pending"
                     },
                     {
@@ -562,6 +581,8 @@
                         flag: "de",
                         escala: "GRA2025002661",
                         ata: "2025-11-03T12:45:00",
+                        terminal: "Terminal de Contentores", // NOVO
+                        cais: "Cais 1", // NOVO
                         status: "pending"
                     },
                     // NOVOS NAVIOS ADICIONADOS
@@ -571,6 +592,8 @@
                         flag: "es",
                         escala: "GRA2025002665",
                         ata: "2025-11-04T09:15:00",
+                        terminal: "Terminal de Contentores", // NOVO
+                        cais: "Cais 1", // NOVO
                         status: "pending"
                     },
                     {
@@ -579,6 +602,8 @@
                         flag: "ma",
                         escala: "GRA2025002668",
                         ata: "2025-11-04T14:00:00",
+                        terminal: "Terminal de Contentores", // NOVO
+                        cais: "Cais 1", // NOVO
                         status: "pending"
                     },
                     {
@@ -587,6 +612,8 @@
                         flag: "pt",
                         escala: "GRA2025002670",
                         ata: "2025-11-04T18:30:00",
+                        terminal: "Terminal de Contentores", // NOVO
+                        cais: "Cais 1", // NOVO
                         status: "pending"
                     }
                 ],
@@ -727,6 +754,7 @@
             const descargaNavioEscala = document.getElementById('descarga-navio-escala');
             const descargaNavioAtracacao = document.getElementById('descarga-navio-atracacao');
             const descargaNavioTotalContentores = document.getElementById('descarga-navio-total-contentores');
+            const descargaNavioLocal = document.getElementById('descarga-navio-local'); // NOVO
 
             // Modal
             const manualModal = document.getElementById('manual-register-modal');
@@ -956,7 +984,7 @@
 
                         // Padding da Tabela REDUZIDO de 'px-6 py-4' para 'px-5 py-3'
                         row.innerHTML = `
-                            <td class="px-5 py-3 whitespace-nowrap font-medium text-gray-900">${ship.name}</td>
+                            <td class="px-5 py-3 whitespace-nowrap font-medium text-gray-900" title="${ship.terminal} | ${ship.cais} |">${ship.name}</td>
                             <td class="px-5 py-3 whitespace-nowrap text-gray-600 flex items-center gap-2">
                                 ${ship.port} 
                                 <img src="https://flagcdn.com/w20/${ship.flag}.png" alt="Bandeira ${ship.flag.toUpperCase()}" class="h-3">
@@ -1392,6 +1420,7 @@
                         descargaNavioNome.textContent = shipInfo.name;
                         descargaNavioEscala.textContent = shipInfo.escala;
                         descargaNavioAtracacao.textContent = formatAtaDateTime(shipInfo.ata);
+                        descargaNavioLocal.textContent = `${shipInfo.terminal} | ${shipInfo.cais} |`; // NOVO
                         
                         // Calcular e preencher total de contentores
                         const totalContentores = db.discharges.filter(d => d.shipName === shipInfo.name).length;
@@ -1581,7 +1610,9 @@
                     const shipInfo = {
                         name: ship.name,
                         escala: ship.escala,
-                        ata: ship.ata // Passa a data ISO
+                        ata: ship.ata, // Passa a data ISO
+                        terminal: ship.terminal, // NOVO
+                        cais: ship.cais // NOVO
                     };
                     showView('descarga', shipInfo);
                  }
