@@ -353,6 +353,7 @@
                                         <th class="px-5 py-3">Nº da Escala</th>
                                         <th class="px-5 py-3">Contentor</th>
                                         <th class="px-5 py-3">Tipo</th>
+                                        <th class="px-5 py-3">Estado</th> <!-- NOVO -->
                                         <th class="px-5 py-3">Data de descarga</th>
                                         <th class="px-5 py-3 text-right">Ações</th>
                                     </tr>
@@ -443,12 +444,7 @@
             </div>
             
             <!-- Corpo do Modal com Formulário --><form id="manual-register-form" class="p-6 space-y-3">
-                <div>
-                    <label for="manual-ship-select" class="block text-sm font-medium text-gray-700 mb-1">Navio</label>
-                    <select id="manual-ship-select" name="ship" class="w-full px-3 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-enapor-blue" required>
-                        <option value="">Selecione um navio...</option>
-                        <!-- Opções preenchidas por JS --></select>
-                </div>
+                <!-- REMOVIDO: Campo de seleção do Navio -->
                 <div>
                     <label for="manual-container-input" class="block text-sm font-medium text-gray-700 mb-1">Número do Contentor</label>
                     <input type="text" id="manual-container-input" name="container" class="w-full px-3 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-enapor-blue" placeholder="Ex: MSCU1234567" required>
@@ -620,76 +616,76 @@
                 discharges: [
                     // --- DADOS NOVEMBRO (MÊS ATUAL) ---
                     // MAR D´CANAL (Finalizado)
-                    { id: 1, shipName: "MAR D´CANAL", escala: "GRA2025002630", container: "MSCU1234567", type: "20P", status: "descarregado", dischargeTime: "2025-11-01T10:45:12", cargaMais: false },
-                    { id: 3, shipName: "MAR D´CANAL", escala: "GRA2025002630", container: "MSCU1234568", type: "20P", status: "descarregado", dischargeTime: "2025-11-01T10:50:02", cargaMais: false },
-                    { id: 7, shipName: "MAR D´CANAL", escala: "GRA2025002630", container: "TRLU6543210", type: "40P", status: "descarregado", dischargeTime: "2025-11-01T11:05:00", cargaMais: false },
+                    { id: 1, shipName: "MAR D´CANAL", escala: "GRA2025002630", container: "MSCU1234567", type: "20P", status: "descarregado", dischargeTime: "2025-11-01T10:45:12", cargaMais: false, cheio: true },
+                    { id: 3, shipName: "MAR D´CANAL", escala: "GRA2025002630", container: "MSCU1234568", type: "20P", status: "descarregado", dischargeTime: "2025-11-01T10:50:02", cargaMais: false, cheio: true },
+                    { id: 7, shipName: "MAR D´CANAL", escala: "GRA2025002630", container: "TRLU6543210", type: "40P", status: "descarregado", dischargeTime: "2025-11-01T11:05:00", cargaMais: false, cheio: false },
                     
                     // B.LÉZA (Finalizado)
-                    { id: 2, shipName: "B.LÉZA", escala: "GRA2025002633", container: "CMAU7654321", type: "40P", status: "descarregado", dischargeTime: "2025-11-01T16:45:00", cargaMais: false },
-                    { id: 8, shipName: "B.LÉZA", escala: "GRA2025002633", container: "CMAU7654322", type: "40P", status: "descarregado", dischargeTime: "2025-11-01T16:50:00", cargaMais: false },
-                    { id: 9, shipName: "B.LÉZA", escala: "GRA2025002633", container: "HLCU1112223", type: "20P", status: "descarregado", dischargeTime: "2025-11-01T17:00:00", cargaMais: false },
-                    { id: 25, shipName: "B.LÉZA", escala: "GRA2025002633", container: "HLCU1112224", type: "20P", status: "descarregado", dischargeTime: "2025-11-01T17:05:15", cargaMais: true }, // Carga Mais
+                    { id: 2, shipName: "B.LÉZA", escala: "GRA2025002633", container: "CMAU7654321", type: "40P", status: "descarregado", dischargeTime: "2025-11-01T16:45:00", cargaMais: false, cheio: true },
+                    { id: 8, shipName: "B.LÉZA", escala: "GRA2025002633", container: "CMAU7654322", type: "40P", status: "descarregado", dischargeTime: "2025-11-01T16:50:00", cargaMais: false, cheio: true },
+                    { id: 9, shipName: "B.LÉZA", escala: "GRA2025002633", container: "HLCU1112223", type: "20P", status: "descarregado", dischargeTime: "2025-11-01T17:00:00", cargaMais: false, cheio: false },
+                    { id: 25, shipName: "B.LÉZA", escala: "GRA2025002633", container: "HLCU1112224", type: "20P", status: "descarregado", dischargeTime: "2025-11-01T17:05:15", cargaMais: true, cheio: true }, // Carga Mais
                     
                     // CHIQUINHO BL (Finalizado)
-                    { id: 4, shipName: "CHIQUINHO BL", escala: "GRA2025002640", container: "MRSU8765432", type: "40P", status: "descarregado", dischargeTime: "2025-11-02T09:10:00", cargaMais: false },
-                    { id: 5, shipName: "CHIQUINHO BL", escala: "GRA2025002640", container: "MAEU5432109", type: "20P", status: "descarregado", dischargeTime: "2025-11-02T09:15:45", cargaMais: false },
-                    { id: 10, shipName: "CHIQUINHO BL", escala: "GRA2025002640", container: "MRSU8765433", type: "40P", status: "descarregado", dischargeTime: "2025-11-02T09:20:00", cargaMais: false },
-                    { id: 11, shipName: "CHIQUINHO BL", escala: "GRA2025002640", container: "MRSU8765434", type: "40P", status: "descarregado", dischargeTime: "2025-11-02T09:25:00", cargaMais: false },
+                    { id: 4, shipName: "CHIQUINHO BL", escala: "GRA2025002640", container: "MRSU8765432", type: "40P", status: "descarregado", dischargeTime: "2025-11-02T09:10:00", cargaMais: false, cheio: true },
+                    { id: 5, shipName: "CHIQUINHO BL", escala: "GRA2025002640", container: "MAEU5432109", type: "20P", status: "descarregado", dischargeTime: "2025-11-02T09:15:45", cargaMais: false, cheio: false },
+                    { id: 10, shipName: "CHIQUINHO BL", escala: "GRA2025002640", container: "MRSU8765433", type: "40P", status: "descarregado", dischargeTime: "2025-11-02T09:20:00", cargaMais: false, cheio: true },
+                    { id: 11, shipName: "CHIQUINHO BL", escala: "GRA2025002640", container: "MRSU8765434", type: "40P", status: "descarregado", dischargeTime: "2025-11-02T09:25:00", cargaMais: false, cheio: true },
                     
                     // DONA TUTUTA (Pendente)
-                    { id: 6, shipName: "DONA TUTUTA", escala: "GRA2025002642", container: "EASU4567890", type: "40P", status: "pendente", dischargeTime: null, cargaMais: false },
-                    { id: 12, shipName: "DONA TUTUTA", escala: "GRA2025002642", container: "EASU4567891", type: "20P", status: "descarregado", dischargeTime: "2025-11-02T11:30:00", cargaMais: false },
-                    { id: 13, shipName: "DONA TUTUTA", escala: "GRA2025002642", container: "EASU4567892", type: "40P", status: "pendente", dischargeTime: null, cargaMais: false },
+                    { id: 6, shipName: "DONA TUTUTA", escala: "GRA2025002642", container: "EASU4567890", type: "40P", status: "pendente", dischargeTime: null, cargaMais: false, cheio: true },
+                    { id: 12, shipName: "DONA TUTUTA", escala: "GRA2025002642", container: "EASU4567891", type: "20P", status: "descarregado", dischargeTime: "2025-11-02T11:30:00", cargaMais: false, cheio: false },
+                    { id: 13, shipName: "DONA TUTUTA", escala: "GRA2025002642", container: "EASU4567892", type: "40P", status: "pendente", dischargeTime: null, cargaMais: false, cheio: true },
                     
                     // PONTA DO SOL (Pendente)
-                    { id: 14, shipName: "PONTA DO SOL", escala: "GRA2025002650", container: "FCIU9876543", type: "20P", status: "pendente", dischargeTime: null, cargaMais: false },
+                    { id: 14, shipName: "PONTA DO SOL", escala: "GRA2025002650", container: "FCIU9876543", type: "20P", status: "pendente", dischargeTime: null, cargaMais: false, cheio: true },
                     
                     // PRAIA D´AGUADA (Pendente)
-                    { id: 15, shipName: "PRAIA D´AGUADA", escala: "GRA2025002651", container: "OOLU1231234", type: "40P", status: "pendente", dischargeTime: null, cargaMais: false },
-                    { id: 16, shipName: "PRAIA D´AGUADA", escala: "GRA2025002651", container: "OOLU1231235", type: "20P", status: "pendente", dischargeTime: null, cargaMais: false },
+                    { id: 15, shipName: "PRAIA D´AGUADA", escala: "GRA2025002651", container: "OOLU1231234", type: "40P", status: "pendente", dischargeTime: null, cargaMais: false, cheio: true },
+                    { id: 16, shipName: "PRAIA D´AGUADA", escala: "GRA2025002651", container: "OOLU1231235", type: "20P", status: "pendente", dischargeTime: null, cargaMais: false, cheio: false },
                     
                     // MONTE CARA (Pendente)
-                    { id: 17, shipName: "MONTE CARA", escala: "GRA2025002655", container: "TCNU5554443", type: "20P", status: "descarregado", dischargeTime: "2025-11-03T08:30:10", cargaMais: false },
-                    { id: 18, shipName: "MONTE CARA", escala: "GRA2025002655", container: "TCNU5554444", type: "40P", status: "pendente", dischargeTime: null, cargaMais: false },
+                    { id: 17, shipName: "MONTE CARA", escala: "GRA2025002655", container: "TCNU5554443", type: "20P", status: "descarregado", dischargeTime: "2025-11-03T08:30:10", cargaMais: false, cheio: true },
+                    { id: 18, shipName: "MONTE CARA", escala: "GRA2025002655", container: "TCNU5554444", type: "40P", status: "pendente", dischargeTime: null, cargaMais: false, cheio: true },
                     
                     // RIB. GRANDE (Pendente)
-                    { id: 19, shipName: "RIB. GRANDE", escala: "GRA2025002656", container: "ZCSU7778889", type: "40P", status: "pendente", dischargeTime: null, cargaMais: false },
-                    { id: 20, shipName: "RIB. GRANDE", escala: "GRA2025002656", container: "ZCSU7778880", type: "40P", status: "pendente", dischargeTime: null, cargaMais: false },
+                    { id: 19, shipName: "RIB. GRANDE", escala: "GRA2025002656", container: "ZCSU7778889", type: "40P", status: "pendente", dischargeTime: null, cargaMais: false, cheio: true },
+                    { id: 20, shipName: "RIB. GRANDE", escala: "GRA2025002656", container: "ZCSU7778880", type: "40P", status: "pendente", dischargeTime: null, cargaMais: false, cheio: true },
                     
                     // SANTO ANTAO (Pendente)
-                    { id: 21, shipName: "SANTO ANTAO", escala: "GRA2025002660", container: "MSCU9998887", type: "20P", status: "pendente", dischargeTime: null, cargaMais: false },
-                    { id: 22, shipName: "SANTO ANTAO", escala: "GRA2025002660", container: "MSCU9998886", type: "20P", status: "pendente", dischargeTime: null, cargaMais: false },
-                    { id: 23, shipName: "SANTO ANTAO", escala: "GRA2025002660", container: "MSCU9998885", type: "40P", status: "pendente", dischargeTime: null, cargaMais: false },
+                    { id: 21, shipName: "SANTO ANTAO", escala: "GRA2025002660", container: "MSCU9998887", type: "20P", status: "pendente", dischargeTime: null, cargaMais: false, cheio: false },
+                    { id: 22, shipName: "SANTO ANTAO", escala: "GRA2025002660", container: "MSCU9998886", type: "20P", status: "pendente", dischargeTime: null, cargaMais: false, cheio: true },
+                    { id: 23, shipName: "SANTO ANTAO", escala: "GRA2025002660", container: "MSCU9998885", type: "40P", status: "pendente", dischargeTime: null, cargaMais: false, cheio: true },
                     
                     // MAR DE CANAL II (Pendente)
-                    { id: 24, shipName: "MAR DE CANAL II", escala: "GRA2025002661", container: "TRLU8887776", type: "40P", status: "pendente", dischargeTime: null, cargaMais: false },
+                    { id: 24, shipName: "MAR DE CANAL II", escala: "GRA2025002661", container: "TRLU8887776", type: "40P", status: "pendente", dischargeTime: null, cargaMais: false, cheio: true },
 
                     // --- DADOS FICTÍCIOS (MESES ANTERIORES) ---
                     // Outubro
-                    { id: 101, shipName: "NAVIO OUTUBRO A", escala: "GRA2025002500", container: "TEST1", type: "20P", status: "descarregado", dischargeTime: "2025-10-05T10:00:00", cargaMais: false },
-                    { id: 102, shipName: "NAVIO OUTUBRO A", escala: "GRA2025002500", container: "TEST2", type: "40P", status: "descarregado", dischargeTime: "2025-10-05T10:15:00", cargaMais: false },
-                    { id: 103, shipName: "NAVIO OUTUBRO B", escala: "GRA2025002510", container: "TEST3", type: "20P", status: "descarregado", dischargeTime: "2025-10-15T14:30:00", cargaMais: false },
-                    { id: 104, shipName: "NAVIO OUTUBRO B", escala: "GRA2025002510", container: "TEST4", type: "20P", status: "descarregado", dischargeTime: "2025-10-15T14:45:00", cargaMais: false },
-                    { id: 105, shipName: "NAVIO OUTUBRO B", escala: "GRA2025002510", container: "TEST5", type: "40P", status: "descarregado", dischargeTime: "2025-10-15T15:00:00", cargaMais: true }, // Carga Mais
-                    { id: 106, shipName: "NAVIO OUTUBRO C", escala: "GRA2025002520", container: "TEST6", type: "20P", status: "descarregado", dischargeTime: "2025-10-28T09:00:00", cargaMais: false },
+                    { id: 101, shipName: "NAVIO OUTUBRO A", escala: "GRA2025002500", container: "TEST1", type: "20P", status: "descarregado", dischargeTime: "2025-10-05T10:00:00", cargaMais: false, cheio: true },
+                    { id: 102, shipName: "NAVIO OUTUBRO A", escala: "GRA2025002500", container: "TEST2", type: "40P", status: "descarregado", dischargeTime: "2025-10-05T10:15:00", cargaMais: false, cheio: false },
+                    { id: 103, shipName: "NAVIO OUTUBRO B", escala: "GRA2025002510", container: "TEST3", type: "20P", status: "descarregado", dischargeTime: "2025-10-15T14:30:00", cargaMais: false, cheio: true },
+                    { id: 104, shipName: "NAVIO OUTUBRO B", escala: "GRA2025002510", container: "TEST4", type: "20P", status: "descarregado", dischargeTime: "2025-10-15T14:45:00", cargaMais: false, cheio: true },
+                    { id: 105, shipName: "NAVIO OUTUBRO B", escala: "GRA2025002510", container: "TEST5", type: "40P", status: "descarregado", dischargeTime: "2025-10-15T15:00:00", cargaMais: true, cheio: true }, // Carga Mais
+                    { id: 106, shipName: "NAVIO OUTUBRO C", escala: "GRA2025002520", container: "TEST6", type: "20P", status: "descarregado", dischargeTime: "2025-10-28T09:00:00", cargaMais: false, cheio: false },
                     
                     // Setembro
-                    { id: 201, shipName: "NAVIO SETEMBRO A", escala: "GRA2025002400", container: "TEST10", type: "40P", status: "descarregado", dischargeTime: "2025-09-10T08:00:00", cargaMais: false },
-                    { id: 202, shipName: "NAVIO SETEMBRO A", escala: "GRA2025002400", container: "TEST11", type: "40P", status: "descarregado", dischargeTime: "2025-09-10T08:30:00", cargaMais: false },
-                    { id: 203, shipName: "NAVIO SETEMBRO B", escala: "GRA2025002410", container: "TEST12", type: "20P", status: "descarregado", dischargeTime: "2025-09-22T11:00:00", cargaMais: false },
+                    { id: 201, shipName: "NAVIO SETEMBRO A", escala: "GRA2025002400", container: "TEST10", type: "40P", status: "descarregado", dischargeTime: "2025-09-10T08:00:00", cargaMais: false, cheio: true },
+                    { id: 202, shipName: "NAVIO SETEMBRO A", escala: "GRA2025002400", container: "TEST11", type: "40P", status: "descarregado", dischargeTime: "2025-09-10T08:30:00", cargaMais: false, cheio: true },
+                    { id: 203, shipName: "NAVIO SETEMBRO B", escala: "GRA2025002410", container: "TEST12", type: "20P", status: "descarregado", dischargeTime: "2025-09-22T11:00:00", cargaMais: false, cheio: false },
                     
                     // Agosto
-                    { id: 301, shipName: "NAVIO AGOSTO A", escala: "GRA2025002300", container: "TEST20", type: "20P", status: "descarregado", dischargeTime: "2025-08-01T10:00:00", cargaMais: false },
-                    { id: 302, shipName: "NAVIO AGOSTO A", escala: "GRA2025002300", container: "TEST21", type: "40P", status: "descarregado", dischargeTime: "2025-08-01T10:20:00", cargaMais: false },
-                    { id: 303, shipName: "NAVIO AGOSTO A", escala: "GRA2025002300", container: "TEST22", type: "20P", status: "descarregado", dischargeTime: "2025-08-01T10:40:00", cargaMais: false },
-                    { id: 304, shipName: "NAVIO AGOSTO B", escala: "GRA2025002310", container: "TEST23", type: "40P", status: "descarregado", dischargeTime: "2025-08-19T16:00:00", cargaMais: false },
+                    { id: 301, shipName: "NAVIO AGOSTO A", escala: "GRA2025002300", container: "TEST20", type: "20P", status: "descarregado", dischargeTime: "2025-08-01T10:00:00", cargaMais: false, cheio: true },
+                    { id: 302, shipName: "NAVIO AGOSTO A", escala: "GRA2025002300", container: "TEST21", type: "40P", status: "descarregado", dischargeTime: "2025-08-01T10:20:00", cargaMais: false, cheio: true },
+                    { id: 303, shipName: "NAVIO AGOSTO A", escala: "GRA2025002300", container: "TEST22", type: "20P", status: "descarregado", dischargeTime: "2025-08-01T10:40:00", cargaMais: false, cheio: false },
+                    { id: 304, shipName: "NAVIO AGOSTO B", escala: "GRA2025002310", container: "TEST23", type: "40P", status: "descarregado", dischargeTime: "2025-08-19T16:00:00", cargaMais: false, cheio: true },
 
                     // Julho
-                    { id: 401, shipName: "NAVIO JULHO A", escala: "GRA2025002200", container: "TEST30", type: "20P", status: "descarregado", dischargeTime: "2025-07-10T09:00:00", cargaMais: false },
-                    { id: 402, shipName: "NAVIO JULHO A", escala: "GRA2025002200", container: "TEST31", type: "20P", status: "descarregado", dischargeTime: "2025-07-10T09:15:00", cargaMais: true }, // Carga Mais
+                    { id: 401, shipName: "NAVIO JULHO A", escala: "GRA2025002200", container: "TEST30", type: "20P", status: "descarregado", dischargeTime: "2025-07-10T09:00:00", cargaMais: false, cheio: true },
+                    { id: 402, shipName: "NAVIO JULHO A", escala: "GRA2025002200", container: "TEST31", type: "20P", status: "descarregado", dischargeTime: "2025-07-10T09:15:00", cargaMais: true, cheio: true }, // Carga Mais
                     
                     // Junho
-                    { id: 501, shipName: "NAVIO JUNHO A", escala: "GRA2025002100", container: "TEST40", type: "40P", status: "descarregado", dischargeTime: "2025-06-20T14:00:00", cargaMais: false }
+                    { id: 501, shipName: "NAVIO JUNHO A", escala: "GRA2025002100", container: "TEST40", type: "40P", status: "descarregado", dischargeTime: "2025-06-20T14:00:00", cargaMais: false, cheio: false }
                 ]
             };
             
@@ -762,7 +758,7 @@
             const openModalBtn = document.getElementById('open-manual-modal-btn');
             const cancelModalBtn = document.getElementById('cancel-manual-modal-btn');
             const manualForm = document.getElementById('manual-register-form');
-            const shipSelect = document.getElementById('manual-ship-select');
+            const shipSelect = document.getElementById('manual-ship-select'); // Este seletor agora é inválido, mas não faz mal
             const containerInput = document.getElementById('manual-container-input');
             const containerTypeSelect = document.getElementById('manual-container-type');
             const manualErrorDiv = document.getElementById('manual-register-error');
@@ -1030,7 +1026,7 @@
                 dischargeTableBody.innerHTML = '';
 
                 if (filteredDischarges.length === 0) {
-                     dischargeTableBody.innerHTML = `<tr><td colspan="6" class="px-5 py-3 text-center text-gray-500">Nenhum contentor encontrado.</td></tr>`;
+                     dischargeTableBody.innerHTML = `<tr><td colspan="7" class="px-5 py-3 text-center text-gray-500">Nenhum contentor encontrado.</td></tr>`; // Colspan mudado para 7
                 } else {
                     // Criar e adicionar linhas
                     paginatedDischarges.forEach(item => {
@@ -1044,12 +1040,18 @@
                             ? `<button class="px-3 py-1 text-xs font-medium text-white bg-enapor-blue rounded-md hover:bg-opacity-90 action-btn" data-action="descarregar" data-id="${item.id}">Descarregar</button>`
                             : `<button class="px-3 py-1 text-xs font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 action-btn" data-action="desmarcar" data-id="${item.id}">Desmarcar</button>`;
                         
+                        // NOVO: HTML para estado Cheio/Vazio
+                        const estadoHtml = item.cheio 
+                            ? '<span class="flex items-center gap-1.5"><span class="h-2 w-2 rounded-full bg-green-500"></span>Cheio</span>' 
+                            : '<span class="flex items-center gap-1.5"><span class="h-2 w-2 rounded-full bg-gray-400"></span>Vazio</span>';
+
                         // Padding da Tabela REDUZIDO de 'px-6 py-4' para 'px-5 py-3'
                         row.innerHTML = `
                             <td class="px-5 py-3 whitespace-nowrap font-medium text-gray-900">${item.shipName}</td>
                             <td class="px-5 py-3 whitespace-nowrap text-gray-600">${item.escala}</td>
                             <td class="px-5 py-3 whitespace-nowrap text-gray-600">${item.container}</td>
                             <td class="px-5 py-3 whitespace-nowrap text-gray-600">${item.type}</td>
+                            <td class="px-5 py-3 whitespace-nowrap text-gray-600">${estadoHtml}</td>
                             <td class="px-5 py-3 whitespace-nowrap text-gray-600">${timeFormatted}</td>
                             <td class="px-5 py-3 whitespace-nowrap text-right">
                                 ${actionButtonHtml}
@@ -1387,6 +1389,7 @@
                 indicadoresSection.classList.add('hidden');
                 descargaHeader.classList.add('hidden');
                 finishOperationBtn.classList.add('hidden'); // Esconder botão 'Finalizar' por defeito
+                openModalBtn.classList.add('hidden'); // Esconder 'Carga Mais' por defeito
                 
                 // Resetar estado ativo da navegação
                 [navNavios, navDescarga, navIndicadores].forEach(nav => {
@@ -1434,11 +1437,15 @@
                             finishOperationBtn.classList.remove('hidden');
                         }
                         
+                        // Mostrar botão 'Carga Mais'
+                        openModalBtn.classList.remove('hidden');
+
                         // Ao ver um navio específico, mostrar 'todos' por defeito
                         state.currentStatusFilter = 'todos';
                     } else {
                         // Ao clicar em "Descarga", mostrar 'pendente' por defeito
                         state.currentStatusFilter = 'pendente';
+                        // Manter 'Carga Mais' escondido (openModalBtn.classList.add('hidden'); já foi chamado)
                     }
                     
                     updateDischargeFilterUI();
@@ -1490,18 +1497,7 @@
             // --- Lógica do Modal ---
 
             function openManualModal() {
-                // Preencher select com navios da DB
-                shipSelect.innerHTML = '<option value="">Selecione um navio...</option>';
-                
-                // Mostrar apenas navios pendentes no modal
-                db.ships.filter(s => s.status === 'pending').forEach(ship => {
-                    const option = document.createElement('option');
-                    option.value = ship.name;
-                    option.textContent = ship.name;
-                    // Guardar dados extra no option para fácil acesso
-                    option.dataset.escala = ship.escala;
-                    shipSelect.appendChild(option);
-                });
+                // REMOVIDO: Lógica de preenchimento do select de navios
                 
                 manualErrorDiv.classList.add('hidden'); // Limpar erros
                 manualErrorDiv.textContent = '';
@@ -1527,13 +1523,22 @@
                 e.preventDefault();
                 manualErrorDiv.classList.add('hidden');
                 
-                const selectedShipName = shipSelect.value;
+                // ALTERADO: Obter navio do estado atual, não do form
+                const selectedShipName = state.currentShipFilter;
                 const container = containerInput.value.toUpperCase();
                 const type = containerTypeSelect.value;
 
                 // Validação
                 if (!selectedShipName) {
-                    manualErrorDiv.textContent = 'Por favor, selecione um navio.';
+                    manualErrorDiv.textContent = 'Erro: Navio não identificado. Por favor, volte à lista e selecione "Ver Contentores" novamente.';
+                    manualErrorDiv.classList.remove('hidden');
+                    return;
+                }
+
+                const ship = db.ships.find(s => s.name === selectedShipName);
+                
+                if (!ship) {
+                    manualErrorDiv.textContent = `Erro: Navio "${selectedShipName}" não encontrado na base de dados.`;
                     manualErrorDiv.classList.remove('hidden');
                     return;
                 }
@@ -1545,8 +1550,7 @@
                 }
 
                 // Obter a escala do navio selecionado
-                const selectedOption = shipSelect.querySelector(`option[value="${selectedShipName}"]`);
-                const escala = selectedOption.dataset.escala;
+                const escala = ship.escala;
 
                 // Criar novo registo de descarga
                 const newDischarge = {
@@ -1557,7 +1561,8 @@
                     type: type,
                     status: "pendente", // "Carga Mais" entra como pendente
                     dischargeTime: null,
-                    cargaMais: true // Marcar como "Carga Mais"
+                    cargaMais: true, // Marcar como "Carga Mais"
+                    cheio: true // Assumir que "Carga Mais" é sempre "Cheio"
                 };
 
                 // Adicionar à base de dados simulada
